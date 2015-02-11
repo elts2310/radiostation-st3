@@ -1,0 +1,73 @@
+/*Για τη διαγραφή των πινάκων (αν θέλουμε να ξαναδημιουργήσουμε τη ΒΔ από την αρχή) πρέπει να εκτελεστεί ο ακόλουθος κώδικας*/
+
+/*ΠΡΕΠΕΙ ΠΡΩΤΑ ΝΑ ΑΦΑΙΡΕΘΟΥΝ ΤΑ FOREIGN KEYS ΑΛΛΙΩΣ ΔΕΝ ΜΠΟΡΕΙ ΝΑ ΔΙΑΓΡΑΦΕΙ ΕΝΑΣ ΠΙΝΑΚΑΣ!!!*/
+
+/*Η αφαίρεση πεδίων στον εκάστοτε πίνακα μπορεί να γίνει με μία μόνο εντολή ALTER TABLE & DROP ανά πίνακα
+(multiple columns), αλλά για κάποιο περίεργο λόγο το NetBeans δεν δέχεται την πολλαπλή αφαίρεση πεδίων. 
+Γι' αυτό παρακάτω γίνεται αφαίρεση ενός πεδίου (και συγκεκριμένα η σύνδεση των foreign keys) κάθε φορά*/
+
+ALTER TABLE ARTIST
+    DROP CONSTRAINT MUSICGENRE_FK;
+
+ALTER TABLE ARTIST
+    DROP CONSTRAINT MUSICGROUP_FK;
+
+ALTER TABLE ARTIST
+    DROP CONSTRAINT ARTIST_ALBUM_FK;
+
+ALTER TABLE MUSICGROUP
+    DROP CONSTRAINT ARTIST_FK;
+
+ALTER TABLE MUSICGROUP
+    DROP CONSTRAINT GROUP_ALBUM_FK;
+
+ALTER TABLE ALBUM
+    DROP CONSTRAINT MUSICPRODUCTIONCOMPANY_FK;
+
+ALTER TABLE ALBUM
+    DROP CONSTRAINT ARTIST_FK;
+
+ALTER TABLE ALBUM
+    DROP CONSTRAINT MUSICGROUP_FK;
+
+ALTER TABLE PLAYLIST
+    DROP CONSTRAINT SONG_FK;
+
+ALTER TABLE SONG
+    DROP CONSTRAINT ALBUM_FK;
+        
+ALTER TABLE SONG
+    DROP CONSTRAINT PLAYLIST_FK;
+
+ALTER TABLE MUSICGROUP_ARTISTS
+    DROP CONSTRAINT ARTIST_FK;
+
+ALTER TABLE MUSICGROUP_ARTISTS
+    DROP CONSTRAINT MUSICGROUP_FK;
+
+ALTER TABLE PLAYLIST_SONGS
+    DROP CONSTRAINT PLAYLIST_FK;
+
+ALTER TABLE PLAYLIST_SONGS
+    DROP CONSTRAINT SONG_FK;
+
+
+/*Διαγραφή πινάκων*/
+
+DROP TABLE ALBUM;
+
+DROP TABLE ARTIST;
+
+DROP TABLE MUSICGENRE;
+
+DROP TABLE MUSICGROUP;
+
+DROP TABLE MUSICPRODUCTIONCOMPANY;
+
+DROP TABLE PLAYLIST;
+
+DROP TABLE SONG;
+
+DROP TABLE MUSICGROUP_ARTISTS;
+
+DROP TABLE PLAYLIST_SONGS;
