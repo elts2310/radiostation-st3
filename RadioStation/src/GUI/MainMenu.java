@@ -66,6 +66,12 @@ public class MainMenu extends javax.swing.JFrame {
         jMenu1.add(jMenuItem2);
 
         jMenuItem3.setText("Άλμπουμ Συγκροτημάτων");
+        jMenuItem3.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem3);
 
         jMenuItem4.setText("Άλμπουμ Καλλιτεχνών");
@@ -132,6 +138,11 @@ public class MainMenu extends javax.swing.JFrame {
     private void btnPlaylistsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlaylistsActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnPlaylistsActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     /**
      * @param args the command line arguments
