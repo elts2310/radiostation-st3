@@ -7,6 +7,7 @@ package GUI;
 
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import radiostation_POJO.Album;
 
 /**
  *
@@ -123,9 +124,9 @@ public class R8_GroupAlbum_View extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         
-        ga = new GroupAlbum();
-        em.persist(ga);
-        R5_Group_Management gma = new R5_Group_Management(ga,false);
+        alb = new Album();
+        em.persist(alb);
+        R5_Group_Management gma = new R5_Group_Management(alb,false);
         
         gma.setVisible(true);
         thisFrame=this;
@@ -135,7 +136,7 @@ public class R8_GroupAlbum_View extends javax.swing.JFrame {
             public void windowClosed(WindowEvent argO) {
                 System.out.println("Window close event occur");
                 if ((MyWindowEvent)argO).exitAndSave) {
-                    list1.add(ga);
+                    list1.add(alb);
                     int row = list1.size() - 1;
                     jTable1.setRowSelectionInterval(row, row);
                     jTable1.scrollRectToVisible(jTable1.getCellRect(row, 0, true));
