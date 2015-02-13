@@ -91,7 +91,7 @@
     <Component class="javax.swing.JLabel" name="jLabel7">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Tahoma" size="18" style="1"/>
+          <Font name="Lucida Grande" size="18" style="1"/>
         </Property>
         <Property name="horizontalAlignment" type="int" value="0"/>
         <Property name="text" type="java.lang.String" value="&#x394;&#x3b9;&#x3b1;&#x3c7;&#x3b5;&#x3af;&#x3c1;&#x3b9;&#x3c3;&#x3b7; &#x386;&#x3bb;&#x3bc;&#x3c0;&#x3bf;&#x3c5;&#x3bc; &#x3a3;&#x3c5;&#x3b3;&#x3ba;&#x3c1;&#x3bf;&#x3c4;&#x3ae;&#x3bc;&#x3b1;&#x3c4;&#x3bf;&#x3c2;"/>

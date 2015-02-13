@@ -64,7 +64,7 @@ public class R9_GroupAlbum_Management extends javax.swing.JFrame {
             }
         });
 
-        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setText("Διαχείριση Άλμπουμ Συγκροτήματος");
         jLabel7.setMaximumSize(new java.awt.Dimension(400, 22));
