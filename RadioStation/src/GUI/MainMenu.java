@@ -28,6 +28,8 @@ public class MainMenu extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -43,6 +45,12 @@ public class MainMenu extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Nanum Brush Script", 0, 48)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("RadioStation");
+
+        jLabel2.setFont(new java.awt.Font("Lucida Grande", 2, 10)); // NOI18N
+        jLabel2.setText("Developed by: Eleni Stamatiadou, Giorgos Tampakis, Panagiotis Trililos & Elias Tsourapas");
+
+        jLabel3.setFont(new java.awt.Font("Lucida Grande", 0, 10)); // NOI18N
+        jLabel3.setText("ΕΑΠ | ΠΛΗ24 2014-2015");
 
         jMenu1.setText("Διαχείριση αρχείων");
 
@@ -90,14 +98,24 @@ public class MainMenu extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(206, 206, 206)
                 .addComponent(jLabel1)
-                .addContainerGap(212, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
+                .addComponent(jLabel2)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(126, 126, 126)
                 .addComponent(jLabel1)
-                .addContainerGap(164, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 145, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3))
+                .addContainerGap())
         );
 
         pack();
@@ -154,6 +172,8 @@ public class MainMenu extends javax.swing.JFrame {
     private javax.swing.JMenu btnExit;
     private javax.swing.JMenu btnPlaylists;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
