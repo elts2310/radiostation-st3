@@ -57,10 +57,10 @@ public class MainMenu extends javax.swing.JFrame {
         jMenuItem2.setText("Συγκροτήματα");
         jMenu1.add(jMenuItem2);
 
-        jMenuItem3.setText("Άλμπουμ συγκροτημάτων");
+        jMenuItem3.setText("Άλμπουμ Συγκροτημάτων");
         jMenu1.add(jMenuItem3);
 
-        jMenuItem4.setText("Άλμπουμ καλλιτεχνών");
+        jMenuItem4.setText("Άλμπουμ Καλλιτεχνών");
         jMenu1.add(jMenuItem4);
 
         jMenuBar1.add(jMenu1);
