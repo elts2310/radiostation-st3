@@ -17,4 +17,14 @@
       <property name="javax.persistence.jdbc.password" value="station"/>
     </properties>
   </persistence-unit>
+  <persistence-unit name="RadioStationPU" transaction-type="RESOURCE_LOCAL">
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <class>radiostation_POJO.Song</class>
+    <properties>
+      <property name="javax.persistence.jdbc.url" value="jdbc:derby://localhost:1527/RadioStation"/>
+      <property name="javax.persistence.jdbc.user" value="GE3"/>
+      <property name="javax.persistence.jdbc.driver" value="org.apache.derby.jdbc.ClientDriver"/>
+      <property name="javax.persistence.jdbc.password" value="PLH24"/>
+    </properties>
+  </persistence-unit>
 </persistence>
