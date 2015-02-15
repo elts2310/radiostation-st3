@@ -21,7 +21,6 @@ public class MainMenu extends javax.swing.JFrame {
     public MainMenu() {
         this.rs = new RadioStation();
         initComponents();
-        RadioStation.createConnection();
     }
 
     /**
