@@ -7,23 +7,28 @@ package GUI;
 
 import radiostation_POJO.Album;
 import radiostation_POJO.Musicgroup;
+import radiostation.RadioStation;
+/*import javax.swing.JOptionPane;*/
 /**
  *
  * @author Panos
  */
 public class R9_GroupAlbum_Management extends javax.swing.JFrame {
-    private R8_GroupAlbum_View creator;
+    /*private R8_GroupAlbum_View creator;*/
+    /*private RadioStation rs = new RadioStation();*/
     /**
      * Creates new form R9_GroupAlbum_Management
      */
     public R9_GroupAlbum_Management() {
+        /*this.rs = new RadioStation();*/
         initComponents();
+        /*RadioStation.createConnection();*/
     }
     
-    public R9_GroupAlbum_Management(R8_GroupAlbum_View inJFrame) {
+    /*public R9_GroupAlbum_Management(R8_GroupAlbum_View inJFrame) {  //(((R9 test)))
         initComponents();
         this.creator = inJFrame;
-    }
+    }*/
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -276,8 +281,9 @@ public class R9_GroupAlbum_Management extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
-    creator.setVisible(true);
+    /*creator.setVisible(true);*/
         dispose();
+        /*System.exit(0);*/
     }//GEN-LAST:event_btnCancelActionPerformed
     
     /**
