@@ -10,7 +10,7 @@ package GUI;
  * @author ΛΕΝΑ
  */
 public class R5_Group_Management extends javax.swing.JFrame {
-
+    private R4_GroupList_View creator;
     /**
      * Creates new form R5_Group_Management
      */
@@ -243,7 +243,8 @@ public class R5_Group_Management extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-
+     creator.setVisible(true);
+        dispose(); 
         // TODO add your handling code here:
         /*
         MyWindowEvent we = new MyWindowEvent(this, WindowEvent.WINDOW_CLOSED,false);
