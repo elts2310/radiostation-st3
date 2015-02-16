@@ -72,7 +72,7 @@ public class R3_Artist_Management extends javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Mail", "Femail" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Male", "Female" }));
 
         org.jdesktop.swingbinding.JComboBoxBinding jComboBoxBinding = org.jdesktop.swingbinding.SwingBindings.createJComboBoxBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, musicgenreList, jComboBox2);
         bindingGroup.addBinding(jComboBoxBinding);
@@ -90,7 +90,7 @@ public class R3_Artist_Management extends javax.swing.JFrame {
 
         jLabel2.setText("Επώνυμο");
 
-        jLabel3.setText("Φύλλο");
+        jLabel3.setText("Φύλο");
 
         jLabel4.setText("Είδος μουσικής");
 
