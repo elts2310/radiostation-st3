@@ -41,7 +41,7 @@ public class R5_Group_Management extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        btnCancel = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -121,10 +121,10 @@ public class R5_Group_Management extends javax.swing.JFrame {
             }
         });
 
-        jButton4.setText("Ακύρωση");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        btnCancel.setText("Ακύρωση");
+        btnCancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                btnCancelActionPerformed(evt);
             }
         });
 
@@ -168,7 +168,7 @@ public class R5_Group_Management extends javax.swing.JFrame {
                     .addComponent(jLabel5)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(10, 10, 10)
-                        .addComponent(jButton4)))
+                        .addComponent(btnCancel)))
                 .addGap(59, 59, 59))
         );
         layout.setVerticalGroup(
@@ -201,7 +201,7 @@ public class R5_Group_Management extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton3)
-                    .addComponent(jButton4))
+                    .addComponent(btnCancel))
                 .addGap(0, 12, Short.MAX_VALUE))
         );
 
@@ -242,8 +242,8 @@ public class R5_Group_Management extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-     creator.setVisible(true);
+    private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
+
         dispose(); 
         // TODO add your handling code here:
         /*
@@ -253,7 +253,7 @@ public class R5_Group_Management extends javax.swing.JFrame {
         }
         this.setVisible(false);
         */
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_btnCancelActionPerformed
 
     /**
      * @param args the command line arguments
@@ -291,10 +291,10 @@ public class R5_Group_Management extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCancel;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
