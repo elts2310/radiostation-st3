@@ -34,10 +34,10 @@ public class R12_ArtistAlbum_View extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableArtistAlbums = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        addArtistAlbum = new javax.swing.JButton();
+        deleteSelectedArtistAlbum = new javax.swing.JButton();
+        editSelectedArtistAlbum = new javax.swing.JButton();
+        exitArtistAlbum = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -65,21 +65,21 @@ public class R12_ArtistAlbum_View extends javax.swing.JFrame {
         jTableBinding.bind();
         jScrollPane1.setViewportView(tableArtistAlbums);
 
-        jButton1.setText("Προσθήκη");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        addArtistAlbum.setText("Προσθήκη");
+        addArtistAlbum.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                addArtistAlbumActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Διαγραφή");
+        deleteSelectedArtistAlbum.setText("Διαγραφή");
 
-        jButton3.setText("Επεξεργασία");
+        editSelectedArtistAlbum.setText("Επεξεργασία");
 
-        jButton4.setText("Έξοδος");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        exitArtistAlbum.setText("Έξοδος");
+        exitArtistAlbum.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                exitArtistAlbumActionPerformed(evt);
             }
         });
 
@@ -91,13 +91,13 @@ public class R12_ArtistAlbum_View extends javax.swing.JFrame {
                 .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1)
+                        .addComponent(addArtistAlbum)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2)
+                        .addComponent(deleteSelectedArtistAlbum)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton3)
+                        .addComponent(editSelectedArtistAlbum)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 322, Short.MAX_VALUE)
-                        .addComponent(jButton4))
+                        .addComponent(exitArtistAlbum))
                     .addComponent(jScrollPane1)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(33, Short.MAX_VALUE))
@@ -111,10 +111,10 @@ public class R12_ArtistAlbum_View extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 374, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3)
-                    .addComponent(jButton4))
+                    .addComponent(addArtistAlbum)
+                    .addComponent(deleteSelectedArtistAlbum)
+                    .addComponent(editSelectedArtistAlbum)
+                    .addComponent(exitArtistAlbum))
                 .addContainerGap(20, Short.MAX_VALUE))
         );
 
@@ -123,16 +123,16 @@ public class R12_ArtistAlbum_View extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void addArtistAlbumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addArtistAlbumActionPerformed
         // TODO add your handling code here:
         //R13_ArtistAlbum_Management aam = new R13_ArtistAlbum_Management();
         //aam.setVisible(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_addArtistAlbumActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void exitArtistAlbumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitArtistAlbumActionPerformed
         // TODO add your handling code here:
         dispose();
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_exitArtistAlbumActionPerformed
 
     /**
      * @param args the command line arguments
@@ -174,12 +174,12 @@ public class R12_ArtistAlbum_View extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.persistence.EntityManager RadioStationPUEntityManager;
+    private javax.swing.JButton addArtistAlbum;
     private java.util.List<radiostation_POJO.Album> albumList;
     private javax.persistence.Query albumQuery;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
+    private javax.swing.JButton deleteSelectedArtistAlbum;
+    private javax.swing.JButton editSelectedArtistAlbum;
+    private javax.swing.JButton exitArtistAlbum;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tableArtistAlbums;

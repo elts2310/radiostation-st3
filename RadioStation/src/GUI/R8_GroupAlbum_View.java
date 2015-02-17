@@ -38,10 +38,10 @@ public class R8_GroupAlbum_View extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableGroupAlbums = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        addGroupAlbum = new javax.swing.JButton();
+        deleteSelectedGroupAlbum = new javax.swing.JButton();
+        editSelectedGroupAlbum = new javax.swing.JButton();
+        ExitGroupAlbum = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -73,21 +73,31 @@ public class R8_GroupAlbum_View extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tableGroupAlbums);
         tableGroupAlbums.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
-        jButton1.setText("Προσθήκη");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        addGroupAlbum.setText("Προσθήκη");
+        addGroupAlbum.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                addGroupAlbumActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Διαγραφή");
-
-        jButton3.setText("Επεξεργασία");
-
-        jButton4.setText("Έξοδος");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        deleteSelectedGroupAlbum.setText("Διαγραφή");
+        deleteSelectedGroupAlbum.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                deleteSelectedGroupAlbumActionPerformed(evt);
+            }
+        });
+
+        editSelectedGroupAlbum.setText("Επεξεργασία");
+        editSelectedGroupAlbum.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editSelectedGroupAlbumActionPerformed(evt);
+            }
+        });
+
+        ExitGroupAlbum.setText("Έξοδος");
+        ExitGroupAlbum.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ExitGroupAlbumActionPerformed(evt);
             }
         });
 
@@ -99,13 +109,13 @@ public class R8_GroupAlbum_View extends javax.swing.JFrame {
                 .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1)
+                        .addComponent(addGroupAlbum)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2)
+                        .addComponent(deleteSelectedGroupAlbum)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton3)
+                        .addComponent(editSelectedGroupAlbum)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 322, Short.MAX_VALUE)
-                        .addComponent(jButton4))
+                        .addComponent(ExitGroupAlbum))
                     .addComponent(jScrollPane1)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(33, Short.MAX_VALUE))
@@ -119,10 +129,10 @@ public class R8_GroupAlbum_View extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 374, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3)
-                    .addComponent(jButton4))
+                    .addComponent(addGroupAlbum)
+                    .addComponent(deleteSelectedGroupAlbum)
+                    .addComponent(editSelectedGroupAlbum)
+                    .addComponent(ExitGroupAlbum))
                 .addContainerGap(20, Short.MAX_VALUE))
         );
 
@@ -131,16 +141,24 @@ public class R8_GroupAlbum_View extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void addGroupAlbumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addGroupAlbumActionPerformed
         // TODO add your handling code here:
         R9_GroupAlbum_Management gam = new R9_GroupAlbum_Management();
         gam.setVisible(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_addGroupAlbumActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void ExitGroupAlbumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExitGroupAlbumActionPerformed
         // TODO add your handling code here:
         dispose();
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_ExitGroupAlbumActionPerformed
+
+    private void deleteSelectedGroupAlbumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteSelectedGroupAlbumActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_deleteSelectedGroupAlbumActionPerformed
+
+    private void editSelectedGroupAlbumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editSelectedGroupAlbumActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_editSelectedGroupAlbumActionPerformed
 
     /**
      * @param args the command line arguments
@@ -178,13 +196,13 @@ public class R8_GroupAlbum_View extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton ExitGroupAlbum;
     private javax.persistence.EntityManager RadioStationPUEntityManager;
+    private javax.swing.JButton addGroupAlbum;
     private java.util.List<radiostation_POJO.Album> albumList;
     private javax.persistence.Query albumQuery;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
+    private javax.swing.JButton deleteSelectedGroupAlbum;
+    private javax.swing.JButton editSelectedGroupAlbum;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tableGroupAlbums;
