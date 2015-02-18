@@ -15,7 +15,7 @@ import javax.persistence.Embeddable;
  * @author eliastsourapas
  */
 @Embeddable
-public class PlaylistSongsPK implements Serializable {
+public class PlaylistSongPK implements Serializable {
     @Basic(optional = false)
     @Column(name = "PLAYLIST_ID")
     private long playlistId;
@@ -23,10 +23,10 @@ public class PlaylistSongsPK implements Serializable {
     @Column(name = "SONG_ID")
     private long songId;
 
-    public PlaylistSongsPK() {
+    public PlaylistSongPK() {
     }
 
-    public PlaylistSongsPK(long playlistId, long songId) {
+    public PlaylistSongPK(long playlistId, long songId) {
         this.playlistId = playlistId;
         this.songId = songId;
     }
@@ -58,10 +58,10 @@ public class PlaylistSongsPK implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof PlaylistSongsPK)) {
+        if (!(object instanceof PlaylistSongPK)) {
             return false;
         }
-        PlaylistSongsPK other = (PlaylistSongsPK) object;
+        PlaylistSongPK other = (PlaylistSongPK) object;
         if (this.playlistId != other.playlistId) {
             return false;
         }
@@ -73,7 +73,7 @@ public class PlaylistSongsPK implements Serializable {
 
     @Override
     public String toString() {
-        return "radiostation_POJO.PlaylistSongsPK[ playlistId=" + playlistId + ", songId=" + songId + " ]";
+        return "radiostation_POJO.PlaylistSongPK[ playlistId=" + playlistId + ", songId=" + songId + " ]";
     }
     
 }

@@ -61,16 +61,14 @@ public class Artist implements Serializable {
     @Basic(optional = false)
     @Column(name = "SEX")
     private String sex;
-    @Basic(optional = false)
     @Column(name = "BIRTH_DAY")
     @Temporal(TemporalType.TIMESTAMP)
     private Date birthDay;
-    @Basic(optional = false)
     @Column(name = "BIRTH_PLACE")
     private String birthPlace;
-    @JoinTable(name = "MUSICGROUP_ARTISTS", joinColumns = {
+    @JoinTable(name = "MUSICGROUP_ARTIST", joinColumns = {
         @JoinColumn(name = "ARTIST_ID", referencedColumnName = "ARTIST_ID")}, inverseJoinColumns = {
-        @JoinColumn(name = "MUSICGROUP_ID", referencedColumnName = "MUSICGROUP_ID")})
+        @JoinColumn(name = "MUSICGROUP_NAME", referencedColumnName = "MUSICGROUP_NAME")})
     @ManyToMany
     private List<Musicgroup> musicgroupList;
     @JoinColumns({
@@ -78,9 +76,9 @@ public class Artist implements Serializable {
         @JoinColumn(name = "DISC_NUMBER", referencedColumnName = "DISC_NUMBER")})
     @ManyToOne
     private Album album;
-    @JoinColumn(name = "GENRE_ID", referencedColumnName = "GENRE_ID")
-    @ManyToOne
-    private Musicgenre genreId;
+    @JoinColumn(name = "GENRE_NAME", referencedColumnName = "GENRE_NAME")
+    @ManyToOne(optional = false)
+    private Musicgenre genreName;
     @OneToMany(mappedBy = "artistId")
     private List<Album> albumList;
 
@@ -91,12 +89,10 @@ public class Artist implements Serializable {
         this.artistId = artistId;
     }
 
-    public Artist(Long artistId, String artisticName, String sex, Date birthDay, String birthPlace) {
+    public Artist(Long artistId, String artisticName, String sex) {
         this.artistId = artistId;
         this.artisticName = artisticName;
         this.sex = sex;
-        this.birthDay = birthDay;
-        this.birthPlace = birthPlace;
     }
 
     public Long getArtistId() {
@@ -172,12 +168,12 @@ public class Artist implements Serializable {
         this.album = album;
     }
 
-    public Musicgenre getGenreId() {
-        return genreId;
+    public Musicgenre getGenreName() {
+        return genreName;
     }
 
-    public void setGenreId(Musicgenre genreId) {
-        this.genreId = genreId;
+    public void setGenreName(Musicgenre genreName) {
+        this.genreName = genreName;
     }
 
     @XmlTransient

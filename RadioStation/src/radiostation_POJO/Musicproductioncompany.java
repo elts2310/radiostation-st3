@@ -11,8 +11,6 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -36,42 +34,37 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Musicproductioncompany.findByTelephone", query = "SELECT m FROM Musicproductioncompany m WHERE m.telephone = :telephone")})
 public class Musicproductioncompany implements Serializable {
     private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "MPC_ID")
-    private Long mpcId;
+    private long mpcId;
+    @Id
     @Basic(optional = false)
     @Column(name = "MPC_NAME")
     private String mpcName;
-    @Basic(optional = false)
     @Column(name = "ADDRESS")
     private String address;
-    @Basic(optional = false)
     @Column(name = "TELEPHONE")
     private String telephone;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "mpcId")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "mpcName")
     private List<Album> albumList;
 
     public Musicproductioncompany() {
     }
 
-    public Musicproductioncompany(Long mpcId) {
-        this.mpcId = mpcId;
-    }
-
-    public Musicproductioncompany(Long mpcId, String mpcName, String address, String telephone) {
-        this.mpcId = mpcId;
+    public Musicproductioncompany(String mpcName) {
         this.mpcName = mpcName;
-        this.address = address;
-        this.telephone = telephone;
     }
 
-    public Long getMpcId() {
+    public Musicproductioncompany(String mpcName, long mpcId) {
+        this.mpcName = mpcName;
+        this.mpcId = mpcId;
+    }
+
+    public long getMpcId() {
         return mpcId;
     }
 
-    public void setMpcId(Long mpcId) {
+    public void setMpcId(long mpcId) {
         this.mpcId = mpcId;
     }
 
@@ -111,7 +104,7 @@ public class Musicproductioncompany implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (mpcId != null ? mpcId.hashCode() : 0);
+        hash += (mpcName != null ? mpcName.hashCode() : 0);
         return hash;
     }
 
@@ -122,7 +115,7 @@ public class Musicproductioncompany implements Serializable {
             return false;
         }
         Musicproductioncompany other = (Musicproductioncompany) object;
-        if ((this.mpcId == null && other.mpcId != null) || (this.mpcId != null && !this.mpcId.equals(other.mpcId))) {
+        if ((this.mpcName == null && other.mpcName != null) || (this.mpcName != null && !this.mpcName.equals(other.mpcName))) {
             return false;
         }
         return true;
@@ -130,7 +123,7 @@ public class Musicproductioncompany implements Serializable {
 
     @Override
     public String toString() {
-        return "radiostation_POJO.Musicproductioncompany[ mpcId=" + mpcId + " ]";
+        return "radiostation_POJO.Musicproductioncompany[ mpcName=" + mpcName + " ]";
     }
     
 }

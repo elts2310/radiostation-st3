@@ -37,10 +37,10 @@ public class MainMenu extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        MenuArtist = new javax.swing.JMenuItem();
-        MenuGroup = new javax.swing.JMenuItem();
-        MenuGroupAlbum = new javax.swing.JMenuItem();
-        MenuArtistAlbum = new javax.swing.JMenuItem();
+        menuArtist = new javax.swing.JMenuItem();
+        menuGroup = new javax.swing.JMenuItem();
+        menuGroupAlbum = new javax.swing.JMenuItem();
+        menuArtistAlbum = new javax.swing.JMenuItem();
         MenuPlaylists = new javax.swing.JMenu();
         MenuExit = new javax.swing.JMenu();
 
@@ -59,39 +59,39 @@ public class MainMenu extends javax.swing.JFrame {
 
         jMenu1.setText("Διαχείριση αρχείων");
 
-        MenuArtist.setText("Καλλιτέχνες");
-        MenuArtist.addActionListener(new java.awt.event.ActionListener() {
+        menuArtist.setText("Καλλιτέχνες");
+        menuArtist.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MenuArtistActionPerformed(evt);
+                menuArtistActionPerformed(evt);
             }
         });
-        jMenu1.add(MenuArtist);
+        jMenu1.add(menuArtist);
 
-        MenuGroup.setText("Συγκροτήματα");
-        MenuGroup.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        MenuGroup.addActionListener(new java.awt.event.ActionListener() {
+        menuGroup.setText("Συγκροτήματα");
+        menuGroup.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        menuGroup.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MenuGroupActionPerformed(evt);
+                menuGroupActionPerformed(evt);
             }
         });
-        jMenu1.add(MenuGroup);
+        jMenu1.add(menuGroup);
 
-        MenuGroupAlbum.setText("Άλμπουμ Συγκροτημάτων");
-        MenuGroupAlbum.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        MenuGroupAlbum.addActionListener(new java.awt.event.ActionListener() {
+        menuGroupAlbum.setText("Άλμπουμ Συγκροτημάτων");
+        menuGroupAlbum.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        menuGroupAlbum.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MenuGroupAlbumActionPerformed(evt);
+                menuGroupAlbumActionPerformed(evt);
             }
         });
-        jMenu1.add(MenuGroupAlbum);
+        jMenu1.add(menuGroupAlbum);
 
-        MenuArtistAlbum.setText("Άλμπουμ Καλλιτεχνών");
-        MenuArtistAlbum.addActionListener(new java.awt.event.ActionListener() {
+        menuArtistAlbum.setText("Άλμπουμ Καλλιτεχνών");
+        menuArtistAlbum.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MenuArtistAlbumActionPerformed(evt);
+                menuArtistAlbumActionPerformed(evt);
             }
         });
-        jMenu1.add(MenuArtistAlbum);
+        jMenu1.add(menuArtistAlbum);
 
         jMenuBar1.add(jMenu1);
 
@@ -143,11 +143,11 @@ public class MainMenu extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void MenuArtistActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuArtistActionPerformed
+    private void menuArtistActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuArtistActionPerformed
         // TODO add your handling code here:
         R2_ArtistList_View alv = new R2_ArtistList_View();
         alv.setVisible(true);
-    }//GEN-LAST:event_MenuArtistActionPerformed
+    }//GEN-LAST:event_menuArtistActionPerformed
 
     private void MenuExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuExitActionPerformed
         System.exit(0);// TODO add your handling code here:
@@ -157,23 +157,23 @@ public class MainMenu extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_MenuPlaylistsActionPerformed
 
-    private void MenuGroupAlbumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuGroupAlbumActionPerformed
+    private void menuGroupAlbumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuGroupAlbumActionPerformed
         // TODO add your handling code here:
         R8_GroupAlbum_View gav = new R8_GroupAlbum_View();
         gav.setVisible(true);
-    }//GEN-LAST:event_MenuGroupAlbumActionPerformed
+    }//GEN-LAST:event_menuGroupAlbumActionPerformed
 
-    private void MenuGroupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuGroupActionPerformed
+    private void menuGroupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuGroupActionPerformed
         // TODO add your handling code here:
         R4_GroupList_View glv = new R4_GroupList_View();
         glv.setVisible(true);
-    }//GEN-LAST:event_MenuGroupActionPerformed
+    }//GEN-LAST:event_menuGroupActionPerformed
 
-    private void MenuArtistAlbumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuArtistAlbumActionPerformed
+    private void menuArtistAlbumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuArtistAlbumActionPerformed
         // TODO add your handling code here:
         R12_ArtistAlbum_View aav = new R12_ArtistAlbum_View();
         aav.setVisible(true);
-    }//GEN-LAST:event_MenuArtistAlbumActionPerformed
+    }//GEN-LAST:event_menuArtistAlbumActionPerformed
 
     /**
      * @param args the command line arguments
@@ -213,16 +213,16 @@ public class MainMenu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenuItem MenuArtist;
-    private javax.swing.JMenuItem MenuArtistAlbum;
     private javax.swing.JMenu MenuExit;
-    private javax.swing.JMenuItem MenuGroup;
-    private javax.swing.JMenuItem MenuGroupAlbum;
     private javax.swing.JMenu MenuPlaylists;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem menuArtist;
+    private javax.swing.JMenuItem menuArtistAlbum;
+    private javax.swing.JMenuItem menuGroup;
+    private javax.swing.JMenuItem menuGroupAlbum;
     // End of variables declaration//GEN-END:variables
 }

@@ -32,8 +32,8 @@ public class R8_GroupAlbum_View extends javax.swing.JFrame {
     private void initComponents() {
         bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
-        RadioStationPUEntityManager = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory("RadioStationPU").createEntityManager();
-        albumQuery = java.beans.Beans.isDesignTime() ? null : RadioStationPUEntityManager.createQuery("SELECT a FROM Album a");
+        RadioStationPUEntityManager0 = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory("RadioStationPU").createEntityManager();
+        albumQuery = java.beans.Beans.isDesignTime() ? null : RadioStationPUEntityManager0.createQuery("SELECT a FROM Album a");
         albumList = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : albumQuery.getResultList();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -56,8 +56,8 @@ public class R8_GroupAlbum_View extends javax.swing.JFrame {
         org.jdesktop.swingbinding.JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${title}"));
         columnBinding.setColumnName("Title");
         columnBinding.setColumnClass(String.class);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${musicgroupId}"));
-        columnBinding.setColumnName("Musicgroup Id");
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${musicgroupName}"));
+        columnBinding.setColumnName("Musicgroup Name");
         columnBinding.setColumnClass(radiostation_POJO.Musicgroup.class);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${releaseDate}"));
         columnBinding.setColumnName("Release Date");
@@ -65,8 +65,8 @@ public class R8_GroupAlbum_View extends javax.swing.JFrame {
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${albumType}"));
         columnBinding.setColumnName("Album Type");
         columnBinding.setColumnClass(String.class);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${mpcId}"));
-        columnBinding.setColumnName("Mpc Id");
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${mpcName}"));
+        columnBinding.setColumnName("Mpc Name");
         columnBinding.setColumnClass(radiostation_POJO.Musicproductioncompany.class);
         bindingGroup.addBinding(jTableBinding);
         jTableBinding.bind();
@@ -197,7 +197,7 @@ public class R8_GroupAlbum_View extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton ExitGroupAlbum;
-    private javax.persistence.EntityManager RadioStationPUEntityManager;
+    private javax.persistence.EntityManager RadioStationPUEntityManager0;
     private javax.swing.JButton addGroupAlbum;
     private java.util.List<radiostation_POJO.Album> albumList;
     private javax.persistence.Query albumQuery;

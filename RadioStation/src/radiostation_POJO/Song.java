@@ -43,8 +43,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Song.findBySongId", query = "SELECT s FROM Song s WHERE s.songId = :songId"),
     @NamedQuery(name = "Song.findByTitle", query = "SELECT s FROM Song s WHERE s.title = :title"),
     @NamedQuery(name = "Song.findByDuration", query = "SELECT s FROM Song s WHERE s.duration = :duration"),
-    @NamedQuery(name = "Song.findByTrackNr", query = "SELECT s FROM Song s WHERE s.trackNr = :trackNr"),
-    @NamedQuery(name = "Song.findByPlaylistId", query = "SELECT s FROM Song s WHERE s.playlistId = :playlistId")})
+    @NamedQuery(name = "Song.findByTrackNr", query = "SELECT s FROM Song s WHERE s.trackNr = :trackNr")})
 public class Song implements Serializable {
     @Transient
     private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
@@ -64,15 +63,13 @@ public class Song implements Serializable {
     @Basic(optional = false)
     @Column(name = "TRACK_NR")
     private int trackNr;
-    @Column(name = "PLAYLIST_ID")
-    private BigInteger playlistId;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "song")
-    private List<PlaylistSongs> playlistSongsList;
     @JoinColumns({
         @JoinColumn(name = "ALBUM_ID", referencedColumnName = "ALBUM_ID"),
         @JoinColumn(name = "DISC_NUMBER", referencedColumnName = "DISC_NUMBER")})
     @ManyToOne(optional = false)
     private Album album;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "song")
+    private List<PlaylistSong> playlistSongList;
 
     public Song() {
     }
@@ -93,9 +90,7 @@ public class Song implements Serializable {
     }
 
     public void setSongId(Long songId) {
-        Long oldSongId = this.songId;
         this.songId = songId;
-        changeSupport.firePropertyChange("songId", oldSongId, songId);
     }
 
     public String getTitle() {
@@ -103,9 +98,7 @@ public class Song implements Serializable {
     }
 
     public void setTitle(String title) {
-        String oldTitle = this.title;
         this.title = title;
-        changeSupport.firePropertyChange("title", oldTitle, title);
     }
 
     public Date getDuration() {
@@ -113,9 +106,7 @@ public class Song implements Serializable {
     }
 
     public void setDuration(Date duration) {
-        Date oldDuration = this.duration;
         this.duration = duration;
-        changeSupport.firePropertyChange("duration", oldDuration, duration);
     }
 
     public int getTrackNr() {
@@ -123,28 +114,7 @@ public class Song implements Serializable {
     }
 
     public void setTrackNr(int trackNr) {
-        int oldTrackNr = this.trackNr;
         this.trackNr = trackNr;
-        changeSupport.firePropertyChange("trackNr", oldTrackNr, trackNr);
-    }
-
-    public BigInteger getPlaylistId() {
-        return playlistId;
-    }
-
-    public void setPlaylistId(BigInteger playlistId) {
-        BigInteger oldPlaylistId = this.playlistId;
-        this.playlistId = playlistId;
-        changeSupport.firePropertyChange("playlistId", oldPlaylistId, playlistId);
-    }
-
-    @XmlTransient
-    public List<PlaylistSongs> getPlaylistSongsList() {
-        return playlistSongsList;
-    }
-
-    public void setPlaylistSongsList(List<PlaylistSongs> playlistSongsList) {
-        this.playlistSongsList = playlistSongsList;
     }
 
     public Album getAlbum() {
@@ -152,9 +122,16 @@ public class Song implements Serializable {
     }
 
     public void setAlbum(Album album) {
-        Album oldAlbum = this.album;
         this.album = album;
-        changeSupport.firePropertyChange("album", oldAlbum, album);
+    }
+
+    @XmlTransient
+    public List<PlaylistSong> getPlaylistSongList() {
+        return playlistSongList;
+    }
+
+    public void setPlaylistSongList(List<PlaylistSong> playlistSongList) {
+        this.playlistSongList = playlistSongList;
     }
 
     @Override
@@ -181,10 +158,10 @@ public class Song implements Serializable {
     public String toString() {
         return "radiostation_POJO.Song[ songId=" + songId + " ]";
     }
-
+    
     public void addPropertyChangeListener(PropertyChangeListener listener) {
         changeSupport.addPropertyChangeListener(listener);
-    }
+}
 
     public void removePropertyChangeListener(PropertyChangeListener listener) {
         changeSupport.removePropertyChangeListener(listener);

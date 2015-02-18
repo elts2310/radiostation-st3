@@ -54,7 +54,7 @@ public class Playlist implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date plCreationDate;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "playlist")
-    private List<PlaylistSongs> playlistSongsList;
+    private List<PlaylistSong> playlistSongList;
 
     public Playlist() {
     }
@@ -102,12 +102,12 @@ public class Playlist implements Serializable {
     }
 
     @XmlTransient
-    public List<PlaylistSongs> getPlaylistSongsList() {
-        return playlistSongsList;
+    public List<PlaylistSong> getPlaylistSongList() {
+        return playlistSongList;
     }
 
-    public void setPlaylistSongsList(List<PlaylistSongs> playlistSongsList) {
-        this.playlistSongsList = playlistSongsList;
+    public void setPlaylistSongList(List<PlaylistSong> playlistSongList) {
+        this.playlistSongList = playlistSongList;
     }
 
     @Override

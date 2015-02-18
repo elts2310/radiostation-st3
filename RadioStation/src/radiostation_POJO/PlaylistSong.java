@@ -22,17 +22,17 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author eliastsourapas
  */
 @Entity
-@Table(name = "PLAYLIST_SONGS")
+@Table(name = "PLAYLIST_SONG")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "PlaylistSongs.findAll", query = "SELECT p FROM PlaylistSongs p"),
-    @NamedQuery(name = "PlaylistSongs.findByPlaylistId", query = "SELECT p FROM PlaylistSongs p WHERE p.playlistSongsPK.playlistId = :playlistId"),
-    @NamedQuery(name = "PlaylistSongs.findBySongId", query = "SELECT p FROM PlaylistSongs p WHERE p.playlistSongsPK.songId = :songId"),
-    @NamedQuery(name = "PlaylistSongs.findByOrderNumber", query = "SELECT p FROM PlaylistSongs p WHERE p.orderNumber = :orderNumber")})
-public class PlaylistSongs implements Serializable {
+    @NamedQuery(name = "PlaylistSong.findAll", query = "SELECT p FROM PlaylistSong p"),
+    @NamedQuery(name = "PlaylistSong.findByPlaylistId", query = "SELECT p FROM PlaylistSong p WHERE p.playlistSongPK.playlistId = :playlistId"),
+    @NamedQuery(name = "PlaylistSong.findBySongId", query = "SELECT p FROM PlaylistSong p WHERE p.playlistSongPK.songId = :songId"),
+    @NamedQuery(name = "PlaylistSong.findByOrderNumber", query = "SELECT p FROM PlaylistSong p WHERE p.orderNumber = :orderNumber")})
+public class PlaylistSong implements Serializable {
     private static final long serialVersionUID = 1L;
     @EmbeddedId
-    protected PlaylistSongsPK playlistSongsPK;
+    protected PlaylistSongPK playlistSongPK;
     @Basic(optional = false)
     @Column(name = "ORDER_NUMBER")
     private int orderNumber;
@@ -43,28 +43,28 @@ public class PlaylistSongs implements Serializable {
     @ManyToOne(optional = false)
     private Song song;
 
-    public PlaylistSongs() {
+    public PlaylistSong() {
     }
 
-    public PlaylistSongs(PlaylistSongsPK playlistSongsPK) {
-        this.playlistSongsPK = playlistSongsPK;
+    public PlaylistSong(PlaylistSongPK playlistSongPK) {
+        this.playlistSongPK = playlistSongPK;
     }
 
-    public PlaylistSongs(PlaylistSongsPK playlistSongsPK, int orderNumber) {
-        this.playlistSongsPK = playlistSongsPK;
+    public PlaylistSong(PlaylistSongPK playlistSongPK, int orderNumber) {
+        this.playlistSongPK = playlistSongPK;
         this.orderNumber = orderNumber;
     }
 
-    public PlaylistSongs(long playlistId, long songId) {
-        this.playlistSongsPK = new PlaylistSongsPK(playlistId, songId);
+    public PlaylistSong(long playlistId, long songId) {
+        this.playlistSongPK = new PlaylistSongPK(playlistId, songId);
     }
 
-    public PlaylistSongsPK getPlaylistSongsPK() {
-        return playlistSongsPK;
+    public PlaylistSongPK getPlaylistSongPK() {
+        return playlistSongPK;
     }
 
-    public void setPlaylistSongsPK(PlaylistSongsPK playlistSongsPK) {
-        this.playlistSongsPK = playlistSongsPK;
+    public void setPlaylistSongPK(PlaylistSongPK playlistSongPK) {
+        this.playlistSongPK = playlistSongPK;
     }
 
     public int getOrderNumber() {
@@ -94,18 +94,18 @@ public class PlaylistSongs implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (playlistSongsPK != null ? playlistSongsPK.hashCode() : 0);
+        hash += (playlistSongPK != null ? playlistSongPK.hashCode() : 0);
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof PlaylistSongs)) {
+        if (!(object instanceof PlaylistSong)) {
             return false;
         }
-        PlaylistSongs other = (PlaylistSongs) object;
-        if ((this.playlistSongsPK == null && other.playlistSongsPK != null) || (this.playlistSongsPK != null && !this.playlistSongsPK.equals(other.playlistSongsPK))) {
+        PlaylistSong other = (PlaylistSong) object;
+        if ((this.playlistSongPK == null && other.playlistSongPK != null) || (this.playlistSongPK != null && !this.playlistSongPK.equals(other.playlistSongPK))) {
             return false;
         }
         return true;
@@ -113,7 +113,7 @@ public class PlaylistSongs implements Serializable {
 
     @Override
     public String toString() {
-        return "radiostation_POJO.PlaylistSongs[ playlistSongsPK=" + playlistSongsPK + " ]";
+        return "radiostation_POJO.PlaylistSong[ playlistSongPK=" + playlistSongPK + " ]";
     }
     
 }

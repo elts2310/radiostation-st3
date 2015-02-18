@@ -66,12 +66,12 @@ public class Album implements Serializable {
     @JoinColumn(name = "ARTIST_ID", referencedColumnName = "ARTIST_ID")
     @ManyToOne
     private Artist artistId;
-    @JoinColumn(name = "MUSICGROUP_ID", referencedColumnName = "MUSICGROUP_ID")
+    @JoinColumn(name = "MUSICGROUP_NAME", referencedColumnName = "MUSICGROUP_NAME")
     @ManyToOne
-    private Musicgroup musicgroupId;
-    @JoinColumn(name = "MPC_ID", referencedColumnName = "MPC_ID")
+    private Musicgroup musicgroupName;
+    @JoinColumn(name = "MPC_NAME", referencedColumnName = "MPC_NAME")
     @ManyToOne(optional = false)
-    private Musicproductioncompany mpcId;
+    private Musicproductioncompany mpcName;
 
     public Album() {
     }
@@ -166,24 +166,24 @@ public class Album implements Serializable {
         changeSupport.firePropertyChange("artistId", oldArtistId, artistId);
     }
 
-    public Musicgroup getMusicgroupId() {
-        return musicgroupId;
+    public Musicgroup getMusicgroupName() {
+        return musicgroupName;
     }
 
-    public void setMusicgroupId(Musicgroup musicgroupId) {
-        Musicgroup oldMusicgroupId = this.musicgroupId;
-        this.musicgroupId = musicgroupId;
-        changeSupport.firePropertyChange("musicgroupId", oldMusicgroupId, musicgroupId);
+    public void setMusicgroupName(Musicgroup musicgroupName) {
+        Musicgroup oldMusicgroupName = this.musicgroupName;
+        this.musicgroupName = musicgroupName;
+        changeSupport.firePropertyChange("musicgroupName", oldMusicgroupName, musicgroupName);
     }
 
-    public Musicproductioncompany getMpcId() {
-        return mpcId;
+    public Musicproductioncompany getMpcName() {
+        return mpcName;
     }
 
-    public void setMpcId(Musicproductioncompany mpcId) {
-        Musicproductioncompany oldMpcId = this.mpcId;
-        this.mpcId = mpcId;
-        changeSupport.firePropertyChange("mpcId", oldMpcId, mpcId);
+    public void setMpcName(Musicproductioncompany mpcName) {
+        Musicproductioncompany oldMpcName = this.mpcName;
+        this.mpcName = mpcName;
+        changeSupport.firePropertyChange("mpcName", oldMpcName, mpcName);
     }
 
     @Override

@@ -2,7 +2,7 @@
 
 <Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <NonVisualComponents>
-    <Component class="javax.persistence.EntityManager" name="RadioStationPUEntityManager">
+    <Component class="javax.persistence.EntityManager" name="RadioStationPUEntityManager0">
       <Properties>
         <Property name="persistenceUnit" type="java.lang.String" value="RadioStationPU"/>
       </Properties>
@@ -11,7 +11,7 @@
       <Properties>
         <Property name="query" type="java.lang.String" value="SELECT a FROM Album a"/>
         <Property name="entityManager" type="java.lang.Object" editor="org.netbeans.modules.form.j2ee.J2EEPropertyModifier$EMProperty$EntityManagerEditor">
-          <ComponentRef name="RadioStationPUEntityManager"/>
+          <ComponentRef name="RadioStationPUEntityManager0"/>
         </Property>
       </Properties>
     </Component>
@@ -144,7 +144,7 @@
               <Subbinding sourcePath="${title}">
                 <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="String.class"/>
               </Subbinding>
-              <Subbinding sourcePath="${musicgroupId}">
+              <Subbinding sourcePath="${musicgroupName}">
                 <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="radiostation_POJO.Musicgroup.class"/>
               </Subbinding>
               <Subbinding sourcePath="${releaseDate}">
@@ -153,7 +153,7 @@
               <Subbinding sourcePath="${albumType}">
                 <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="String.class"/>
               </Subbinding>
-              <Subbinding sourcePath="${mpcId}">
+              <Subbinding sourcePath="${mpcName}">
                 <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="radiostation_POJO.Musicproductioncompany.class"/>
               </Subbinding>
             </BindingProperty>

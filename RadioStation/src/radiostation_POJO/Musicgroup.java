@@ -11,8 +11,6 @@ import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinColumns;
@@ -41,15 +39,13 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Musicgroup.findByFormationDate", query = "SELECT m FROM Musicgroup m WHERE m.formationDate = :formationDate")})
 public class Musicgroup implements Serializable {
     private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "MUSICGROUP_ID")
-    private Long musicgroupId;
+    private long musicgroupId;
+    @Id
     @Basic(optional = false)
     @Column(name = "MUSICGROUP_NAME")
     private String musicgroupName;
-    @Basic(optional = false)
     @Column(name = "FORMATION_DATE")
     @Temporal(TemporalType.TIMESTAMP)
     private Date formationDate;
@@ -60,27 +56,26 @@ public class Musicgroup implements Serializable {
         @JoinColumn(name = "DISC_NUMBER", referencedColumnName = "DISC_NUMBER")})
     @ManyToOne
     private Album album;
-    @OneToMany(mappedBy = "musicgroupId")
+    @OneToMany(mappedBy = "musicgroupName")
     private List<Album> albumList;
 
     public Musicgroup() {
     }
 
-    public Musicgroup(Long musicgroupId) {
-        this.musicgroupId = musicgroupId;
-    }
-
-    public Musicgroup(Long musicgroupId, String musicgroupName, Date formationDate) {
-        this.musicgroupId = musicgroupId;
+    public Musicgroup(String musicgroupName) {
         this.musicgroupName = musicgroupName;
-        this.formationDate = formationDate;
     }
 
-    public Long getMusicgroupId() {
+    public Musicgroup(String musicgroupName, long musicgroupId) {
+        this.musicgroupName = musicgroupName;
+        this.musicgroupId = musicgroupId;
+    }
+
+    public long getMusicgroupId() {
         return musicgroupId;
     }
 
-    public void setMusicgroupId(Long musicgroupId) {
+    public void setMusicgroupId(long musicgroupId) {
         this.musicgroupId = musicgroupId;
     }
 
@@ -129,7 +124,7 @@ public class Musicgroup implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (musicgroupId != null ? musicgroupId.hashCode() : 0);
+        hash += (musicgroupName != null ? musicgroupName.hashCode() : 0);
         return hash;
     }
 
@@ -140,7 +135,7 @@ public class Musicgroup implements Serializable {
             return false;
         }
         Musicgroup other = (Musicgroup) object;
-        if ((this.musicgroupId == null && other.musicgroupId != null) || (this.musicgroupId != null && !this.musicgroupId.equals(other.musicgroupId))) {
+        if ((this.musicgroupName == null && other.musicgroupName != null) || (this.musicgroupName != null && !this.musicgroupName.equals(other.musicgroupName))) {
             return false;
         }
         return true;
@@ -148,7 +143,7 @@ public class Musicgroup implements Serializable {
 
     @Override
     public String toString() {
-        return "radiostation_POJO.Musicgroup[ musicgroupId=" + musicgroupId + " ]";
+        return "radiostation_POJO.Musicgroup[ musicgroupName=" + musicgroupName + " ]";
     }
     
 }
