@@ -39,9 +39,6 @@ public class R9_GroupAlbum_Management extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        RadioStationPUEntityManager = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory("RadioStationPU").createEntityManager();
-        songQuery = java.beans.Beans.isDesignTime() ? null : RadioStationPUEntityManager.createQuery("SELECT s FROM Song s");
-        songList = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : songQuery.getResultList();
         jButton1 = new javax.swing.JButton();
         btnCancel = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
@@ -322,7 +319,6 @@ public class R9_GroupAlbum_Management extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.persistence.EntityManager RadioStationPUEntityManager;
     private javax.swing.JComboBox Type;
     private javax.swing.JButton btnCancel;
     private javax.swing.JButton jButton1;
@@ -342,8 +338,6 @@ public class R9_GroupAlbum_Management extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private java.util.List<radiostation_POJO.Song> songList;
-    private javax.persistence.Query songQuery;
     private javax.swing.JTextField txtDiscNr;
     private javax.swing.JTextField txtReleaseDt;
     private javax.swing.JTextField txtTitle;
