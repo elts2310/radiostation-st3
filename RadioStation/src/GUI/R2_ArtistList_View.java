@@ -62,13 +62,23 @@ public class R2_ArtistList_View extends javax.swing.JFrame {
         });
 
         deleteSelectedArtist.setText("Διαγραφή");
+        deleteSelectedArtist.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         editSelectedArtist.setText("Επεξεργασία");
+        editSelectedArtist.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editSelectedArtistActionPerformed(evt);
+            }
+        });
 
         exitArtist.setText("Έξοδος");
         exitArtist.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                exitArtistActionPerformed(evt);
+                jButton4ActionPerformed(evt);
             }
         });
 
@@ -112,14 +122,31 @@ public class R2_ArtistList_View extends javax.swing.JFrame {
 
     private void addArtistActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addArtistActionPerformed
         // TODO add your handling code here:
-        R3_Artist_Management am = new R3_Artist_Management();
-        am.setVisible(true);
+        R3_Artist_Management amad = new R3_Artist_Management();
+        amad.setVisible(true);
     }//GEN-LAST:event_addArtistActionPerformed
 
     private void exitArtistActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitArtistActionPerformed
         // TODO add your handling code here:
         dispose();
     }//GEN-LAST:event_exitArtistActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    R3_Artist_Management amde = new R3_Artist_Management();
+        amde.setVisible(true);
+        
+// TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void editSelectedArtistActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editSelectedArtistActionPerformed
+ R3_Artist_Management amed = new R3_Artist_Management();
+        amed.setVisible(true);
+        // TODO add your handling code here:
+    }//GEN-LAST:event_editSelectedArtistActionPerformed
 
     /**
      * @param args the command line arguments
