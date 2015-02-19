@@ -29,7 +29,7 @@ public class R2_ArtistList_View extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        artistsTable = new javax.swing.JTable();
         addArtist = new javax.swing.JButton();
         deleteSelectedArtist = new javax.swing.JButton();
         editSelectedArtist = new javax.swing.JButton();
@@ -41,7 +41,7 @@ public class R2_ArtistList_View extends javax.swing.JFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Αρχείο Καλλιτεχνών");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        artistsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null},
@@ -52,7 +52,7 @@ public class R2_ArtistList_View extends javax.swing.JFrame {
                 "Επώνυμο", "Όνομα", "Καλλιτεχνικό Όνομα", "Φύλο", "Ημ/νία Γέννησης", "Τόπος Γέννησης", "Είδη Μουσικής"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(artistsTable);
 
         addArtist.setText("Προσθήκη");
         addArtist.addActionListener(new java.awt.event.ActionListener() {
@@ -128,25 +128,24 @@ public class R2_ArtistList_View extends javax.swing.JFrame {
 
     private void exitArtistActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitArtistActionPerformed
         // TODO add your handling code here:
-        dispose();
     }//GEN-LAST:event_exitArtistActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
+        dispose();
     }//GEN-LAST:event_jButton4ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-    R3_Artist_Management amde = new R3_Artist_Management();
-        amde.setVisible(true);
-        
-// TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
-
     private void editSelectedArtistActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editSelectedArtistActionPerformed
- R3_Artist_Management amed = new R3_Artist_Management();
-        amed.setVisible(true);
         // TODO add your handling code here:
+        R3_Artist_Management amad = new R3_Artist_Management();
+        amad.setVisible(true);
     }//GEN-LAST:event_editSelectedArtistActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        R3_Artist_Management amad = new R3_Artist_Management();
+        amad.setVisible(true);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -188,11 +187,11 @@ public class R2_ArtistList_View extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addArtist;
+    private javax.swing.JTable artistsTable;
     private javax.swing.JButton deleteSelectedArtist;
     private javax.swing.JButton editSelectedArtist;
     private javax.swing.JButton exitArtist;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }
