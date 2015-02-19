@@ -29,7 +29,7 @@ public class R2_ArtistList_View extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        artistsTable = new javax.swing.JTable();
+        jTable1 = new javax.swing.JTable();
         addArtist = new javax.swing.JButton();
         deleteSelectedArtist = new javax.swing.JButton();
         editSelectedArtist = new javax.swing.JButton();
@@ -41,18 +41,7 @@ public class R2_ArtistList_View extends javax.swing.JFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Αρχείο Καλλιτεχνών");
 
-        artistsTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
-            },
-            new String [] {
-                "Επώνυμο", "Όνομα", "Καλλιτεχνικό Όνομα", "Φύλο", "Ημ/νία Γέννησης", "Τόπος Γέννησης", "Είδη Μουσικής"
-            }
-        ));
-        jScrollPane1.setViewportView(artistsTable);
+        jScrollPane1.setViewportView(jTable1);
 
         addArtist.setText("Προσθήκη");
         addArtist.addActionListener(new java.awt.event.ActionListener() {
@@ -187,11 +176,11 @@ public class R2_ArtistList_View extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addArtist;
-    private javax.swing.JTable artistsTable;
     private javax.swing.JButton deleteSelectedArtist;
     private javax.swing.JButton editSelectedArtist;
     private javax.swing.JButton exitArtist;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }
