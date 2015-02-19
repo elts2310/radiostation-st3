@@ -15,7 +15,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinColumns;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
@@ -71,11 +70,6 @@ public class Artist implements Serializable {
         @JoinColumn(name = "MUSICGROUP_NAME", referencedColumnName = "MUSICGROUP_NAME")})
     @ManyToMany
     private List<Musicgroup> musicgroupList;
-    @JoinColumns({
-        @JoinColumn(name = "ALBUM_ID", referencedColumnName = "ALBUM_ID"),
-        @JoinColumn(name = "DISC_NUMBER", referencedColumnName = "DISC_NUMBER")})
-    @ManyToOne
-    private Album album;
     @JoinColumn(name = "GENRE_NAME", referencedColumnName = "GENRE_NAME")
     @ManyToOne(optional = false)
     private Musicgenre genreName;
@@ -158,14 +152,6 @@ public class Artist implements Serializable {
 
     public void setMusicgroupList(List<Musicgroup> musicgroupList) {
         this.musicgroupList = musicgroupList;
-    }
-
-    public Album getAlbum() {
-        return album;
-    }
-
-    public void setAlbum(Album album) {
-        this.album = album;
     }
 
     public Musicgenre getGenreName() {

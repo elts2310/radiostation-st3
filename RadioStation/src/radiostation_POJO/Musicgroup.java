@@ -12,10 +12,7 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinColumns;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -51,11 +48,6 @@ public class Musicgroup implements Serializable {
     private Date formationDate;
     @ManyToMany(mappedBy = "musicgroupList")
     private List<Artist> artistList;
-    @JoinColumns({
-        @JoinColumn(name = "ALBUM_ID", referencedColumnName = "ALBUM_ID"),
-        @JoinColumn(name = "DISC_NUMBER", referencedColumnName = "DISC_NUMBER")})
-    @ManyToOne
-    private Album album;
     @OneToMany(mappedBy = "musicgroupName")
     private List<Album> albumList;
 
@@ -102,14 +94,6 @@ public class Musicgroup implements Serializable {
 
     public void setArtistList(List<Artist> artistList) {
         this.artistList = artistList;
-    }
-
-    public Album getAlbum() {
-        return album;
-    }
-
-    public void setAlbum(Album album) {
-        this.album = album;
     }
 
     @XmlTransient

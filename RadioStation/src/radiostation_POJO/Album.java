@@ -5,8 +5,6 @@
  */
 package radiostation_POJO;
 
-import java.beans.PropertyChangeListener;
-import java.beans.PropertyChangeSupport;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -23,7 +21,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -42,8 +39,6 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Album.findByAlbumType", query = "SELECT a FROM Album a WHERE a.albumType = :albumType"),
     @NamedQuery(name = "Album.findByDiscNumber", query = "SELECT a FROM Album a WHERE a.albumPK.discNumber = :discNumber")})
 public class Album implements Serializable {
-    @Transient
-    private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected AlbumPK albumPK;
@@ -57,12 +52,8 @@ public class Album implements Serializable {
     @Basic(optional = false)
     @Column(name = "ALBUM_TYPE")
     private String albumType;
-    @OneToMany(mappedBy = "album")
-    private List<Artist> artistList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "album")
     private List<Song> songList;
-    @OneToMany(mappedBy = "album")
-    private List<Musicgroup> musicgroupList;
     @JoinColumn(name = "ARTIST_ID", referencedColumnName = "ARTIST_ID")
     @ManyToOne
     private Artist artistId;
@@ -104,9 +95,7 @@ public class Album implements Serializable {
     }
 
     public void setTitle(String title) {
-        String oldTitle = this.title;
         this.title = title;
-        changeSupport.firePropertyChange("title", oldTitle, title);
     }
 
     public Date getReleaseDate() {
@@ -114,9 +103,7 @@ public class Album implements Serializable {
     }
 
     public void setReleaseDate(Date releaseDate) {
-        Date oldReleaseDate = this.releaseDate;
         this.releaseDate = releaseDate;
-        changeSupport.firePropertyChange("releaseDate", oldReleaseDate, releaseDate);
     }
 
     public String getAlbumType() {
@@ -124,18 +111,7 @@ public class Album implements Serializable {
     }
 
     public void setAlbumType(String albumType) {
-        String oldAlbumType = this.albumType;
         this.albumType = albumType;
-        changeSupport.firePropertyChange("albumType", oldAlbumType, albumType);
-    }
-
-    @XmlTransient
-    public List<Artist> getArtistList() {
-        return artistList;
-    }
-
-    public void setArtistList(List<Artist> artistList) {
-        this.artistList = artistList;
     }
 
     @XmlTransient
@@ -147,23 +123,12 @@ public class Album implements Serializable {
         this.songList = songList;
     }
 
-    @XmlTransient
-    public List<Musicgroup> getMusicgroupList() {
-        return musicgroupList;
-    }
-
-    public void setMusicgroupList(List<Musicgroup> musicgroupList) {
-        this.musicgroupList = musicgroupList;
-    }
-
     public Artist getArtistId() {
         return artistId;
     }
 
     public void setArtistId(Artist artistId) {
-        Artist oldArtistId = this.artistId;
         this.artistId = artistId;
-        changeSupport.firePropertyChange("artistId", oldArtistId, artistId);
     }
 
     public Musicgroup getMusicgroupName() {
@@ -171,9 +136,7 @@ public class Album implements Serializable {
     }
 
     public void setMusicgroupName(Musicgroup musicgroupName) {
-        Musicgroup oldMusicgroupName = this.musicgroupName;
         this.musicgroupName = musicgroupName;
-        changeSupport.firePropertyChange("musicgroupName", oldMusicgroupName, musicgroupName);
     }
 
     public Musicproductioncompany getMpcName() {
@@ -181,9 +144,7 @@ public class Album implements Serializable {
     }
 
     public void setMpcName(Musicproductioncompany mpcName) {
-        Musicproductioncompany oldMpcName = this.mpcName;
         this.mpcName = mpcName;
-        changeSupport.firePropertyChange("mpcName", oldMpcName, mpcName);
     }
 
     @Override
@@ -209,14 +170,6 @@ public class Album implements Serializable {
     @Override
     public String toString() {
         return "radiostation_POJO.Album[ albumPK=" + albumPK + " ]";
-    }
-
-    public void addPropertyChangeListener(PropertyChangeListener listener) {
-        changeSupport.addPropertyChangeListener(listener);
-    }
-
-    public void removePropertyChangeListener(PropertyChangeListener listener) {
-        changeSupport.removePropertyChangeListener(listener);
     }
     
 }
