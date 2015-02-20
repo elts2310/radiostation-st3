@@ -26,10 +26,14 @@ public class R16_Playlist_View extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
+        RadioStationPUEntityManager = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory("RadioStationPU").createEntityManager();
+        playlistQuery = java.beans.Beans.isDesignTime() ? null : RadioStationPUEntityManager.createQuery("SELECT p FROM Playlist p");
+        playlistList = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : playlistQuery.getResultList();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tablePlaylists = new javax.swing.JTable();
         newPlaylist = new javax.swing.JButton();
         alterPlaylist = new javax.swing.JButton();
         deletePlaylist = new javax.swing.JButton();
@@ -42,18 +46,20 @@ public class R16_Playlist_View extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
         jLabel1.setText("Λίστες Τραγουδιών");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane1.setViewportView(jTable1);
+        org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, playlistList, tablePlaylists);
+        org.jdesktop.swingbinding.JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${plName}"));
+        columnBinding.setColumnName("Pl Name");
+        columnBinding.setColumnClass(String.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${plDescription}"));
+        columnBinding.setColumnName("Pl Description");
+        columnBinding.setColumnClass(String.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${plCreationDate}"));
+        columnBinding.setColumnName("Pl Creation Date");
+        columnBinding.setColumnClass(java.util.Date.class);
+        bindingGroup.addBinding(jTableBinding);
+        jTableBinding.bind();
+
+        jScrollPane1.setViewportView(tablePlaylists);
 
         newPlaylist.setText("Δημιουργία");
         newPlaylist.addActionListener(new java.awt.event.ActionListener() {
@@ -129,6 +135,8 @@ public class R16_Playlist_View extends javax.swing.JFrame {
                 .addGap(28, 28, 28))
         );
 
+        bindingGroup.bind();
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -183,6 +191,7 @@ public class R16_Playlist_View extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.persistence.EntityManager RadioStationPUEntityManager;
     private javax.swing.JButton alterPlaylist;
     private javax.swing.JButton deletePlaylist;
     private javax.swing.JButton exitPlaylist;
@@ -190,7 +199,10 @@ public class R16_Playlist_View extends javax.swing.JFrame {
     private javax.swing.JButton importPlaylist;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JButton newPlaylist;
+    private java.util.List<radiostation_POJO.Playlist> playlistList;
+    private javax.persistence.Query playlistQuery;
+    private javax.swing.JTable tablePlaylists;
+    private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 }
