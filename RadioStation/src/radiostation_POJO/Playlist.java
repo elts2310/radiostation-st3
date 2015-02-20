@@ -9,15 +9,16 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -53,8 +54,11 @@ public class Playlist implements Serializable {
     @Column(name = "PL_CREATION_DATE")
     @Temporal(TemporalType.TIMESTAMP)
     private Date plCreationDate;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "playlist")
-    private List<PlaylistSong> playlistSongList;
+    @JoinTable(name = "PLAYLIST_SONG", joinColumns = {
+        @JoinColumn(name = "PLAYLIST_ID", referencedColumnName = "PLAYLIST_ID")}, inverseJoinColumns = {
+        @JoinColumn(name = "SONG_ID", referencedColumnName = "SONG_ID")})
+    @ManyToMany
+    private List<Song> songList;
 
     public Playlist() {
     }
@@ -102,12 +106,12 @@ public class Playlist implements Serializable {
     }
 
     @XmlTransient
-    public List<PlaylistSong> getPlaylistSongList() {
-        return playlistSongList;
+    public List<Song> getSongList() {
+        return songList;
     }
 
-    public void setPlaylistSongList(List<PlaylistSong> playlistSongList) {
-        this.playlistSongList = playlistSongList;
+    public void setSongList(List<Song> songList) {
+        this.songList = songList;
     }
 
     @Override

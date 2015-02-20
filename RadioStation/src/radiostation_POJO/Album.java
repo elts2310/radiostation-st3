@@ -13,8 +13,10 @@ import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
@@ -36,17 +38,20 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Album.findAll", query = "SELECT a FROM Album a"),
-    @NamedQuery(name = "Album.findByAlbumId", query = "SELECT a FROM Album a WHERE a.albumPK.albumId = :albumId"),
+    @NamedQuery(name = "Album.findByAlbumId", query = "SELECT a FROM Album a WHERE a.albumId = :albumId"),
     @NamedQuery(name = "Album.findByTitle", query = "SELECT a FROM Album a WHERE a.title = :title"),
     @NamedQuery(name = "Album.findByReleaseDate", query = "SELECT a FROM Album a WHERE a.releaseDate = :releaseDate"),
     @NamedQuery(name = "Album.findByAlbumType", query = "SELECT a FROM Album a WHERE a.albumType = :albumType"),
-    @NamedQuery(name = "Album.findByDiscNumber", query = "SELECT a FROM Album a WHERE a.albumPK.discNumber = :discNumber")})
+    @NamedQuery(name = "Album.findByDiscNumber", query = "SELECT a FROM Album a WHERE a.discNumber = :discNumber")})
 public class Album implements Serializable {
     @Transient
     private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
     private static final long serialVersionUID = 1L;
-    @EmbeddedId
-    protected AlbumPK albumPK;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "ALBUM_ID")
+    private Long albumId;
     @Basic(optional = false)
     @Column(name = "TITLE")
     private String title;
@@ -57,7 +62,10 @@ public class Album implements Serializable {
     @Basic(optional = false)
     @Column(name = "ALBUM_TYPE")
     private String albumType;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "album")
+    @Basic(optional = false)
+    @Column(name = "DISC_NUMBER")
+    private int discNumber;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "albumId")
     private List<Song> songList;
     @JoinColumn(name = "ARTIST_ID", referencedColumnName = "ARTIST_ID")
     @ManyToOne
@@ -72,27 +80,26 @@ public class Album implements Serializable {
     public Album() {
     }
 
-    public Album(AlbumPK albumPK) {
-        this.albumPK = albumPK;
+    public Album(Long albumId) {
+        this.albumId = albumId;
     }
 
-    public Album(AlbumPK albumPK, String title, Date releaseDate, String albumType) {
-        this.albumPK = albumPK;
+    public Album(Long albumId, String title, Date releaseDate, String albumType, int discNumber) {
+        this.albumId = albumId;
         this.title = title;
         this.releaseDate = releaseDate;
         this.albumType = albumType;
+        this.discNumber = discNumber;
     }
 
-    public Album(long albumId, int discNumber) {
-        this.albumPK = new AlbumPK(albumId, discNumber);
+    public Long getAlbumId() {
+        return albumId;
     }
 
-    public AlbumPK getAlbumPK() {
-        return albumPK;
-    }
-
-    public void setAlbumPK(AlbumPK albumPK) {
-        this.albumPK = albumPK;
+    public void setAlbumId(Long albumId) {
+        Long oldAlbumId = this.albumId;
+        this.albumId = albumId;
+        changeSupport.firePropertyChange("albumId", oldAlbumId, albumId);
     }
 
     public String getTitle() {
@@ -123,6 +130,16 @@ public class Album implements Serializable {
         String oldAlbumType = this.albumType;
         this.albumType = albumType;
         changeSupport.firePropertyChange("albumType", oldAlbumType, albumType);
+    }
+
+    public int getDiscNumber() {
+        return discNumber;
+    }
+
+    public void setDiscNumber(int discNumber) {
+        int oldDiscNumber = this.discNumber;
+        this.discNumber = discNumber;
+        changeSupport.firePropertyChange("discNumber", oldDiscNumber, discNumber);
     }
 
     @XmlTransient
@@ -167,7 +184,7 @@ public class Album implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (albumPK != null ? albumPK.hashCode() : 0);
+        hash += (albumId != null ? albumId.hashCode() : 0);
         return hash;
     }
 
@@ -178,7 +195,7 @@ public class Album implements Serializable {
             return false;
         }
         Album other = (Album) object;
-        if ((this.albumPK == null && other.albumPK != null) || (this.albumPK != null && !this.albumPK.equals(other.albumPK))) {
+        if ((this.albumId == null && other.albumId != null) || (this.albumId != null && !this.albumId.equals(other.albumId))) {
             return false;
         }
         return true;
@@ -186,7 +203,7 @@ public class Album implements Serializable {
 
     @Override
     public String toString() {
-        return "radiostation_POJO.Album[ albumPK=" + albumPK + " ]";
+        return "radiostation_POJO.Album[ albumId=" + albumId + " ]";
     }
 
     public void addPropertyChangeListener(PropertyChangeListener listener) {

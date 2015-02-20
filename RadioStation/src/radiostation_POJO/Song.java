@@ -6,24 +6,19 @@
 package radiostation_POJO;
 
 import java.io.Serializable;
-import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinColumns;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -39,7 +34,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Song.findBySongId", query = "SELECT s FROM Song s WHERE s.songId = :songId"),
     @NamedQuery(name = "Song.findByTitle", query = "SELECT s FROM Song s WHERE s.title = :title"),
     @NamedQuery(name = "Song.findByDuration", query = "SELECT s FROM Song s WHERE s.duration = :duration"),
-    @NamedQuery(name = "Song.findByTrackNr", query = "SELECT s FROM Song s WHERE s.trackNr = :trackNr")})
+    @NamedQuery(name = "Song.findByTrackNr", query = "SELECT s FROM Song s WHERE s.trackNr = :trackNr"),
+    @NamedQuery(name = "Song.findByDiscNumber", query = "SELECT s FROM Song s WHERE s.discNumber = :discNumber")})
 public class Song implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -52,18 +48,18 @@ public class Song implements Serializable {
     private String title;
     @Basic(optional = false)
     @Column(name = "DURATION")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date duration;
+    private int duration;
     @Basic(optional = false)
     @Column(name = "TRACK_NR")
     private int trackNr;
-    @JoinColumns({
-        @JoinColumn(name = "ALBUM_ID", referencedColumnName = "ALBUM_ID"),
-        @JoinColumn(name = "DISC_NUMBER", referencedColumnName = "DISC_NUMBER")})
+    @Basic(optional = false)
+    @Column(name = "DISC_NUMBER")
+    private int discNumber;
+    @ManyToMany(mappedBy = "songList")
+    private List<Playlist> playlistList;
+    @JoinColumn(name = "ALBUM_ID", referencedColumnName = "ALBUM_ID")
     @ManyToOne(optional = false)
-    private Album album;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "song")
-    private List<PlaylistSong> playlistSongList;
+    private Album albumId;
 
     public Song() {
     }
@@ -72,11 +68,12 @@ public class Song implements Serializable {
         this.songId = songId;
     }
 
-    public Song(Long songId, String title, Date duration, int trackNr) {
+    public Song(Long songId, String title, int duration, int trackNr, int discNumber) {
         this.songId = songId;
         this.title = title;
         this.duration = duration;
         this.trackNr = trackNr;
+        this.discNumber = discNumber;
     }
 
     public Long getSongId() {
@@ -95,11 +92,11 @@ public class Song implements Serializable {
         this.title = title;
     }
 
-    public Date getDuration() {
+    public int getDuration() {
         return duration;
     }
 
-    public void setDuration(Date duration) {
+    public void setDuration(int duration) {
         this.duration = duration;
     }
 
@@ -111,21 +108,29 @@ public class Song implements Serializable {
         this.trackNr = trackNr;
     }
 
-    public Album getAlbum() {
-        return album;
+    public int getDiscNumber() {
+        return discNumber;
     }
 
-    public void setAlbum(Album album) {
-        this.album = album;
+    public void setDiscNumber(int discNumber) {
+        this.discNumber = discNumber;
     }
 
     @XmlTransient
-    public List<PlaylistSong> getPlaylistSongList() {
-        return playlistSongList;
+    public List<Playlist> getPlaylistList() {
+        return playlistList;
     }
 
-    public void setPlaylistSongList(List<PlaylistSong> playlistSongList) {
-        this.playlistSongList = playlistSongList;
+    public void setPlaylistList(List<Playlist> playlistList) {
+        this.playlistList = playlistList;
+    }
+
+    public Album getAlbumId() {
+        return albumId;
+    }
+
+    public void setAlbumId(Album albumId) {
+        this.albumId = albumId;
     }
 
     @Override
