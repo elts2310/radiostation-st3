@@ -5,11 +5,24 @@
  */
 package GUI;
 
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.EntityManager;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import radiostation_POJO.Artist;
+
 /**
  *
  * @author eliastsourapas
  */
 public class R2_ArtistList_View extends javax.swing.JFrame {
+    public boolean createMode; //δημιουργία καλλιτέχνη
+    public boolean editMode; //επεξεργασία καλλιτέχνη
+    private List<Artist> artists = new ArrayList();
+    private EntityManager em;
+    public Artist newArtist; //Ο καλλιτέχνης που τροποποιείται
+    private JFrame creator;
 
     /**
      * Creates new form R8_GroupAlbum_View
@@ -35,9 +48,9 @@ public class R2_ArtistList_View extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tableArtists = new javax.swing.JTable();
         addArtist = new javax.swing.JButton();
-        deleteSelectedArtist = new javax.swing.JButton();
         editSelectedArtist = new javax.swing.JButton();
-        exitArtist = new javax.swing.JButton();
+        exitBtn = new javax.swing.JButton();
+        deleteSelectedArtist = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -78,13 +91,6 @@ public class R2_ArtistList_View extends javax.swing.JFrame {
             }
         });
 
-        deleteSelectedArtist.setText("Διαγραφή");
-        deleteSelectedArtist.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-
         editSelectedArtist.setText("Επεξεργασία");
         editSelectedArtist.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -92,10 +98,17 @@ public class R2_ArtistList_View extends javax.swing.JFrame {
             }
         });
 
-        exitArtist.setText("Έξοδος");
-        exitArtist.addActionListener(new java.awt.event.ActionListener() {
+        exitBtn.setText("Έξοδος");
+        exitBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                exitBtnActionPerformed(evt);
+            }
+        });
+
+        deleteSelectedArtist.setText("Διαγραφή");
+        deleteSelectedArtist.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteSelectedArtistActionPerformed(evt);
             }
         });
 
@@ -115,7 +128,7 @@ public class R2_ArtistList_View extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(editSelectedArtist)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(exitArtist)))
+                        .addComponent(exitBtn)))
                 .addContainerGap(33, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -128,9 +141,9 @@ public class R2_ArtistList_View extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(addArtist)
-                    .addComponent(deleteSelectedArtist)
                     .addComponent(editSelectedArtist)
-                    .addComponent(exitArtist))
+                    .addComponent(exitBtn)
+                    .addComponent(deleteSelectedArtist))
                 .addContainerGap(27, Short.MAX_VALUE))
         );
 
@@ -141,30 +154,44 @@ public class R2_ArtistList_View extends javax.swing.JFrame {
 
     private void addArtistActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addArtistActionPerformed
         // TODO add your handling code here:
-        R3_Artist_Management amad = new R3_Artist_Management();
-        amad.setVisible(true);
+        this.createMode = true;
+        this.editMode = false;
+        new R3_Artist_Management(this).setVisible(true);
+        this.setVisible(true);
+        //R3_Artist_Management amad = new R3_Artist_Management();
+        //amad.setVisible(true);
     }//GEN-LAST:event_addArtistActionPerformed
 
-    private void exitArtistActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitArtistActionPerformed
+    private void exitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitArtistActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_exitArtistActionPerformed
-
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
+        creator.setVisible(true);
         dispose();
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_exitArtistActionPerformed
 
     private void editSelectedArtistActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editSelectedArtistActionPerformed
         // TODO add your handling code here:
-        R3_Artist_Management amad = new R3_Artist_Management();
-        amad.setVisible(true);
+        this.createMode = false;
+        this.editMode = true;
+        if(tableArtists.getSelectedRow()==-1)
+            JOptionPane.showMessageDialog(null, "Δεν έχει επιλεγεί καλλιτέχνης!");
+        else{
+            for(Artist art: artists){
+                if(art.getArtistId()==tableArtists.getValueAt(tableArtists.getSelectedRow(), 0)){
+                    newArtist = art;
+                    new R3_Artist_Management(this).setVisible(true);
+                    this.setVisible(true);
+                }
+            }
+        }
     }//GEN-LAST:event_editSelectedArtistActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void exitArtistActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitBtnActionPerformed
         // TODO add your handling code here:
-        R3_Artist_Management amad = new R3_Artist_Management();
-        amad.setVisible(true);
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_exitBtnActionPerformed
+
+    private void deleteSelectedArtistActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteSelectedArtistActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_deleteSelectedArtistActionPerformed
 
     /**
      * @param args the command line arguments
@@ -211,7 +238,7 @@ public class R2_ArtistList_View extends javax.swing.JFrame {
     private javax.persistence.Query artistQuery;
     private javax.swing.JButton deleteSelectedArtist;
     private javax.swing.JButton editSelectedArtist;
-    private javax.swing.JButton exitArtist;
+    private javax.swing.JButton exitBtn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tableArtists;

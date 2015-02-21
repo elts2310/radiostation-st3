@@ -60,7 +60,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="editSelectedArtist" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
-                      <Component id="exitArtist" min="-2" max="-2" attributes="0"/>
+                      <Component id="exitBtn" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace pref="33" max="32767" attributes="0"/>
@@ -77,9 +77,9 @@
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="addArtist" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="deleteSelectedArtist" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="editSelectedArtist" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="exitArtist" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="exitBtn" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="deleteSelectedArtist" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="27" max="32767" attributes="0"/>
           </Group>
@@ -184,14 +184,6 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addArtistActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="deleteSelectedArtist">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="&#x394;&#x3b9;&#x3b1;&#x3b3;&#x3c1;&#x3b1;&#x3c6;&#x3ae;"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton2ActionPerformed"/>
-      </Events>
-    </Component>
     <Component class="javax.swing.JButton" name="editSelectedArtist">
       <Properties>
         <Property name="text" type="java.lang.String" value="&#x395;&#x3c0;&#x3b5;&#x3be;&#x3b5;&#x3c1;&#x3b3;&#x3b1;&#x3c3;&#x3af;&#x3b1;"/>
@@ -200,12 +192,20 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="editSelectedArtistActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="exitArtist">
+    <Component class="javax.swing.JButton" name="exitBtn">
       <Properties>
         <Property name="text" type="java.lang.String" value="&#x388;&#x3be;&#x3bf;&#x3b4;&#x3bf;&#x3c2;"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton4ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="exitBtnActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="deleteSelectedArtist">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="&#x394;&#x3b9;&#x3b1;&#x3b3;&#x3c1;&#x3b1;&#x3c6;&#x3ae;"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="deleteSelectedArtistActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

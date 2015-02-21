@@ -7,6 +7,11 @@ package GUI;
 
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.EntityManager;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import radiostation_POJO.Album;
 
 /**
@@ -14,6 +19,12 @@ import radiostation_POJO.Album;
  * @author eliastsourapas
  */
 public class R8_GroupAlbum_View extends javax.swing.JFrame {
+    public boolean createMode; //δημιουργία άλμπουμ
+    public boolean editMode; //επεξεργασία άλμπουμ
+    private List<Album> groupalbums = new ArrayList();
+    private EntityManager em;
+    public Album newAlbum; //Το άλμπουμ που τροποποιείται
+    private JFrame creator;
 
     /**
      * Creates new form R8_GroupAlbum_View
@@ -143,12 +154,15 @@ public class R8_GroupAlbum_View extends javax.swing.JFrame {
 
     private void addGroupAlbumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addGroupAlbumActionPerformed
         // TODO add your handling code here:
-        R9_GroupAlbum_Management gam = new R9_GroupAlbum_Management();
-        gam.setVisible(true);
+        this.createMode = true;
+        this.editMode = false;
+        new R9_GroupAlbum_Management(this).setVisible(true);
+        this.setVisible(true);
     }//GEN-LAST:event_addGroupAlbumActionPerformed
 
     private void ExitGroupAlbumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExitGroupAlbumActionPerformed
         // TODO add your handling code here:
+        creator.setVisible(true);
         dispose();
     }//GEN-LAST:event_ExitGroupAlbumActionPerformed
 
@@ -158,6 +172,19 @@ public class R8_GroupAlbum_View extends javax.swing.JFrame {
 
     private void editSelectedGroupAlbumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editSelectedGroupAlbumActionPerformed
         // TODO add your handling code here:
+        this.createMode = false;
+        this.editMode = true;
+        if(tableGroupAlbums.getSelectedRow()==-1)
+            JOptionPane.showMessageDialog(null, "Δεν έχει επιλεγεί άλμπουμ!");
+        else{
+            for(Album alb: groupalbums){
+                if(alb.getAlbumId()==tableGroupAlbums.getValueAt(tableGroupAlbums.getSelectedRow(), 0)){
+                    newAlbum = alb;
+                    new R9_GroupAlbum_Management(this).setVisible(true);
+                    this.setVisible(true);
+                }
+            }
+        }
     }//GEN-LAST:event_editSelectedGroupAlbumActionPerformed
 
     /**

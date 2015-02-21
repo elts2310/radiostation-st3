@@ -5,11 +5,24 @@
  */
 package GUI;
 
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.EntityManager;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import radiostation_POJO.Album;
+
 /**
  *
  * @author eliastsourapas
  */
 public class R12_ArtistAlbum_View extends javax.swing.JFrame {
+    public boolean createMode; //δημιουργία άλμπουμ
+    public boolean editMode; //επεξεργασία άλμπουμ
+    private List<Album> artistalbums = new ArrayList();
+    private EntityManager em;
+    public Album newAlbum; //Το άλμπουμ που τροποποιείται
+    private JFrame creator;
 
     /**
      * Creates new form R8_GroupAlbum_View
@@ -55,6 +68,11 @@ public class R12_ArtistAlbum_View extends javax.swing.JFrame {
         deleteSelectedArtistAlbum.setText("Διαγραφή");
 
         editSelectedArtistAlbum.setText("Επεξεργασία");
+        editSelectedArtistAlbum.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editSelectedArtistAlbumActionPerformed(evt);
+            }
+        });
 
         exitArtistAlbum.setText("Έξοδος");
         exitArtistAlbum.addActionListener(new java.awt.event.ActionListener() {
@@ -129,14 +147,34 @@ public class R12_ArtistAlbum_View extends javax.swing.JFrame {
 
     private void addArtistAlbumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addArtistAlbumActionPerformed
         // TODO add your handling code here:
-        //R13_ArtistAlbum_Management aam = new R13_ArtistAlbum_Management();
-        //aam.setVisible(true);
+        this.createMode = true;
+        this.editMode = false;
+        new R13_ArtistAlbum_Management(this).setVisible(true);
+        this.setVisible(true);
     }//GEN-LAST:event_addArtistAlbumActionPerformed
 
     private void exitArtistAlbumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitArtistAlbumActionPerformed
         // TODO add your handling code here:
+        creator.setVisible(true);
         dispose();
     }//GEN-LAST:event_exitArtistAlbumActionPerformed
+
+    private void editSelectedArtistAlbumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editSelectedArtistAlbumActionPerformed
+        // TODO add your handling code here:
+        this.createMode = false;
+        this.editMode = true;
+        if(tableArtistAlbums.getSelectedRow()==-1)
+            JOptionPane.showMessageDialog(null, "Δεν έχει επιλεγεί άλμπουμ!");
+        else{
+            for(Album alb: artistalbums){
+                if(alb.getAlbumId()==tableArtistAlbums.getValueAt(tableArtistAlbums.getSelectedRow(), 0)){
+                    newAlbum = alb;
+                    new R13_ArtistAlbum_Management(this).setVisible(true);
+                    this.setVisible(true);
+                }
+            }
+        }
+    }//GEN-LAST:event_editSelectedArtistAlbumActionPerformed
 
     /**
      * @param args the command line arguments

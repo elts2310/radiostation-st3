@@ -5,11 +5,25 @@
  */
 package GUI;
 
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.EntityManager;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import radiostation_POJO.Musicgroup;
+
 /**
  *
  * @author eliastsourapas
  */
 public class R4_GroupList_View extends javax.swing.JFrame {
+    public boolean createMode; //δημιουργία καλλιτέχνη
+    public boolean editMode; //επεξεργασία καλλιτέχνη
+    private List<Musicgroup> mgs = new ArrayList();
+    private EntityManager em;
+    public Musicgroup newMusicgroup;
+    private JFrame creator;
+    
 
     /**
      * Creates new form R8_GroupAlbum_View
@@ -66,6 +80,11 @@ public class R4_GroupList_View extends javax.swing.JFrame {
         deleteSelectedGroup.setText("Διαγραφή");
 
         editSelectedGroup.setText("Επεξεργασία");
+        editSelectedGroup.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editSelectedGroupActionPerformed(evt);
+            }
+        });
 
         exitGroup.setText("Έξοδος");
         exitGroup.addActionListener(new java.awt.event.ActionListener() {
@@ -116,14 +135,34 @@ public class R4_GroupList_View extends javax.swing.JFrame {
 
     private void addGroupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addGroupActionPerformed
         // TODO add your handling code here:
-        R5_Group_Management gm = new R5_Group_Management();
-        gm.setVisible(true);
+        this.createMode = true;
+        this.editMode = false;
+        new R5_Group_Management(this).setVisible(true);
+        this.setVisible(true);
     }//GEN-LAST:event_addGroupActionPerformed
 
     private void exitGroupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitGroupActionPerformed
         // TODO add your handling code here:
+        creator.setVisible(true);
         dispose();
     }//GEN-LAST:event_exitGroupActionPerformed
+
+    private void editSelectedGroupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editSelectedGroupActionPerformed
+        // TODO add your handling code here:
+        this.createMode = false;
+        this.editMode = true;
+        if(tableGroups.getSelectedRow()==-1)
+            JOptionPane.showMessageDialog(null, "Δεν έχει επιλεγεί συγκρότημα!");
+        else{
+            for(Musicgroup mg: mgs){
+                if(mg.getMusicgroupName()==tableGroups.getValueAt(tableGroups.getSelectedRow(), 0)){
+                    newMusicgroup = mg;
+                    new R5_Group_Management(this).setVisible(true);
+                    this.setVisible(true);
+                }
+            }
+        }
+    }//GEN-LAST:event_editSelectedGroupActionPerformed
 
     /**
      * @param args the command line arguments
