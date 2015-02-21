@@ -12,6 +12,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import radiostation.AppControl;
 import radiostation_POJO.Album;
 
 /**
@@ -25,6 +26,7 @@ public class R8_GroupAlbum_View extends javax.swing.JFrame {
     private EntityManager em;
     public Album newAlbum; //Το άλμπουμ που τροποποιείται
     private JFrame creator;
+    AppControl ap; //Αντικείμενο για τον χειρισμό της ΒΔ
 
     /**
      * Creates new form R8_GroupAlbum_View
