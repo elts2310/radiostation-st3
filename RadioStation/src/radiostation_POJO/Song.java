@@ -6,7 +6,7 @@
 package radiostation_POJO;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -24,7 +24,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author eliastsourapas
+ * @author Panos
  */
 @Entity
 @Table(name = "SONG")
@@ -55,8 +55,8 @@ public class Song implements Serializable {
     @Basic(optional = false)
     @Column(name = "DISC_NUMBER")
     private int discNumber;
-    @ManyToMany(mappedBy = "songList")
-    private List<Playlist> playlistList;
+    @ManyToMany(mappedBy = "songCollection")
+    private Collection<Playlist> playlistCollection;
     @JoinColumn(name = "ALBUM_ID", referencedColumnName = "ALBUM_ID")
     @ManyToOne(optional = false)
     private Album albumId;
@@ -117,12 +117,12 @@ public class Song implements Serializable {
     }
 
     @XmlTransient
-    public List<Playlist> getPlaylistList() {
-        return playlistList;
+    public Collection<Playlist> getPlaylistCollection() {
+        return playlistCollection;
     }
 
-    public void setPlaylistList(List<Playlist> playlistList) {
-        this.playlistList = playlistList;
+    public void setPlaylistCollection(Collection<Playlist> playlistCollection) {
+        this.playlistCollection = playlistCollection;
     }
 
     public Album getAlbumId() {

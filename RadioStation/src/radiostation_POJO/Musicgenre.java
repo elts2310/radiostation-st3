@@ -6,7 +6,7 @@
 package radiostation_POJO;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -21,7 +21,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author eliastsourapas
+ * @author Panos
  */
 @Entity
 @Table(name = "MUSICGENRE")
@@ -40,7 +40,7 @@ public class Musicgenre implements Serializable {
     @Column(name = "GENRE_NAME")
     private String genreName;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "genreName")
-    private List<Artist> artistList;
+    private Collection<Artist> artistCollection;
 
     public Musicgenre() {
     }
@@ -71,12 +71,12 @@ public class Musicgenre implements Serializable {
     }
 
     @XmlTransient
-    public List<Artist> getArtistList() {
-        return artistList;
+    public Collection<Artist> getArtistCollection() {
+        return artistCollection;
     }
 
-    public void setArtistList(List<Artist> artistList) {
-        this.artistList = artistList;
+    public void setArtistCollection(Collection<Artist> artistCollection) {
+        this.artistCollection = artistCollection;
     }
 
     @Override

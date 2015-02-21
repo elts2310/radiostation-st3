@@ -14,7 +14,7 @@ import radiostation.RadioStation;
  * @author Panos
  */
 public class R9_GroupAlbum_Management extends javax.swing.JFrame {
-    /*private R8_GroupAlbum_View creator;*/
+    private R8_GroupAlbum_View creator;
     /*private RadioStation rs = new RadioStation();*/
     /**
      * Creates new form R9_GroupAlbum_Management
@@ -25,10 +25,10 @@ public class R9_GroupAlbum_Management extends javax.swing.JFrame {
         /*RadioStation.createConnection();*/
     }
     
-    /*public R9_GroupAlbum_Management(R8_GroupAlbum_View inJFrame) {  //(((R9 test)))
+    public R9_GroupAlbum_Management(R8_GroupAlbum_View inJFrame) {  //(((R9 test)))
         initComponents();
         this.creator = inJFrame;
-    }*/
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -212,13 +212,14 @@ public class R9_GroupAlbum_Management extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtTitle)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox3, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jComboBox2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtTitle, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 391, Short.MAX_VALUE)
+                        .addComponent(jComboBox3, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtReleaseDt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -303,6 +304,9 @@ public class R9_GroupAlbum_Management extends javax.swing.JFrame {
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         // TODO add your handling code here:
+        Album alb = new Album();
+        alb.setTitle(this.txtTitle.getText());
+        /*alb.setAlbumPK(this.txtAlbumID.getText());*/
     }//GEN-LAST:event_btnSaveActionPerformed
 
     private void insertSongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertSongActionPerformed
