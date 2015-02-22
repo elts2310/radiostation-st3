@@ -23,7 +23,6 @@ public class R2_ArtistList_View extends javax.swing.JFrame {
     private List<Artist> artists = new ArrayList();
     private EntityManager em;
     public Artist newArtist; //Ο καλλιτέχνης που τροποποιείται
-    private JFrame creator;
 
     /**
      * Creates new form R8_GroupAlbum_View
@@ -159,14 +158,10 @@ public class R2_ArtistList_View extends javax.swing.JFrame {
         this.editMode = false;
         this.setVisible(true);
         new R3_Artist_Management(this).setVisible(true);
-        /*this.setVisible(false);*/
-        //R3_Artist_Management amad = new R3_Artist_Management();
-        //amad.setVisible(true);
     }//GEN-LAST:event_addArtistActionPerformed
 
     private void exitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitArtistActionPerformed
         // TODO add your handling code here:
-        /*creator.setVisible(true);*/
         dispose();
     }//GEN-LAST:event_exitArtistActionPerformed
 

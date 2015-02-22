@@ -22,7 +22,6 @@ public class R4_GroupList_View extends javax.swing.JFrame {
     private List<Musicgroup> mgs = new ArrayList();
     private EntityManager em;
     public Musicgroup newMusicgroup;
-    private JFrame creator;
     
 
     /**
@@ -139,12 +138,10 @@ public class R4_GroupList_View extends javax.swing.JFrame {
         this.editMode = false;
         this.setVisible(true);
         new R5_Group_Management(this).setVisible(true);
-        /*this.setVisible(false);*/
     }//GEN-LAST:event_addGroupActionPerformed
 
     private void exitGroupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitGroupActionPerformed
         // TODO add your handling code here:
-        /*creator.setVisible(true);*/
         dispose();
     }//GEN-LAST:event_exitGroupActionPerformed
 

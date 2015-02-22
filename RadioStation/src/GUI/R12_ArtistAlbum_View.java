@@ -22,7 +22,6 @@ public class R12_ArtistAlbum_View extends javax.swing.JFrame {
     private List<Album> artistalbums = new ArrayList();
     private EntityManager em;
     public Album newAlbum; //Το άλμπουμ που τροποποιείται
-    private JFrame creator;
 
     /**
      * Creates new form R8_GroupAlbum_View
@@ -150,13 +149,11 @@ public class R12_ArtistAlbum_View extends javax.swing.JFrame {
         this.createMode = true;
         this.editMode = false;
         this.setVisible(true);
-        /*new R13_ArtistAlbum_Management(this).setVisible(true);*/
-        /*this.setVisible(false);*/
+        //new R13_ArtistAlbum_Management(this).setVisible(true);
     }//GEN-LAST:event_addArtistAlbumActionPerformed
 
     private void exitArtistAlbumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitArtistAlbumActionPerformed
         // TODO add your handling code here:
-        /*creator.setVisible(true);*/
         dispose();
     }//GEN-LAST:event_exitArtistAlbumActionPerformed
 
@@ -170,7 +167,7 @@ public class R12_ArtistAlbum_View extends javax.swing.JFrame {
             for(Album alb: artistalbums){
                 if(alb.getAlbumId()==tableArtistAlbums.getValueAt(tableArtistAlbums.getSelectedRow(), 0)){
                     newAlbum = alb;
-                    /*new R13_ArtistAlbum_Management(this).setVisible(true);*/
+                    //new R13_ArtistAlbum_Management(this).setVisible(true);
                     this.setVisible(false);
                 }
             }
