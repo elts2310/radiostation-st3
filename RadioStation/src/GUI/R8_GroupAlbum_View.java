@@ -5,12 +5,9 @@
  */
 package GUI;
 
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import radiostation.AppControl;
 import radiostation_POJO.Album;

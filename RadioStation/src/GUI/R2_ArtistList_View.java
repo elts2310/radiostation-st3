@@ -8,7 +8,6 @@ package GUI;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import radiostation_POJO.Artist;
 
