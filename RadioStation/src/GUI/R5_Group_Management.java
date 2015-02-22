@@ -17,6 +17,10 @@ public class R5_Group_Management extends javax.swing.JFrame {
     public R5_Group_Management() {
         initComponents();
     }
+    
+    public R5_Group_Management(R4_GroupList_View inJFrame) {
+        initComponents();
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.

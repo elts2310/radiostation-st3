@@ -151,24 +151,31 @@
           <BindingProperties>
             <BindingProperty name="elements" source="artistList" target="tableArtists" targetPath="elements" updateStrategy="0" immediately="true">
               <Subbinding sourcePath="${firstName}">
+                <BindingParameter name="NAME" value="First Name"/>
                 <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="String.class"/>
               </Subbinding>
               <Subbinding sourcePath="${lastName}">
+                <BindingParameter name="NAME" value="Last Name"/>
                 <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="String.class"/>
               </Subbinding>
               <Subbinding sourcePath="${artisticName}">
+                <BindingParameter name="NAME" value="Artistic Name"/>
                 <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="String.class"/>
               </Subbinding>
               <Subbinding sourcePath="${sex}">
+                <BindingParameter name="NAME" value="Sex"/>
                 <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="String.class"/>
               </Subbinding>
               <Subbinding sourcePath="${genreName}">
+                <BindingParameter name="NAME" value="Genre Name"/>
                 <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="radiostation_POJO.Musicgenre.class"/>
               </Subbinding>
               <Subbinding sourcePath="${birthDay}">
+                <BindingParameter name="NAME" value="Birth Day"/>
                 <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="java.util.Date.class"/>
               </Subbinding>
               <Subbinding sourcePath="${birthPlace}">
+                <BindingParameter name="NAME" value="Birth Place"/>
                 <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="String.class"/>
               </Subbinding>
             </BindingProperty>

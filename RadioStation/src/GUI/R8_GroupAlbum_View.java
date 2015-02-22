@@ -111,7 +111,6 @@ public class R8_GroupAlbum_View extends javax.swing.JFrame {
         columnBinding.setColumnClass(radiostation_POJO.Musicproductioncompany.class);
         bindingGroup.addBinding(jTableBinding);
         jTableBinding.bind();
-
         jScrollPane1.setViewportView(tableGroupAlbums);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

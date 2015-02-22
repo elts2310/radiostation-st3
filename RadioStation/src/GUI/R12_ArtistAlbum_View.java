@@ -149,7 +149,7 @@ public class R12_ArtistAlbum_View extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.createMode = true;
         this.editMode = false;
-        new R13_ArtistAlbum_Management(this).setVisible(true);
+        /*new R13_ArtistAlbum_Management(this).setVisible(true);*/
         this.setVisible(true);
     }//GEN-LAST:event_addArtistAlbumActionPerformed
 
@@ -169,7 +169,7 @@ public class R12_ArtistAlbum_View extends javax.swing.JFrame {
             for(Album alb: artistalbums){
                 if(alb.getAlbumId()==tableArtistAlbums.getValueAt(tableArtistAlbums.getSelectedRow(), 0)){
                     newAlbum = alb;
-                    new R13_ArtistAlbum_Management(this).setVisible(true);
+                    /*new R13_ArtistAlbum_Management(this).setVisible(true);*/
                     this.setVisible(true);
                 }
             }

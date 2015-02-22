@@ -5,16 +5,23 @@
  */
 package GUI;
 
+import javax.persistence.EntityManager;
+
 /**
  *
  * @author ΛΕΝΑ
  */
 public class R3_Artist_Management extends javax.swing.JFrame {
     private R2_ArtistList_View creator;
+    private EntityManager em;
     /**
      * Creates new form R3_Artist_Management
      */
     public R3_Artist_Management() {
+        initComponents();
+    }
+    
+    public R3_Artist_Management(R2_ArtistList_View inJFrame) {
         initComponents();
     }
 

@@ -12,6 +12,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import radiostation_POJO.Artist;
 
+
 /**
  *
  * @author eliastsourapas
@@ -156,7 +157,7 @@ public class R2_ArtistList_View extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.createMode = true;
         this.editMode = false;
-        new R3_Artist_Management(this).setVisible(true);
+        /*new R3_Artist_Management(this).setVisible(true);*/
         this.setVisible(true);
         //R3_Artist_Management amad = new R3_Artist_Management();
         //amad.setVisible(true);
@@ -178,7 +179,7 @@ public class R2_ArtistList_View extends javax.swing.JFrame {
             for(Artist art: artists){
                 if(art.getArtistId()==tableArtists.getValueAt(tableArtists.getSelectedRow(), 0)){
                     newArtist = art;
-                    new R3_Artist_Management(this).setVisible(true);
+                    /*new R3_Artist_Management(this).setVisible(true);*/
                     this.setVisible(true);
                 }
             }
