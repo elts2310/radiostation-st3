@@ -157,13 +157,14 @@ public class R8_GroupAlbum_View extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.createMode = true;
         this.editMode = false;
-        new R9_GroupAlbum_Management(this).setVisible(true);
         this.setVisible(true);
+        new R9_GroupAlbum_Management(this).setVisible(true);
+        /*this.setVisible(true);*/
     }//GEN-LAST:event_addGroupAlbumActionPerformed
 
     private void ExitGroupAlbumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExitGroupAlbumActionPerformed
         // TODO add your handling code here:
-        creator.setVisible(true);
+        /*creator.setVisible(true);*/
         dispose();
     }//GEN-LAST:event_ExitGroupAlbumActionPerformed
 
@@ -182,7 +183,7 @@ public class R8_GroupAlbum_View extends javax.swing.JFrame {
                 if(alb.getAlbumId()==tableGroupAlbums.getValueAt(tableGroupAlbums.getSelectedRow(), 0)){
                     newAlbum = alb;
                     new R9_GroupAlbum_Management(this).setVisible(true);
-                    this.setVisible(true);
+                    this.setVisible(false);
                 }
             }
         }

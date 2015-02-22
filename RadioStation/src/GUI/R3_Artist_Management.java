@@ -219,6 +219,7 @@ public class R3_Artist_Management extends javax.swing.JFrame {
 
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
         // TODO add your handling code here:
+        /*creator.setVisible(true);*/
         dispose(); 
 
     }//GEN-LAST:event_btnCancelActionPerformed

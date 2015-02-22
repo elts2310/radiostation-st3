@@ -43,12 +43,13 @@ public class R9_GroupAlbum_Management extends javax.swing.JFrame {
     }
     
     public R9_GroupAlbum_Management(R8_GroupAlbum_View inJFrame) {  //(((R9 test)))
-        initComponents();
+        
+        initComponents();        
         /*for (Musicgroup mg : groups) {
             String displayMsg = "Όνομα.: " + mg.getMusicgroupName();
             MusicGroupList.addItem(displayMsg);
         }
-        MusicGroupList.setSelectedIndex(-1);
+        MusicGroupList.setSelectedIndex(-1);*/
         
         
         /*this.creator = inJFrame;*/
@@ -327,7 +328,7 @@ public class R9_GroupAlbum_Management extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
-    /*creator.setVisible(true);*/
+        /*creator.setVisible(true);*/
         dispose();
         /*System.exit(0);*/
     }//GEN-LAST:event_btnCancelActionPerformed

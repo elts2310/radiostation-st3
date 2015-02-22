@@ -157,15 +157,16 @@ public class R2_ArtistList_View extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.createMode = true;
         this.editMode = false;
-        new R3_Artist_Management(this).setVisible(true);
         this.setVisible(true);
+        new R3_Artist_Management(this).setVisible(true);
+        /*this.setVisible(false);*/
         //R3_Artist_Management amad = new R3_Artist_Management();
         //amad.setVisible(true);
     }//GEN-LAST:event_addArtistActionPerformed
 
     private void exitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitArtistActionPerformed
         // TODO add your handling code here:
-        creator.setVisible(true);
+        /*creator.setVisible(true);*/
         dispose();
     }//GEN-LAST:event_exitArtistActionPerformed
 
@@ -180,7 +181,7 @@ public class R2_ArtistList_View extends javax.swing.JFrame {
                 if(art.getArtistId()==tableArtists.getValueAt(tableArtists.getSelectedRow(), 0)){
                     newArtist = art;
                     new R3_Artist_Management(this).setVisible(true);
-                    this.setVisible(true);
+                    this.setVisible(false);
                 }
             }
         }
