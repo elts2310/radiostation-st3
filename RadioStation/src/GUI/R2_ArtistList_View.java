@@ -175,7 +175,6 @@ public class R2_ArtistList_View extends javax.swing.JFrame {
                 if(art.getArtistId()==tableArtists.getValueAt(tableArtists.getSelectedRow(), 0)){
                     newArtist = art;
                     new R3_Artist_Management(this).setVisible(true);
-                    this.setVisible(false);
                 }
             }
         }

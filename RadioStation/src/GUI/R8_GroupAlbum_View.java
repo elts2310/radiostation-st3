@@ -177,7 +177,6 @@ public class R8_GroupAlbum_View extends javax.swing.JFrame {
                 if(alb.getAlbumId()==tableGroupAlbums.getValueAt(tableGroupAlbums.getSelectedRow(), 0)){
                     newAlbum = alb;
                     new R9_GroupAlbum_Management(this).setVisible(true);
-                    this.setVisible(false);
                 }
             }
         }

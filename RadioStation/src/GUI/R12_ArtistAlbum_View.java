@@ -167,7 +167,6 @@ public class R12_ArtistAlbum_View extends javax.swing.JFrame {
                 if(alb.getAlbumId()==tableArtistAlbums.getValueAt(tableArtistAlbums.getSelectedRow(), 0)){
                     newAlbum = alb;
                     //new R13_ArtistAlbum_Management(this).setVisible(true);
-                    this.setVisible(false);
                 }
             }
         }
