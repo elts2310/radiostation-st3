@@ -137,7 +137,7 @@ public class R4_GroupList_View extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.createMode = true;
         this.editMode = false;
-        /*new R5_Group_Management(this).setVisible(true);*/
+        new R5_Group_Management(this).setVisible(true);
         this.setVisible(true);
     }//GEN-LAST:event_addGroupActionPerformed
 
@@ -157,7 +157,7 @@ public class R4_GroupList_View extends javax.swing.JFrame {
             for(Musicgroup mg: mgs){
                 if(mg.getMusicgroupName()==tableGroups.getValueAt(tableGroups.getSelectedRow(), 0)){
                     newMusicgroup = mg;
-                    /*new R5_Group_Management(this).setVisible(true);*/
+                    new R5_Group_Management(this).setVisible(true);
                     this.setVisible(true);
                 }
             }
