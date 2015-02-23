@@ -5,11 +5,25 @@
  */
 package GUI;
 
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.EntityManager;
+import javax.swing.JOptionPane;
+import radiostation.AppControl;
+import radiostation_POJO.Playlist;
+
 /**
  *
  * @author eliastsourapas
  */
 public class R16_Playlist_View extends javax.swing.JFrame {
+    public boolean createMode; //δημιουγία λίστας τραγουδιών
+    public boolean editMode; //επεξεργασία λίστας τραγουδιών
+    public boolean deleteMode; //διαγραφή λίστας τραγουδιών
+    private List<Playlist> playlists = new ArrayList();
+    private EntityManager em;
+    public Playlist newPls; //Η λίστα τραγουδιών που τροποποιείται
+    AppControl ap; //Αντικείμενο για τον χειρισμό της ΒΔ
 
     /**
      * Creates new form R16_Playlist_View
@@ -76,6 +90,11 @@ public class R16_Playlist_View extends javax.swing.JFrame {
         });
 
         deletePlaylist.setText("Διαγραφή");
+        deletePlaylist.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deletePlaylistActionPerformed(evt);
+            }
+        });
 
         importPlaylist.setText("Εισαγωγή...");
 
@@ -142,18 +161,51 @@ public class R16_Playlist_View extends javax.swing.JFrame {
 
     private void newPlaylistActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newPlaylistActionPerformed
         // TODO add your handling code here:
-        //R17_Playlist_Management plm = new R17_Playlist_Management();
-        //plm.setVisible(true);
+        this.createMode = true;
+        this.editMode = false;
+        this.deleteMode = false;
+        this.setVisible(true);
+        //new R17_Playlist_Management(this).setVisible(true);
     }//GEN-LAST:event_newPlaylistActionPerformed
 
     private void alterPlaylistActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alterPlaylistActionPerformed
         // TODO add your handling code here:
+        this.createMode = false;
+        this.editMode = true;
+        this.deleteMode = false;
+        if(tablePlaylists.getSelectedRow()==-1)
+            JOptionPane.showMessageDialog(null, "Δεν έχει επιλεγεί λίστα!");
+        else{
+            for(Playlist pls: playlists){
+                if(pls.getPlaylistId()==tablePlaylists.getValueAt(tablePlaylists.getSelectedRow(), 0)){
+                    newPls = pls;
+                    //new R17_Playlist_Management(this).setVisible(true);
+                }
+            }
+        }
     }//GEN-LAST:event_alterPlaylistActionPerformed
 
     private void exitPlaylistActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitPlaylistActionPerformed
         // TODO add your handling code here:
         dispose();
     }//GEN-LAST:event_exitPlaylistActionPerformed
+
+    private void deletePlaylistActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deletePlaylistActionPerformed
+        // TODO add your handling code here:
+        this.createMode = false;
+        this.editMode = false;
+        this.deleteMode = true;
+        if(tablePlaylists.getSelectedRow()==-1)
+            JOptionPane.showMessageDialog(null, "Δεν έχει επιλεγεί λίστα!");
+        else{
+            for(Playlist pls: playlists){
+                if(pls.getPlaylistId()==tablePlaylists.getValueAt(tablePlaylists.getSelectedRow(), 0)){
+                    newPls = pls;
+                    //new R17_Playlist_Management(this).setVisible(true);
+                }
+            }
+        }
+    }//GEN-LAST:event_deletePlaylistActionPerformed
 
     /**
      * @param args the command line arguments
