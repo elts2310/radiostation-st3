@@ -39,6 +39,12 @@ public class R5_Group_Management extends javax.swing.JFrame {
         albumList = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : albumQuery.getResultList();
         musicgroupQuery = java.beans.Beans.isDesignTime() ? null : RadioStationPUEntityManager.createQuery("SELECT m FROM Musicgroup m");
         musicgroupList = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : musicgroupQuery.getResultList();
+        musicgroupArtistQuery = java.beans.Beans.isDesignTime() ? null : RadioStationPUEntityManager.createQuery("SELECT m FROM MusicgroupArtist m");
+        musicgroupArtistList = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : musicgroupArtistQuery.getResultList();
+        artistQuery1 = java.beans.Beans.isDesignTime() ? null : RadioStationPUEntityManager.createQuery("SELECT a FROM Artist a");
+        artistList1 = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : artistQuery1.getResultList();
+        artistQuery2 = java.beans.Beans.isDesignTime() ? null : RadioStationPUEntityManager.createQuery("SELECT a FROM Artist a");
+        artistList2 = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : artistQuery2.getResultList();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jTextFieldGroupName = new javax.swing.JTextField();
@@ -46,14 +52,14 @@ public class R5_Group_Management extends javax.swing.JFrame {
         jTextFieldDate = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jButtonInput = new javax.swing.JButton();
         jButtonDelete = new javax.swing.JButton();
         jButtonSave = new javax.swing.JButton();
         btnCancel = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTableGroupMebers = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -74,6 +80,12 @@ public class R5_Group_Management extends javax.swing.JFrame {
         jTextFieldDate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldDateActionPerformed(evt);
+            }
+        });
+
+        jScrollPane1.addContainerListener(new java.awt.event.ContainerAdapter() {
+            public void componentAdded(java.awt.event.ContainerEvent evt) {
+                jScrollPane1ComponentAdded(evt);
             }
         });
 
@@ -101,20 +113,16 @@ public class R5_Group_Management extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jTable1);
 
-        jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, musicgroupList, jTable2);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${artistList}"));
-        columnBinding.setColumnName("Artist List");
-        columnBinding.setColumnClass(java.util.List.class);
-        bindingGroup.addBinding(jTableBinding);
-        jTableBinding.bind();
-
-        jScrollPane2.setViewportView(jTable2);
-
         jLabel4.setText("Διαθέσιμοι Καλλιτέχνες");
 
         jLabel5.setText("Μέλη Σγκροτήματος");
 
         jButtonInput.setText("Εισαγωγή");
+        jButtonInput.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButtonInputMouseClicked(evt);
+            }
+        });
         jButtonInput.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonInputActionPerformed(evt);
@@ -122,6 +130,11 @@ public class R5_Group_Management extends javax.swing.JFrame {
         });
 
         jButtonDelete.setText("Διαγραφή");
+        jButtonDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonDeleteActionPerformed(evt);
+            }
+        });
 
         jButtonSave.setText("Αποθήκευση");
         jButtonSave.addActionListener(new java.awt.event.ActionListener() {
@@ -136,6 +149,21 @@ public class R5_Group_Management extends javax.swing.JFrame {
                 btnCancelActionPerformed(evt);
             }
         });
+
+        jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, artistList2, jTableGroupMebers);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${lastName}"));
+        columnBinding.setColumnName("Last Name");
+        columnBinding.setColumnClass(String.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${firstName}"));
+        columnBinding.setColumnName("First Name");
+        columnBinding.setColumnClass(String.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${artisticName}"));
+        columnBinding.setColumnName("Artistic Name");
+        columnBinding.setColumnClass(String.class);
+        bindingGroup.addBinding(jTableBinding);
+        jTableBinding.bind();
+
+        jScrollPane3.setViewportView(jTableGroupMebers);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -173,11 +201,11 @@ public class R5_Group_Management extends javax.swing.JFrame {
                             .addComponent(jButtonDelete))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(10, 10, 10)
-                        .addComponent(btnCancel)))
+                        .addComponent(btnCancel))
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(59, 59, 59))
         );
         layout.setVerticalGroup(
@@ -199,14 +227,15 @@ public class R5_Group_Management extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(1, 1, 1)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addComponent(jButtonInput)
                         .addGap(29, 29, 29)
-                        .addComponent(jButtonDelete)))
+                        .addComponent(jButtonDelete))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonSave)
@@ -236,7 +265,8 @@ public class R5_Group_Management extends javax.swing.JFrame {
     }//GEN-LAST:event_jTable1ComponentHidden
 
     private void jButtonInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInputActionPerformed
-        // TODO add your handling code here:
+      DefaultTableModel model=(DefaultTableModel) tblArtist.getModel();
+      
     }//GEN-LAST:event_jButtonInputActionPerformed
 
     private void jButtonSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSaveActionPerformed
@@ -253,6 +283,21 @@ public class R5_Group_Management extends javax.swing.JFrame {
         // TODO add your handling code here:
       
     }//GEN-LAST:event_btnCancelActionPerformed
+
+    private void jButtonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeleteActionPerformed
+
+        
+        
+// TODO add your handling code here:
+    }//GEN-LAST:event_jButtonDeleteActionPerformed
+
+    private void jScrollPane1ComponentAdded(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_jScrollPane1ComponentAdded
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jScrollPane1ComponentAdded
+
+    private void jButtonInputMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonInputMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonInputMouseClicked
 
     /**
      * @param args the command line arguments
@@ -294,7 +339,11 @@ public class R5_Group_Management extends javax.swing.JFrame {
     private java.util.List<radiostation_POJO.Album> albumList;
     private javax.persistence.Query albumQuery;
     private java.util.List<radiostation_POJO.Artist> artistList;
+    private java.util.List<radiostation_POJO.Artist> artistList1;
+    private java.util.List<radiostation_POJO.Artist> artistList2;
     private javax.persistence.Query artistQuery;
+    private javax.persistence.Query artistQuery1;
+    private javax.persistence.Query artistQuery2;
     private javax.swing.JButton btnCancel;
     private javax.swing.JButton jButtonDelete;
     private javax.swing.JButton jButtonInput;
@@ -305,11 +354,13 @@ public class R5_Group_Management extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
+    private javax.swing.JTable jTableGroupMebers;
     private javax.swing.JTextField jTextFieldDate;
     private javax.swing.JTextField jTextFieldGroupName;
+    private java.util.List<GUI.MusicgroupArtist> musicgroupArtistList;
+    private javax.persistence.Query musicgroupArtistQuery;
     private java.util.List<radiostation_POJO.Musicgroup> musicgroupList;
     private javax.persistence.Query musicgroupQuery;
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;
