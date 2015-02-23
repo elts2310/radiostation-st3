@@ -18,7 +18,7 @@ import net.proteanit.sql.DBUtils;
  */
 public class R3_Artist_Management extends javax.swing.JFrame {
     private R2_ArtistList_View creator;
-   
+  
     /**
      * Creates new form R3_Artist_Management
      */
