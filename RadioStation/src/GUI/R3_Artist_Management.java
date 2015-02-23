@@ -19,7 +19,7 @@ public class R3_Artist_Management extends javax.swing.JFrame {
     private EntityManager em;
     public boolean createMode; //δημιουργία καλλιτέχνη
     public boolean editMode; //επεξεργασία καλλιτέχνη
-    public boolean deletMode; // διαγραφή καλλιτέχνη
+    public boolean deleteMode; // διαγραφή καλλιτέχνη
     private List<Artist> artists = new ArrayList();
     public Artist newArtist; //Ο καλλιτέχνης που τροποποιείται
     private Object conn;
@@ -299,8 +299,8 @@ public class R3_Artist_Management extends javax.swing.JFrame {
         
     }
         else{
-                if(deletMode=true);
-                { String sgl="Delet from Artist where ARTISTIC_NAME=?";
+                if(deleteMode=true);
+                { String sgl="Delete from Artist where ARTISTIC_NAME=?";
                 try{
                 pst=conn.prepearStatement(sql);
                 pst.setString(1,ARTISTIC_NAME.getText());
@@ -313,10 +313,10 @@ public class R3_Artist_Management extends javax.swing.JFrame {
                 
                 }
        
-      
+      */
 // TODO add your handling code here:
     }//GEN-LAST:event_jButSaveActionPerformed
-*/
+
     private void jTextFieldSurnameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldSurnameActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldSurnameActionPerformed
