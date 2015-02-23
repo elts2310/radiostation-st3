@@ -245,6 +245,9 @@
         <Component class="javax.swing.JTextField" name="jTextFieldName">
         </Component>
         <Component class="javax.swing.JTextField" name="jTextFieldArtisticName">
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextFieldArtisticNameActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="jTextFieldBirthDate">
           <Events>
@@ -252,6 +255,9 @@
           </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="jTextFieldBirthPlace">
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextFieldBirthPlaceActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel7">
           <Properties>

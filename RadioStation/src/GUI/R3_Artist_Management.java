@@ -5,8 +5,11 @@
  */
 package GUI;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.EntityManager;
-
+import radiostation_POJO.Artist;
+import javax.swing.JOptionPane;
 /**
  *
  * @author ΛΕΝΑ
@@ -14,6 +17,14 @@ import javax.persistence.EntityManager;
 public class R3_Artist_Management extends javax.swing.JFrame {
     private R2_ArtistList_View creator;
     private EntityManager em;
+    public boolean createMode; //δημιουργία καλλιτέχνη
+    public boolean editMode; //επεξεργασία καλλιτέχνη
+    public boolean deletMode; // διαγραφή καλλιτέχνη
+    private List<Artist> artists = new ArrayList();
+    public Artist newArtist; //Ο καλλιτέχνης που τροποποιείται
+    private Object conn;
+
+    
     /**
      * Creates new form R3_Artist_Management
      */
@@ -95,9 +106,21 @@ public class R3_Artist_Management extends javax.swing.JFrame {
             }
         });
 
+        jTextFieldArtisticName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldArtisticNameActionPerformed(evt);
+            }
+        });
+
         jTextFieldBirthDate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldBirthDateActionPerformed(evt);
+            }
+        });
+
+        jTextFieldBirthPlace.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldBirthPlaceActionPerformed(evt);
             }
         });
 
@@ -225,9 +248,75 @@ public class R3_Artist_Management extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelActionPerformed
 
     private void jButSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButSaveActionPerformed
-        // TODO add your handling code here:
+/*
+        if (this.createMode=true);{
+     
+        String sgl="Insert in to Artist (LAST_NAME,FIRST_NAME,ARTISTIC_NAME,"
+                + "SEX,BIRTH_DAY,BIRTH_PLACE,GENRE_NAME} values (?,?,?,?,?,?,?)";
+    try{
+        statement=conn.prepearStatement(sql);
+        pst.setString(1,jTextFieldSurname.getText());
+        pst.setString(1,jTextFieldName.getText());
+        pst.setString(1,jTextFieldArtisticName.getText());
+        pst.setString(1,jComboBox1.getText());
+        pst.setString(1,jTextFieldBirthDate.getText());
+        pst.setString(1,jTextFieldBirthPlace.getText());
+        pst.setString(1,jComboBox2.getText());
+        
+        pst.execute();
+           JOptionPane.showMessageDialog(null,"Καταχώριση νέου καλλιτέχνη"); 
+        
+        }
+        catch(Exception e){
+        JOptionPane.showMessageDialog(null,e);
+        
+        }
+        }(LAST_NAME,FIRST_NAME,ARTISTIC_NAME,"
+                + "SEX,BIRTH_DAY,BIRTH_PLACE,GENRE_NAME} values (?,?,?,?,?,?,?)";
+        else 
+        {
+        if (this.editMode=true);{
+        try{
+            String value1= jTextFieldSurname.getText();
+            String value2=jTextFieldName.getText();
+            String value3=jTextFieldArtisticName.getText();
+            String value4=jComboBox1.getText();
+            String value5=jTextFieldBirthDate.getText();
+            String value6=jTextFieldBirthPlace.getText();
+            String value7=jComboBox2.getText();
+        
+        String sql="Update Artist set LAST_NAME='"+value1"',FIRST_NAME='"+value2+"',ARTISTIC_NAME='"+value3+"',SEX='"+value4+"',BIRTH_DAY='"+value5+"',BIRTH_PLACE='"+value6+"',GENRE_NAME='"+value7+"'";
+     pst.conn.prepareStatement(sql);
+        pst.execute();
+       JOptionPane.showMessageDialog(null,"Updated"); 
+    }
+        catch(Exception e){
+        JOptionPane.showMessageDialog(null,e);
+        
+        }
+        }
+        
+        
+    }
+        else{
+                if(deletMode=true);
+                { String sgl="Delet from Artist where ARTISTIC_NAME=?";
+                try{
+                pst=conn.prepearStatement(sql);
+                pst.setString(1,ARTISTIC_NAME.getText());
+                
+                pst.execute();
+                        
+                JOptionPane.showMessageDialog(null, "Ο καλλιτέχνης θα διαγραφεί");
+                }catch(Exception e);
+                {JOptionPane.showMessageDialog(null,e);
+                
+                }
+       
+      
+// TODO add your handling code here:
     }//GEN-LAST:event_jButSaveActionPerformed
-
+*/
     private void jTextFieldSurnameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldSurnameActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldSurnameActionPerformed
@@ -235,6 +324,14 @@ public class R3_Artist_Management extends javax.swing.JFrame {
     private void jTextFieldBirthDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldBirthDateActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldBirthDateActionPerformed
+
+    private void jTextFieldArtisticNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldArtisticNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldArtisticNameActionPerformed
+
+    private void jTextFieldBirthPlaceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldBirthPlaceActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldBirthPlaceActionPerformed
 
     /**
      * @param args the command line arguments
