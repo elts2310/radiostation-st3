@@ -10,12 +10,22 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import radiostation_POJO.Artist;
 import javax.swing.JOptionPane;
+import javax.sql.*;
+import net.proteanit.sql.DBUtils;
 /**
  *
  * @author ΛΕΝΑ
  */
 public class R3_Artist_Management extends javax.swing.JFrame {
     private R2_ArtistList_View creator;
+   
+    /**
+     * Creates new form R3_Artist_Management
+     */
+    public R3_Artist_Management() {
+        initComponents();
+        conn=javaconnect.ConnecrDB();
+         private FilljCombobox2();
     private EntityManager em;
     public boolean createMode; //δημιουργία καλλιτέχνη
     public boolean editMode; //επεξεργασία καλλιτέχνη
@@ -23,17 +33,16 @@ public class R3_Artist_Management extends javax.swing.JFrame {
     private List<Artist> artists = new ArrayList();
     public Artist newArtist; //Ο καλλιτέχνης που τροποποιείται
     private Object conn;
+    Connection conn=null;
+    ResultSet rs=null;
+    PrepareStatement pst=null;
 
+
+}
     
-    /**
-     * Creates new form R3_Artist_Management
-     */
-    public R3_Artist_Management() {
+   public R3_Artist_Management(R2_ArtistList_View inJFrame) {
         initComponents();
-    }
-    
-    public R3_Artist_Management(R2_ArtistList_View inJFrame) {
-        initComponents();
+ 
     }
 
     /**
@@ -127,6 +136,11 @@ public class R3_Artist_Management extends javax.swing.JFrame {
         jLabel7.setText("Καλλιτεχνικό όνομα");
 
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -244,7 +258,6 @@ public class R3_Artist_Management extends javax.swing.JFrame {
         // TODO add your handling code here:
         /*creator.setVisible(true);*/
         dispose(); 
-
     }//GEN-LAST:event_btnCancelActionPerformed
 
     private void jButSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButSaveActionPerformed
@@ -333,6 +346,28 @@ public class R3_Artist_Management extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldBirthPlaceActionPerformed
 
+    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
+       
+        // TODO add your handling code here:
+       
+    }//GEN-LAST:event_jComboBox2ActionPerformed
+    private void FilljCombobox2(){
+      try{
+            String sql="selecte * from MUSICGENRE";
+            pst=conn.prepearStatement(sql);
+            rs=pst.executeQuery();
+            
+            while (rs.next()){
+                String name=rs.getString("GENRE_NAME");
+                jComboBox2_name.addItem(name);
+            
+            }
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null,e);
+        }
+    
+    
+    }
     /**
      * @param args the command line arguments
      */
@@ -367,7 +402,6 @@ public class R3_Artist_Management extends javax.swing.JFrame {
             }
         });
     }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancel;
     private javax.swing.JButton jButSave;
