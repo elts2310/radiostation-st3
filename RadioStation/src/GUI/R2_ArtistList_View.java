@@ -19,7 +19,7 @@ import radiostation_POJO.Artist;
 public class R2_ArtistList_View extends javax.swing.JFrame {
     public boolean createMode; //δημιουργία καλλιτέχνη
     public boolean editMode; //επεξεργασία καλλιτέχνη
- //   public boolean deletMode; // διαγραφή καλλιτέχνη
+    public boolean deleteMode; //διαγραφή καλλιτέχνη
     private List<Artist> artists = new ArrayList();
     private EntityManager em;
     public Artist newArtist; //Ο καλλιτέχνης που τροποποιείται
@@ -156,7 +156,7 @@ public class R2_ArtistList_View extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.createMode = true;
         this.editMode = false;
-//        this.deletMode = false;
+        this.deleteMode = false;
         this.setVisible(true);
         new R3_Artist_Management(this).setVisible(true);
     }//GEN-LAST:event_addArtistActionPerformed
@@ -170,7 +170,7 @@ public class R2_ArtistList_View extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.createMode = false;
         this.editMode = true;
-  //      this.deletMode=false;
+        this.deleteMode = false;
         if(tableArtists.getSelectedRow()==-1)
             JOptionPane.showMessageDialog(null, "Δεν έχει επιλεγεί καλλιτέχνης!");
         else{
@@ -188,17 +188,20 @@ public class R2_ArtistList_View extends javax.swing.JFrame {
     }//GEN-LAST:event_exitBtnActionPerformed
 
     private void deleteSelectedArtistActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteSelectedArtistActionPerformed
-    this.createMode = false;
+        // TODO add your handling code here:
+        this.createMode = false;
         this.editMode = false;
-    //    this.deletMode=true;
+        this.deleteMode = true;
         if(tableArtists.getSelectedRow()==-1)
             JOptionPane.showMessageDialog(null, "Δεν έχει επιλεγεί καλλιτέχνης!");
         else{
-           
+            for(Artist art: artists){
+                if(art.getArtistId()==tableArtists.getValueAt(tableArtists.getSelectedRow(), 0)){
+                    newArtist = art;
                     new R3_Artist_Management(this).setVisible(true);
                 }
-            
-// TODO add your handling code here:
+            }
+        }
     }//GEN-LAST:event_deleteSelectedArtistActionPerformed
 
     /**
