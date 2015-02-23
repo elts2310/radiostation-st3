@@ -18,6 +18,7 @@ import radiostation_POJO.Album;
 public class R12_ArtistAlbum_View extends javax.swing.JFrame {
     public boolean createMode; //δημιουργία άλμπουμ
     public boolean editMode; //επεξεργασία άλμπουμ
+    public boolean deleteMode; //διαγραφή άλμπουμ
     private List<Album> artistalbums = new ArrayList();
     private EntityManager em;
     public Album newAlbum; //Το άλμπουμ που τροποποιείται
@@ -64,6 +65,11 @@ public class R12_ArtistAlbum_View extends javax.swing.JFrame {
         });
 
         deleteSelectedArtistAlbum.setText("Διαγραφή");
+        deleteSelectedArtistAlbum.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteSelectedArtistAlbumActionPerformed(evt);
+            }
+        });
 
         editSelectedArtistAlbum.setText("Επεξεργασία");
         editSelectedArtistAlbum.addActionListener(new java.awt.event.ActionListener() {
@@ -147,6 +153,7 @@ public class R12_ArtistAlbum_View extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.createMode = true;
         this.editMode = false;
+        this.deleteMode = false;
         this.setVisible(true);
         //new R13_ArtistAlbum_Management(this).setVisible(true);
     }//GEN-LAST:event_addArtistAlbumActionPerformed
@@ -160,6 +167,7 @@ public class R12_ArtistAlbum_View extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.createMode = false;
         this.editMode = true;
+        this.deleteMode = false;
         if(tableArtistAlbums.getSelectedRow()==-1)
             JOptionPane.showMessageDialog(null, "Δεν έχει επιλεγεί άλμπουμ!");
         else{
@@ -171,6 +179,23 @@ public class R12_ArtistAlbum_View extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_editSelectedArtistAlbumActionPerformed
+
+    private void deleteSelectedArtistAlbumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteSelectedArtistAlbumActionPerformed
+        // TODO add your handling code here:
+        this.createMode = false;
+        this.editMode = false;
+        this.deleteMode = true;
+        if(tableArtistAlbums.getSelectedRow()==-1)
+            JOptionPane.showMessageDialog(null, "Δεν έχει επιλεγεί άλμπουμ!");
+        else{
+            for(Album alb: artistalbums){
+                if(alb.getAlbumId()==tableArtistAlbums.getValueAt(tableArtistAlbums.getSelectedRow(), 0)){
+                    newAlbum = alb;
+                    //new R13_ArtistAlbum_Management(this).setVisible(true);
+                }
+            }
+        }
+    }//GEN-LAST:event_deleteSelectedArtistAlbumActionPerformed
 
     /**
      * @param args the command line arguments

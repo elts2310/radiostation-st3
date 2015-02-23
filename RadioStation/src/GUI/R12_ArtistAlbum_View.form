@@ -108,6 +108,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="&#x394;&#x3b9;&#x3b1;&#x3b3;&#x3c1;&#x3b1;&#x3c6;&#x3ae;"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="deleteSelectedArtistAlbumActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="editSelectedArtistAlbum">
       <Properties>

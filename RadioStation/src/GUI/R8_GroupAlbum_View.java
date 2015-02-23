@@ -19,6 +19,7 @@ import radiostation_POJO.Album;
 public class R8_GroupAlbum_View extends javax.swing.JFrame {
     public boolean createMode; //δημιουργία άλμπουμ
     public boolean editMode; //επεξεργασία άλμπουμ
+    public boolean deleteMode; //διαγραφή άλμπουμ
     private List<Album> groupalbums = new ArrayList();
     private EntityManager em;
     public Album newAlbum; //Το άλμπουμ που τροποποιείται
@@ -153,6 +154,7 @@ public class R8_GroupAlbum_View extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.createMode = true;
         this.editMode = false;
+        this.deleteMode = false;
         this.setVisible(true);
         new R9_GroupAlbum_Management(this).setVisible(true);
     }//GEN-LAST:event_addGroupAlbumActionPerformed
@@ -164,12 +166,26 @@ public class R8_GroupAlbum_View extends javax.swing.JFrame {
 
     private void deleteSelectedGroupAlbumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteSelectedGroupAlbumActionPerformed
         // TODO add your handling code here:
+        this.createMode = false;
+        this.editMode = false;
+        this.deleteMode = true;
+        if(tableGroupAlbums.getSelectedRow()==-1)
+            JOptionPane.showMessageDialog(null, "Δεν έχει επιλεγεί άλμπουμ!");
+        else{
+            for(Album alb: groupalbums){
+                if(alb.getAlbumId()==tableGroupAlbums.getValueAt(tableGroupAlbums.getSelectedRow(), 0)){
+                    newAlbum = alb;
+                    new R9_GroupAlbum_Management(this).setVisible(true);
+                }
+            }
+        }
     }//GEN-LAST:event_deleteSelectedGroupAlbumActionPerformed
 
     private void editSelectedGroupAlbumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editSelectedGroupAlbumActionPerformed
         // TODO add your handling code here:
         this.createMode = false;
         this.editMode = true;
+        this.deleteMode = false;
         if(tableGroupAlbums.getSelectedRow()==-1)
             JOptionPane.showMessageDialog(null, "Δεν έχει επιλεγεί άλμπουμ!");
         else{

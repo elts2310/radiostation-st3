@@ -16,8 +16,9 @@ import radiostation_POJO.Musicgroup;
  * @author eliastsourapas
  */
 public class R4_GroupList_View extends javax.swing.JFrame {
-    public boolean createMode; //δημιουργία καλλιτέχνη
-    public boolean editMode; //επεξεργασία καλλιτέχνη
+    public boolean createMode; //δημιουργία συγκροτήματος
+    public boolean editMode; //επεξεργασία συγκροτήματος
+    public boolean deleteMode; //διαγραφή συγκροτήματος
     private List<Musicgroup> mgs = new ArrayList();
     private EntityManager em;
     public Musicgroup newMusicgroup;
@@ -76,6 +77,11 @@ public class R4_GroupList_View extends javax.swing.JFrame {
         });
 
         deleteSelectedGroup.setText("Διαγραφή");
+        deleteSelectedGroup.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteSelectedGroupActionPerformed(evt);
+            }
+        });
 
         editSelectedGroup.setText("Επεξεργασία");
         editSelectedGroup.addActionListener(new java.awt.event.ActionListener() {
@@ -135,6 +141,7 @@ public class R4_GroupList_View extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.createMode = true;
         this.editMode = false;
+        this.deleteMode = false;
         this.setVisible(true);
         new R5_Group_Management(this).setVisible(true);
     }//GEN-LAST:event_addGroupActionPerformed
@@ -148,6 +155,7 @@ public class R4_GroupList_View extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.createMode = false;
         this.editMode = true;
+        this.deleteMode = false;
         if(tableGroups.getSelectedRow()==-1)
             JOptionPane.showMessageDialog(null, "Δεν έχει επιλεγεί συγκρότημα!");
         else{
@@ -159,6 +167,23 @@ public class R4_GroupList_View extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_editSelectedGroupActionPerformed
+
+    private void deleteSelectedGroupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteSelectedGroupActionPerformed
+        // TODO add your handling code here:
+        this.createMode = false;
+        this.editMode = false;
+        this.deleteMode = true;
+        if(tableGroups.getSelectedRow()==-1)
+            JOptionPane.showMessageDialog(null, "Δεν έχει επιλεγεί συγκρότημα!");
+        else{
+            for(Musicgroup mg: mgs){
+                if(mg.getMusicgroupName()==tableGroups.getValueAt(tableGroups.getSelectedRow(), 0)){
+                    newMusicgroup = mg;
+                    new R5_Group_Management(this).setVisible(true);
+                }
+            }
+        }
+    }//GEN-LAST:event_deleteSelectedGroupActionPerformed
 
     /**
      * @param args the command line arguments
