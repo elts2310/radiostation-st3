@@ -364,7 +364,7 @@ public class R3_Artist_Management extends javax.swing.JFrame {
         }catch(Exception e){
             JOptionPane.showMessageDialog(null,e);
         }
-    
+        
     */
     }
     /*
