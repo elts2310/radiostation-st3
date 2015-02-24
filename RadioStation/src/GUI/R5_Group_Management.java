@@ -291,7 +291,7 @@ public class R5_Group_Management extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelActionPerformed
 
     private void jButtonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeleteActionPerformed
-int position = jTableGroupMebers.getSelectedRow();
+/*int position = jTableGroupMebers.getSelectedRow();
      
         if(jTableGroupMebers.getSelectedRow()==-1)
             JOptionPane.showMessageDialog(null, "Δεν έχει επιλεγεί καλλιτέχνης!");
@@ -314,7 +314,7 @@ int position = jTableGroupMebers.getSelectedRow();
         
         }
         
-        
+  */      
 // TODO add your handling code here:
     }//GEN-LAST:event_jButtonDeleteActionPerformed
 
