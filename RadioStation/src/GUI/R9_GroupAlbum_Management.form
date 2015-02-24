@@ -9,7 +9,7 @@
     </Component>
     <Component class="javax.persistence.Query" name="musicgroupQuery">
       <Properties>
-        <Property name="query" type="java.lang.String" value="SELECT m.musicgroupName FROM Musicgroup m.musicgroupName"/>
+        <Property name="query" type="java.lang.String" value="SELECT m FROM Musicgroup m"/>
         <Property name="entityManager" type="java.lang.Object" editor="org.netbeans.modules.form.j2ee.J2EEPropertyModifier$EMProperty$EntityManagerEditor">
           <ComponentRef name="RadioStationPUEntityManager"/>
         </Property>
@@ -27,7 +27,7 @@
     </Component>
     <Component class="javax.persistence.Query" name="musicproductioncompanyQuery">
       <Properties>
-        <Property name="query" type="java.lang.String" value="SELECT m.mpcName FROM Musicproductioncompany m.mpcName"/>
+        <Property name="query" type="java.lang.String" value="SELECT m FROM Musicproductioncompany m"/>
         <Property name="entityManager" type="java.lang.Object" editor="org.netbeans.modules.form.j2ee.J2EEPropertyModifier$EMProperty$EntityManagerEditor">
           <ComponentRef name="RadioStationPUEntityManager"/>
         </Property>
