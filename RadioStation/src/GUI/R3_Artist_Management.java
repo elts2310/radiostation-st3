@@ -11,7 +11,6 @@ import javax.persistence.EntityManager;
 import radiostation_POJO.Artist;
 import javax.swing.JOptionPane;
 import javax.sql.*;
-import net.proteanit.sql.DBUtils;
 /**
  *
  * @author ΛΕΝΑ
@@ -23,20 +22,20 @@ public class R3_Artist_Management extends javax.swing.JFrame {
      * Creates new form R3_Artist_Management
      */
     public R3_Artist_Management() {
-        initComponents();
-        conn=javaconnect.ConnecrDB();
-         private FilljCombobox2();
-    private EntityManager em;
+       initComponents();
+  /*      conn=javaconnect.ConnecrDB();
+         private FilljCombobox2();*/
+  /*  private EntityManager em;
     public boolean createMode; //δημιουργία καλλιτέχνη
     public boolean editMode; //επεξεργασία καλλιτέχνη
     public boolean deleteMode; // διαγραφή καλλιτέχνη
     private List<Artist> artists = new ArrayList();
     public Artist newArtist; //Ο καλλιτέχνης που τροποποιείται
     private Object conn;
-    Connection conn=null;
+   /* Connection conn=null;
     ResultSet rs=null;
     PrepareStatement pst=null;
-
+*/
 
 }
     
@@ -352,7 +351,7 @@ public class R3_Artist_Management extends javax.swing.JFrame {
        
     }//GEN-LAST:event_jComboBox2ActionPerformed
     private void FilljCombobox2(){
-      try{
+/*      try{
             String sql="selecte * from MUSICGENRE";
             pst=conn.prepearStatement(sql);
             rs=pst.executeQuery();
@@ -366,9 +365,9 @@ public class R3_Artist_Management extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null,e);
         }
     
-    
+    */
     }
-    /**
+    /*
      * @param args the command line arguments
      */
     public static void main(String args[]) {
