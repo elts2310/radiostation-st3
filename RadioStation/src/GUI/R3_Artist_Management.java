@@ -52,7 +52,11 @@ public class R3_Artist_Management extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
+        RadioStationPUEntityManager = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory("RadioStationPU").createEntityManager();
+        musicgenreQuery = java.beans.Beans.isDesignTime() ? null : RadioStationPUEntityManager.createQuery("SELECT m FROM Musicgenre m");
+        musicgenreList = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : musicgenreQuery.getResultList();
         jLabel1 = new javax.swing.JLabel();
         btnCancel = new javax.swing.JButton();
         jButSave = new javax.swing.JButton();
@@ -70,7 +74,7 @@ public class R3_Artist_Management extends javax.swing.JFrame {
         jTextFieldBirthDate = new javax.swing.JTextField();
         jTextFieldBirthPlace = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox();
+        genreButton = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
 
@@ -134,10 +138,12 @@ public class R3_Artist_Management extends javax.swing.JFrame {
 
         jLabel7.setText("Καλλιτεχνικό όνομα");
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox2.addActionListener(new java.awt.event.ActionListener() {
+        org.jdesktop.swingbinding.JComboBoxBinding jComboBoxBinding = org.jdesktop.swingbinding.SwingBindings.createJComboBoxBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, musicgenreList, genreButton);
+        bindingGroup.addBinding(jComboBoxBinding);
+
+        genreButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox2ActionPerformed(evt);
+                genreButtonActionPerformed(evt);
             }
         });
 
@@ -170,7 +176,7 @@ public class R3_Artist_Management extends javax.swing.JFrame {
                                     .addComponent(jTextFieldBirthDate)))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(genreButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel8)
@@ -192,7 +198,7 @@ public class R3_Artist_Management extends javax.swing.JFrame {
                         .addGap(22, 22, 22)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
-                            .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(genreButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jTextFieldSurname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -249,6 +255,8 @@ public class R3_Artist_Management extends javax.swing.JFrame {
                     .addComponent(btnCancel))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        bindingGroup.bind();
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -345,11 +353,11 @@ public class R3_Artist_Management extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldBirthPlaceActionPerformed
 
-    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
+    private void genreButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_genreButtonActionPerformed
        
         // TODO add your handling code here:
        
-    }//GEN-LAST:event_jComboBox2ActionPerformed
+    }//GEN-LAST:event_genreButtonActionPerformed
     private void FilljCombobox2(){
 /*      try{
             String sql="selecte * from MUSICGENRE";
@@ -402,10 +410,11 @@ public class R3_Artist_Management extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.persistence.EntityManager RadioStationPUEntityManager;
     private javax.swing.JButton btnCancel;
+    private javax.swing.JComboBox genreButton;
     private javax.swing.JButton jButSave;
     private javax.swing.JComboBox jComboBox1;
-    private javax.swing.JComboBox jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -420,5 +429,8 @@ public class R3_Artist_Management extends javax.swing.JFrame {
     private javax.swing.JTextField jTextFieldBirthPlace;
     private javax.swing.JTextField jTextFieldName;
     private javax.swing.JTextField jTextFieldSurname;
+    private java.util.List<radiostation_POJO.Musicgenre> musicgenreList;
+    private javax.persistence.Query musicgenreQuery;
+    private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 }
