@@ -64,12 +64,13 @@ public class R9_GroupAlbum_Management extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
         RadioStationPUEntityManager = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory("RadioStationPU").createEntityManager();
-        musicgroupQuery = java.beans.Beans.isDesignTime() ? null : RadioStationPUEntityManager.createQuery("SELECT m FROM Musicgroup m");
+        musicgroupQuery = java.beans.Beans.isDesignTime() ? null : RadioStationPUEntityManager.createQuery("SELECT m.musicgroupName FROM Musicgroup m.musicgroupName");
         musicgroupList = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : musicgroupQuery.getResultList();
-        musicgroupQuery1 = java.beans.Beans.isDesignTime() ? null : RadioStationPUEntityManager.createQuery("SELECT m FROM Musicgroup m");
-        musicgroupList1 = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : musicgroupQuery1.getResultList();
+        musicproductioncompanyQuery = java.beans.Beans.isDesignTime() ? null : RadioStationPUEntityManager.createQuery("SELECT m.mpcName FROM Musicproductioncompany m.mpcName");
+        musicproductioncompanyList = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : musicproductioncompanyQuery.getResultList();
         btnSave = new javax.swing.JButton();
         btnCancel = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
@@ -90,11 +91,10 @@ public class R9_GroupAlbum_Management extends javax.swing.JFrame {
         Type = new javax.swing.JComboBox();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox();
+        MpcList = new javax.swing.JComboBox();
         MusicGroupList = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(725, 585));
         setResizable(false);
 
         btnSave.setText("Αποθήκευση");
@@ -193,7 +193,7 @@ public class R9_GroupAlbum_Management extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(13, Short.MAX_VALUE)
                 .addComponent(jLabel8)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -235,7 +235,16 @@ public class R9_GroupAlbum_Management extends javax.swing.JFrame {
 
         jLabel5.setText("Αριθμός Δίσκου");
 
-        jComboBox2.setPreferredSize(new java.awt.Dimension(300, 20));
+        MpcList.setPreferredSize(new java.awt.Dimension(300, 20));
+
+        org.jdesktop.swingbinding.JComboBoxBinding jComboBoxBinding = org.jdesktop.swingbinding.SwingBindings.createJComboBoxBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, musicproductioncompanyList, MpcList);
+        bindingGroup.addBinding(jComboBoxBinding);
+
+        MusicGroupList.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MusicGroupListActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -246,7 +255,7 @@ public class R9_GroupAlbum_Management extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jComboBox2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(MpcList, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(txtTitle, javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 391, Short.MAX_VALUE)
@@ -286,7 +295,7 @@ public class R9_GroupAlbum_Management extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtReleaseDt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(MpcList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 20, Short.MAX_VALUE))
         );
 
@@ -324,6 +333,8 @@ public class R9_GroupAlbum_Management extends javax.swing.JFrame {
                 .addContainerGap(25, Short.MAX_VALUE))
         );
 
+        bindingGroup.bind();
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -347,6 +358,10 @@ public class R9_GroupAlbum_Management extends javax.swing.JFrame {
     private void deleteSongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteSongActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_deleteSongActionPerformed
+
+    private void MusicGroupListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MusicGroupListActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_MusicGroupListActionPerformed
     
     /**
      * @param args the command line arguments
@@ -404,6 +419,7 @@ public class R9_GroupAlbum_Management extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox MpcList;
     private javax.swing.JComboBox MusicGroupList;
     private javax.persistence.EntityManager RadioStationPUEntityManager;
     private javax.swing.JComboBox Type;
@@ -411,7 +427,6 @@ public class R9_GroupAlbum_Management extends javax.swing.JFrame {
     private javax.swing.JButton btnSave;
     private javax.swing.JButton deleteSong;
     private javax.swing.JButton insertSong;
-    private javax.swing.JComboBox jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -425,11 +440,12 @@ public class R9_GroupAlbum_Management extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private java.util.List<radiostation_POJO.Musicgroup> musicgroupList;
-    private java.util.List<radiostation_POJO.Musicgroup> musicgroupList1;
     private javax.persistence.Query musicgroupQuery;
-    private javax.persistence.Query musicgroupQuery1;
+    private java.util.List<radiostation_POJO.Musicproductioncompany> musicproductioncompanyList;
+    private javax.persistence.Query musicproductioncompanyQuery;
     private javax.swing.JTextField txtDiscNr;
     private javax.swing.JTextField txtReleaseDt;
     private javax.swing.JTextField txtTitle;
+    private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 }
