@@ -144,14 +144,14 @@
                               <Group type="102" attributes="0">
                                   <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="jComboBox1" min="-2" max="-2" attributes="0"/>
+                                      <Component id="sexComboBox" min="-2" max="-2" attributes="0"/>
                                       <Component id="jTextFieldBirthPlace" max="32767" attributes="0"/>
                                       <Component id="jTextFieldBirthDate" alignment="0" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                               <Group type="102" alignment="1" attributes="0">
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="genreButton" min="-2" max="-2" attributes="0"/>
+                                  <Component id="genreComboBox" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -174,7 +174,7 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jLabel2" min="-2" pref="22" max="-2" attributes="0"/>
                       <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                          <Component id="jComboBox1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="sexComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -183,7 +183,7 @@
                           <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="genreButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="genreComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
@@ -222,7 +222,7 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JComboBox" name="jComboBox1">
+        <Component class="javax.swing.JComboBox" name="sexComboBox">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="2">
@@ -231,6 +231,9 @@
               </StringArray>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="sexComboBoxActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel2">
           <Properties>
@@ -289,12 +292,12 @@
             <Property name="text" type="java.lang.String" value="&#x39a;&#x3b1;&#x3bb;&#x3bb;&#x3b9;&#x3c4;&#x3b5;&#x3c7;&#x3bd;&#x3b9;&#x3ba;&#x3cc; &#x3cc;&#x3bd;&#x3bf;&#x3bc;&#x3b1;"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JComboBox" name="genreButton">
+        <Component class="javax.swing.JComboBox" name="genreComboBox">
           <BindingProperties>
-            <BindingProperty name="elements" source="musicgenreList" target="genreButton" targetPath="elements" updateStrategy="0" immediately="false"/>
+            <BindingProperty name="elements" source="musicgenreList" target="genreComboBox" targetPath="elements" updateStrategy="0" immediately="false"/>
           </BindingProperties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="genreButtonActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="genreComboBoxActionPerformed"/>
           </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_SerializeTo" type="java.lang.String" value="R3_Artist_Management_genreButton"/>

@@ -5,6 +5,9 @@
  */
 package GUI;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -16,6 +19,11 @@ import javax.sql.*;
  * @author ΛΕΝΑ
  */
 public class R3_Artist_Management extends javax.swing.JFrame {
+    Connection conn = null;
+    ResultSet rs = null;
+    PreparedStatement pst = null;
+    
+    
     private R2_ArtistList_View creator;
   
     /**
@@ -23,23 +31,10 @@ public class R3_Artist_Management extends javax.swing.JFrame {
      */
     public R3_Artist_Management() {
        initComponents();
-  /*      conn=javaconnect.ConnecrDB();
-         private FilljCombobox2();*/
-  /*  private EntityManager em;
-    public boolean createMode; //δημιουργία καλλιτέχνη
-    public boolean editMode; //επεξεργασία καλλιτέχνη
-    public boolean deleteMode; // διαγραφή καλλιτέχνη
-    private List<Artist> artists = new ArrayList();
-    public Artist newArtist; //Ο καλλιτέχνης που τροποποιείται
-    private Object conn;
-   /* Connection conn=null;
-    ResultSet rs=null;
-    PrepareStatement pst=null;
-*/
 
 }
     
-   public R3_Artist_Management(R2_ArtistList_View inJFrame) {
+    public R3_Artist_Management(R2_ArtistList_View inJFrame) {
         initComponents();
  
     }
@@ -61,7 +56,7 @@ public class R3_Artist_Management extends javax.swing.JFrame {
         btnCancel = new javax.swing.JButton();
         jButSave = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
-        jComboBox1 = new javax.swing.JComboBox();
+        sexComboBox = new javax.swing.JComboBox();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -74,7 +69,7 @@ public class R3_Artist_Management extends javax.swing.JFrame {
         jTextFieldBirthDate = new javax.swing.JTextField();
         jTextFieldBirthPlace = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        genreButton = new javax.swing.JComboBox();
+        genreComboBox = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
 
@@ -98,7 +93,12 @@ public class R3_Artist_Management extends javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Male", "Female" }));
+        sexComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Male", "Female" }));
+        sexComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sexComboBoxActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("Επώνυμο");
 
@@ -138,12 +138,12 @@ public class R3_Artist_Management extends javax.swing.JFrame {
 
         jLabel7.setText("Καλλιτεχνικό όνομα");
 
-        org.jdesktop.swingbinding.JComboBoxBinding jComboBoxBinding = org.jdesktop.swingbinding.SwingBindings.createJComboBoxBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, musicgenreList, genreButton);
+        org.jdesktop.swingbinding.JComboBoxBinding jComboBoxBinding = org.jdesktop.swingbinding.SwingBindings.createJComboBoxBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, musicgenreList, genreComboBox);
         bindingGroup.addBinding(jComboBoxBinding);
 
-        genreButton.addActionListener(new java.awt.event.ActionListener() {
+        genreComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                genreButtonActionPerformed(evt);
+                genreComboBoxActionPerformed(evt);
             }
         });
 
@@ -171,12 +171,12 @@ public class R3_Artist_Management extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(39, 39, 39)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(sexComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jTextFieldBirthPlace)
                                     .addComponent(jTextFieldBirthDate)))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(genreButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(genreComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel8)
@@ -191,14 +191,14 @@ public class R3_Artist_Management extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(sexComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel3)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(22, 22, 22)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
-                            .addComponent(genreButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(genreComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jTextFieldSurname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -263,7 +263,6 @@ public class R3_Artist_Management extends javax.swing.JFrame {
 
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
         // TODO add your handling code here:
-        /*creator.setVisible(true);*/
         dispose(); 
     }//GEN-LAST:event_btnCancelActionPerformed
 
@@ -353,14 +352,17 @@ public class R3_Artist_Management extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldBirthPlaceActionPerformed
 
-    private void genreButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_genreButtonActionPerformed
-       
+    private void genreComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_genreComboBoxActionPerformed
         // TODO add your handling code here:
        
-    }//GEN-LAST:event_genreButtonActionPerformed
-    private void FilljCombobox2(){
-/*      try{
-            String sql="selecte * from MUSICGENRE";
+    }//GEN-LAST:event_genreComboBoxActionPerformed
+
+    private void sexComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sexComboBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_sexComboBoxActionPerformed
+    /*private void FilljCombobox2(){
+      try{
+            String sql="select * from MUSICGENRE";
             pst=conn.prepearStatement(sql);
             rs=pst.executeQuery();
             
@@ -373,8 +375,8 @@ public class R3_Artist_Management extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null,e);
         }
         
-    */
-    }
+    
+    }*/
     /*
      * @param args the command line arguments
      */
@@ -412,9 +414,8 @@ public class R3_Artist_Management extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.persistence.EntityManager RadioStationPUEntityManager;
     private javax.swing.JButton btnCancel;
-    private javax.swing.JComboBox genreButton;
+    private javax.swing.JComboBox genreComboBox;
     private javax.swing.JButton jButSave;
-    private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -431,6 +432,7 @@ public class R3_Artist_Management extends javax.swing.JFrame {
     private javax.swing.JTextField jTextFieldSurname;
     private java.util.List<radiostation_POJO.Musicgenre> musicgenreList;
     private javax.persistence.Query musicgenreQuery;
+    private javax.swing.JComboBox sexComboBox;
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 }
