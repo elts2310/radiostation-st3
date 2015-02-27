@@ -339,9 +339,7 @@ public class R9_GroupAlbum_Management extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
-        /*creator.setVisible(true);*/
         dispose();
-        /*System.exit(0);*/
     }//GEN-LAST:event_btnCancelActionPerformed
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
@@ -366,7 +364,7 @@ public class R9_GroupAlbum_Management extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    private void MGL_fill(){
+    /*private void MGL_fill(){
     try{
         String query = "select * from Musicgroup";
         PreparedStatement pst = conn.prepareStatement(query);
@@ -383,7 +381,7 @@ public class R9_GroupAlbum_Management extends javax.swing.JFrame {
     
     
     
-    }
+    }*/
     
     
     public static void main(String args[]) {
