@@ -220,7 +220,7 @@ public class R17_Playlist_Management extends javax.swing.JFrame {
             //pls.setPlCreationDate(this.dateTxt);
         }
         else if (editMode.getEditMode() == true) {
-            String sql = "edit from PLAYLIST where playlistId =?";
+            String sql = "update from PLAYLIST where playlistId =?";
             try{
                 pst = conn.prepareStatement(sql);
                 pst.setString(1, plsId.getText());
