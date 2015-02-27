@@ -32,6 +32,30 @@ public class R16_Playlist_View extends javax.swing.JFrame {
         initComponents();
     }
 
+    public boolean getCreateMode() {
+        return createMode;
+    }
+    
+    public void setCreateMode(boolean createMode) {
+        this.createMode = createMode;
+    }
+    
+    public boolean getEditMode() {
+        return editMode;
+    }
+    
+    public void setEditMode(boolean editMode) {
+        this.editMode = editMode;
+    }
+    
+    public boolean getDeleteMode() {
+        return deleteMode;
+    }
+    
+    public void setDeleteMode(boolean deleteMode) {
+        this.deleteMode = deleteMode;
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -165,7 +189,7 @@ public class R16_Playlist_View extends javax.swing.JFrame {
         this.editMode = false;
         this.deleteMode = false;
         this.setVisible(true);
-        //new R17_Playlist_Management(this).setVisible(true);
+        new R17_Playlist_Management(this).setVisible(true);
     }//GEN-LAST:event_newPlaylistActionPerformed
 
     private void alterPlaylistActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alterPlaylistActionPerformed
@@ -179,7 +203,7 @@ public class R16_Playlist_View extends javax.swing.JFrame {
             for(Playlist pls: playlists){
                 if(pls.getPlaylistId()==tablePlaylists.getValueAt(tablePlaylists.getSelectedRow(), 0)){
                     newPls = pls;
-                    //new R17_Playlist_Management(this).setVisible(true);
+                    new R17_Playlist_Management(this).setVisible(true);
                 }
             }
         }
@@ -201,7 +225,7 @@ public class R16_Playlist_View extends javax.swing.JFrame {
             for(Playlist pls: playlists){
                 if(pls.getPlaylistId()==tablePlaylists.getValueAt(tablePlaylists.getSelectedRow(), 0)){
                     newPls = pls;
-                    //new R17_Playlist_Management(this).setVisible(true);
+                    new R17_Playlist_Management(this).setVisible(true);
                 }
             }
         }

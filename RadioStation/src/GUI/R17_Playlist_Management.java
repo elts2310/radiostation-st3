@@ -5,16 +5,31 @@
  */
 package GUI;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import javax.swing.JOptionPane;
+import radiostation_POJO.Playlist;
+
 /**
  *
  * @author eliastsourapas
  */
 public class R17_Playlist_Management extends javax.swing.JFrame {
+    Connection conn = null;
+    ResultSet rs = null;
+    PreparedStatement pst = null;
+    
+    private R16_Playlist_View creator;
 
     /**
      * Creates new form R17_Playlist_Management
      */
     public R17_Playlist_Management() {
+        initComponents();
+    }
+
+    public R17_Playlist_Management(R16_Playlist_View inJFrame) {
         initComponents();
     }
 
@@ -42,6 +57,8 @@ public class R17_Playlist_Management extends javax.swing.JFrame {
         addSong = new javax.swing.JButton();
         removeSong = new javax.swing.JButton();
         dateTxt = new javax.swing.JFormattedTextField();
+        jLabel6 = new javax.swing.JLabel();
+        plsId = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -53,8 +70,6 @@ public class R17_Playlist_Management extends javax.swing.JFrame {
 
         jLabel3.setText("Περιγραφή");
 
-        playlistTitle.setText("jTextField1");
-
         jLabel4.setText("Ημ/νία Δημιουργίας");
 
         playlistDescription.setColumns(20);
@@ -62,6 +77,11 @@ public class R17_Playlist_Management extends javax.swing.JFrame {
         jScrollPane1.setViewportView(playlistDescription);
 
         savePlaylist.setText("Αποθήκευση");
+        savePlaylist.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                savePlaylistActionPerformed(evt);
+            }
+        });
 
         exitButton.setText("Ακύρωση");
         exitButton.addActionListener(new java.awt.event.ActionListener() {
@@ -99,6 +119,10 @@ public class R17_Playlist_Management extends javax.swing.JFrame {
 
         dateTxt.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("dd/MM/yyyy"))));
 
+        jLabel6.setText("Κωδικός λίστας");
+
+        plsId.setBackground(new java.awt.Color(255, 204, 51));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -109,9 +133,6 @@ public class R17_Playlist_Management extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addContainerGap())
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -132,14 +153,26 @@ public class R17_Playlist_Management extends javax.swing.JFrame {
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(exitButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(savePlaylist, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addGap(19, 19, 19))))
+                        .addGap(19, 19, 19))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel6)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(plsId, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(15, 15, 15)
+                .addGap(26, 26, 26)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(plsId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -162,7 +195,7 @@ public class R17_Playlist_Management extends javax.swing.JFrame {
                         .addComponent(addSong)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(removeSong)))
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -172,6 +205,44 @@ public class R17_Playlist_Management extends javax.swing.JFrame {
         // TODO add your handling code here:
         dispose();
     }//GEN-LAST:event_exitButtonActionPerformed
+
+    private void savePlaylistActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_savePlaylistActionPerformed
+        // TODO add your handling code here:
+        R16_Playlist_View createMode = new R16_Playlist_View();
+        R16_Playlist_View editMode = new R16_Playlist_View();
+        R16_Playlist_View deleteMode = new R16_Playlist_View();
+        
+        if (createMode.getCreateMode() == true) {
+            Playlist pls = new Playlist();
+            //pls.setPlaylistId(this.plsId);
+            pls.setPlName(this.playlistTitle.getText());
+            pls.setPlDescription(this.playlistDescription.getText());
+            //pls.setPlCreationDate(this.dateTxt);
+        }
+        else if (editMode.getEditMode() == true) {
+            String sql = "edit from PLAYLIST where playlistId =?";
+            try{
+                pst = conn.prepareStatement(sql);
+                pst.setString(1, plsId.getText());
+                pst.setString(2, playlistTitle.getText());
+                pst.setString(3, playlistDescription.getText());
+            }catch(Exception e){
+                JOptionPane.showMessageDialog(null, e);
+            }
+        }
+        else if (deleteMode.getDeleteMode() == true) {
+            String sql = "delete from PLAYLST where playlistId =?";
+            try{
+            pst = conn.prepareStatement(sql);
+            pst.setString(1, plsId.getText());
+            pst.execute();
+            JOptionPane.showMessageDialog(null, "Η λίστα τραγουδιών διαγράφηκε επιτυχώς!");
+            }catch(Exception e){
+                JOptionPane.showMessageDialog(null, e);
+            }
+        }
+        dispose();
+    }//GEN-LAST:event_savePlaylistActionPerformed
 
     /**
      * @param args the command line arguments
@@ -217,11 +288,13 @@ public class R17_Playlist_Management extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextArea playlistDescription;
     private javax.swing.JTable playlistSongsTable;
     private javax.swing.JTextField playlistTitle;
+    private javax.swing.JTextField plsId;
     private javax.swing.JButton removeSong;
     private javax.swing.JButton savePlaylist;
     // End of variables declaration//GEN-END:variables

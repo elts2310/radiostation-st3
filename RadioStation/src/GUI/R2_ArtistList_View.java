@@ -30,6 +30,30 @@ public class R2_ArtistList_View extends javax.swing.JFrame {
     public R2_ArtistList_View() {
         initComponents();
     }
+    
+    public boolean getCreateMode() {
+        return createMode;
+    }
+    
+    public void setCreateMode(boolean createMode) {
+        this.createMode = createMode;
+    }
+    
+    public boolean getEditMode() {
+        return editMode;
+    }
+    
+    public void setEditMode(boolean editMode) {
+        this.editMode = editMode;
+    }
+    
+    public boolean getDeleteMode() {
+        return deleteMode;
+    }
+    
+    public void setDeleteMode(boolean deleteMode) {
+        this.deleteMode = deleteMode;
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
