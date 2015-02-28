@@ -67,9 +67,9 @@ public class R9_GroupAlbum_Management extends javax.swing.JFrame {
         bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
         RadioStationPUEntityManager = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory("RadioStationPU").createEntityManager();
-        musicgroupQuery = java.beans.Beans.isDesignTime() ? null : RadioStationPUEntityManager.createQuery("SELECT m FROM Musicgroup m");
+        musicgroupQuery = java.beans.Beans.isDesignTime() ? null : RadioStationPUEntityManager.createQuery("SELECT m.musicgroupName FROM Musicgroup m");
         musicgroupList = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : musicgroupQuery.getResultList();
-        musicproductioncompanyQuery = java.beans.Beans.isDesignTime() ? null : RadioStationPUEntityManager.createQuery("SELECT m FROM Musicproductioncompany m");
+        musicproductioncompanyQuery = java.beans.Beans.isDesignTime() ? null : RadioStationPUEntityManager.createQuery("SELECT m.mpcName FROM Musicproductioncompany m");
         musicproductioncompanyList = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : musicproductioncompanyQuery.getResultList();
         btnSave = new javax.swing.JButton();
         btnCancel = new javax.swing.JButton();
