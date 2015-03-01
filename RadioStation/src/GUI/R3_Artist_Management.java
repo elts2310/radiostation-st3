@@ -404,7 +404,7 @@ public class R3_Artist_Management extends javax.swing.JFrame {
         }
         //</editor-fold>
 
-        /* Create and display the form */
+         /*Create and display the form*/
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new R3_Artist_Management().setVisible(true);

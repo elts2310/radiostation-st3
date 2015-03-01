@@ -195,7 +195,7 @@
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace pref="13" max="32767" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
                   <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
@@ -483,6 +483,9 @@
           </BindingProperties>
         </Component>
         <Component class="javax.swing.JComboBox" name="MusicGroupList">
+          <BindingProperties>
+            <BindingProperty name="elements" source="musicgroupList" target="MusicGroupList" targetPath="elements" updateStrategy="0" immediately="false"/>
+          </BindingProperties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MusicGroupListActionPerformed"/>
           </Events>

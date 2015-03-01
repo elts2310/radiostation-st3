@@ -254,42 +254,6 @@ public class R5_Group_Management extends javax.swing.JFrame {
       
     }//GEN-LAST:event_btnCancelActionPerformed
 
-    private void jButtonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeleteActionPerformed
-/*int position = jTableGroupMebers.getSelectedRow();
-     
-        if(jTableGroupMebers.getSelectedRow()==-1)
-            JOptionPane.showMessageDialog(null, "Δεν έχει επιλεγεί καλλιτέχνης!");
-        else{
-            Object[][] temp = new Object[data.length-1][2];
-            for(int i=0;i<position;i++){
-                temp[i][0] = data[i][0];
-                temp[i][1] = data[i][1];
-                
-            }
-            for(int i=position+1;i<data.length;i++){
-                
-                temp[i-1][0]=data[i][0];
-                temp[i-1][1]=data[i][1];
-                
-                
-            }
-        data = temp;
-        jTableGroupMebers.setModel(new DefaultTableModel(data,columnNames));
-        
-        }
-        
-  */      
-// TODO add your handling code here:
-    }//GEN-LAST:event_jButtonDeleteActionPerformed
-
-    private void jScrollPane1ComponentAdded(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_jScrollPane1ComponentAdded
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jScrollPane1ComponentAdded
-
-    private void jButtonInputMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonInputMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonInputMouseClicked
-
     /**
      * @param args the command line arguments
      */
