@@ -8,9 +8,6 @@ package GUI;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.ArrayList;
-import java.util.List;
-import javax.persistence.EntityManager;
 import radiostation_POJO.Artist;
 import javax.swing.JOptionPane;
 import javax.sql.*;
@@ -63,13 +60,15 @@ public class R3_Artist_Management extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jTextFieldSurname = new javax.swing.JTextField();
-        jTextFieldName = new javax.swing.JTextField();
-        jTextFieldArtisticName = new javax.swing.JTextField();
+        jTextArtistLastName = new javax.swing.JTextField();
+        jTextArtistName = new javax.swing.JTextField();
+        jTextArtisticName = new javax.swing.JTextField();
         jTextFieldBirthDate = new javax.swing.JTextField();
-        jTextFieldBirthPlace = new javax.swing.JTextField();
+        jTextBirthPlace = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         genreComboBox = new javax.swing.JComboBox();
+        jLabel9 = new javax.swing.JLabel();
+        jTextArtistId = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
 
@@ -112,15 +111,21 @@ public class R3_Artist_Management extends javax.swing.JFrame {
 
         jLabel8.setText("Όνομα");
 
-        jTextFieldSurname.addActionListener(new java.awt.event.ActionListener() {
+        jTextArtistLastName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldSurnameActionPerformed(evt);
+                jTextArtistLastNameActionPerformed(evt);
             }
         });
 
-        jTextFieldArtisticName.addActionListener(new java.awt.event.ActionListener() {
+        jTextArtistName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldArtisticNameActionPerformed(evt);
+                jTextArtistNameActionPerformed(evt);
+            }
+        });
+
+        jTextArtisticName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextArtisticNameActionPerformed(evt);
             }
         });
 
@@ -130,9 +135,9 @@ public class R3_Artist_Management extends javax.swing.JFrame {
             }
         });
 
-        jTextFieldBirthPlace.addActionListener(new java.awt.event.ActionListener() {
+        jTextBirthPlace.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldBirthPlaceActionPerformed(evt);
+                jTextBirthPlaceActionPerformed(evt);
             }
         });
 
@@ -147,82 +152,95 @@ public class R3_Artist_Management extends javax.swing.JFrame {
             }
         });
 
+        jLabel9.setText("Id Καλλιτέχνη");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel7)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jTextFieldName, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 205, Short.MAX_VALUE)
-                                .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jTextFieldSurname, javax.swing.GroupLayout.Alignment.LEADING)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 93, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel4))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel9)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jTextArtistLastName, javax.swing.GroupLayout.DEFAULT_SIZE, 205, Short.MAX_VALUE)
+                                        .addGap(93, 93, 93)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel3)
+                                            .addComponent(jLabel4)))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                        .addGap(0, 0, Short.MAX_VALUE)
+                                        .addComponent(jLabel6)))
+                                .addGap(34, 34, 34)))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(39, 39, 39)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(sexComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextFieldBirthPlace)
-                                    .addComponent(jTextFieldBirthDate)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(genreComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(sexComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(genreComboBox, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextBirthPlace, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel8)
-                            .addComponent(jTextFieldArtisticName, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addContainerGap()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jTextArtisticName, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addGap(85, 85, 85)
+                                    .addComponent(jTextArtistId, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jLabel2)
+                                .addComponent(jLabel8)
+                                .addComponent(jTextArtistName, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel7)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel5)
+                        .addGap(54, 54, 54)
+                        .addComponent(jTextFieldBirthDate, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(sexComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel3)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(22, 22, 22)
+                        .addContainerGap()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(sexComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3))
+                        .addGap(24, 24, 24)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
-                            .addComponent(genreComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(genreComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextArtistLastName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextFieldSurname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
-                .addComponent(jLabel8)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
-                .addComponent(jTextFieldName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextFieldBirthPlace, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel5)
-                            .addComponent(jTextFieldBirthDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel7)
-                        .addGap(24, 24, 24)))
-                .addComponent(jTextFieldArtisticName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(23, 23, 23))
+                            .addComponent(jLabel9)
+                            .addComponent(jTextArtistId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel8)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jTextArtistName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTextBirthPlace, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel7)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(jTextFieldBirthDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(8, 8, 8)
+                .addComponent(jTextArtisticName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(75, 75, 75))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -233,9 +251,7 @@ public class R3_Artist_Management extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(102, 102, 102))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 423, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButSave)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -267,90 +283,69 @@ public class R3_Artist_Management extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelActionPerformed
 
     private void jButSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButSaveActionPerformed
-/*
-        if (this.createMode=true);{
-     
-        String sgl="Insert in to Artist (LAST_NAME,FIRST_NAME,ARTISTIC_NAME,"
-                + "SEX,BIRTH_DAY,BIRTH_PLACE,GENRE_NAME} values (?,?,?,?,?,?,?)";
-    try{
-        statement=conn.prepearStatement(sql);
-        pst.setString(1,jTextFieldSurname.getText());
-        pst.setString(1,jTextFieldName.getText());
-        pst.setString(1,jTextFieldArtisticName.getText());
-        pst.setString(1,jComboBox1.getText());
-        pst.setString(1,jTextFieldBirthDate.getText());
-        pst.setString(1,jTextFieldBirthPlace.getText());
-        pst.setString(1,jComboBox2.getText());
-        
-        pst.execute();
-           JOptionPane.showMessageDialog(null,"Καταχώριση νέου καλλιτέχνη"); 
-        
-        }
-        catch(Exception e){
-        JOptionPane.showMessageDialog(null,e);
-        
-        }
-        }(LAST_NAME,FIRST_NAME,ARTISTIC_NAME,"
-                + "SEX,BIRTH_DAY,BIRTH_PLACE,GENRE_NAME} values (?,?,?,?,?,?,?)";
-        else 
-        {
-        if (this.editMode=true);{
-        try{
-            String value1= jTextFieldSurname.getText();
-            String value2=jTextFieldName.getText();
-            String value3=jTextFieldArtisticName.getText();
-            String value4=jComboBox1.getText();
-            String value5=jTextFieldBirthDate.getText();
-            String value6=jTextFieldBirthPlace.getText();
-            String value7=jComboBox2.getText();
-        
-        String sql="Update Artist set LAST_NAME='"+value1"',FIRST_NAME='"+value2+"',ARTISTIC_NAME='"+value3+"',SEX='"+value4+"',BIRTH_DAY='"+value5+"',BIRTH_PLACE='"+value6+"',GENRE_NAME='"+value7+"'";
-     pst.conn.prepareStatement(sql);
-        pst.execute();
-       JOptionPane.showMessageDialog(null,"Updated"); 
-    }
-        catch(Exception e){
-        JOptionPane.showMessageDialog(null,e);
-        
-        }
-        }
-        
-        
-    }
-        else{
-                if(deleteMode=true);
-                { String sgl="Delete from Artist where ARTISTIC_NAME=?";
-                try{
-                pst=conn.prepearStatement(sql);
-                pst.setString(1,ARTISTIC_NAME.getText());
-                
-                pst.execute();
-                        
-                JOptionPane.showMessageDialog(null, "Ο καλλιτέχνης θα διαγραφεί");
-                }catch(Exception e);
-                {JOptionPane.showMessageDialog(null,e);
-                
-                }
-       
-      */
+        R2_ArtistList_View createMode = new R2_ArtistList_View();
+          R2_ArtistList_View editMode = new R2_ArtistList_View(); 
+           R2_ArtistList_View deleteMode = new R2_ArtistList_View();
+           
+           if (createMode.getCreateMode()==true){
+               Artist art= new Artist();
+               //art.setArtistId(this.jTextArtistId.getText());
+               art.setFirstName(this.jTextArtistName.getText());
+              art.setLastName(this.jTextArtistLastName.getText()); 
+              art.setArtisticName(this.jTextArtisticName.getText()); 
+              art.setBirthPlace(this.jTextBirthPlace.getText()); 
+               
+           }
+           else if(editMode.getEditMode()==true){
+               String sql="update from ARTIST where ArtistId=?";
+               try{
+                   pst=conn.prepareStatement(sql);
+                   pst.setString(1,jTextArtistId.getText());
+                   pst.setString(2,jTextArtistName.getText());
+                   pst.setString(1,jTextArtistLastName.getText());
+                    pst.setString(1,jTextBirthPlace.getText());
+                    
+                    
+               }catch(Exception e){
+                   JOptionPane.showMessageDialog(null, e);
+               }
+               
+               
+           }
+           else if(deleteMode.getDeleteMode()==true){
+               
+               String sql="delete from ARTIST where ArtistId=?";
+               try{
+                   pst=conn.prepareStatement(sql);
+                   pst.setString(1,jTextArtistId.getText());
+                   pst.execute();
+                   
+                   JOptionPane.showMessageDialog(null, "Ο καλλιτέχνης διαγράφηκε με επιτυχία");
+               }catch(Exception e){
+                   
+                   JOptionPane.showMessageDialog(null, e);
+               }
+               
+           }
+           dispose();
 // TODO add your handling code here:
     }//GEN-LAST:event_jButSaveActionPerformed
 
-    private void jTextFieldSurnameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldSurnameActionPerformed
+    private void jTextArtistLastNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextArtistLastNameActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldSurnameActionPerformed
+    }//GEN-LAST:event_jTextArtistLastNameActionPerformed
 
     private void jTextFieldBirthDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldBirthDateActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldBirthDateActionPerformed
 
-    private void jTextFieldArtisticNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldArtisticNameActionPerformed
+    private void jTextArtisticNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextArtisticNameActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldArtisticNameActionPerformed
+    }//GEN-LAST:event_jTextArtisticNameActionPerformed
 
-    private void jTextFieldBirthPlaceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldBirthPlaceActionPerformed
+    private void jTextBirthPlaceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextBirthPlaceActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldBirthPlaceActionPerformed
+    }//GEN-LAST:event_jTextBirthPlaceActionPerformed
 
     private void genreComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_genreComboBoxActionPerformed
         // TODO add your handling code here:
@@ -360,6 +355,10 @@ public class R3_Artist_Management extends javax.swing.JFrame {
     private void sexComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sexComboBoxActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_sexComboBoxActionPerformed
+
+    private void jTextArtistNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextArtistNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextArtistNameActionPerformed
     /*private void FilljCombobox2(){
       try{
             String sql="select * from MUSICGENRE";
@@ -424,12 +423,14 @@ public class R3_Artist_Management extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextFieldArtisticName;
+    private javax.swing.JTextField jTextArtistId;
+    private javax.swing.JTextField jTextArtistLastName;
+    private javax.swing.JTextField jTextArtistName;
+    private javax.swing.JTextField jTextArtisticName;
+    private javax.swing.JTextField jTextBirthPlace;
     private javax.swing.JTextField jTextFieldBirthDate;
-    private javax.swing.JTextField jTextFieldBirthPlace;
-    private javax.swing.JTextField jTextFieldName;
-    private javax.swing.JTextField jTextFieldSurname;
     private java.util.List<radiostation_POJO.Musicgenre> musicgenreList;
     private javax.persistence.Query musicgenreQuery;
     private javax.swing.JComboBox sexComboBox;
