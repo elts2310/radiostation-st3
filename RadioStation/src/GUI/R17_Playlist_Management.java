@@ -41,7 +41,11 @@ public class R17_Playlist_Management extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
+        RadioStationPUEntityManager = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory("RadioStationPU").createEntityManager();
+        songQuery = java.beans.Beans.isDesignTime() ? null : RadioStationPUEntityManager.createQuery("SELECT s FROM Song s");
+        songList = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : songQuery.getResultList();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -90,38 +94,41 @@ public class R17_Playlist_Management extends javax.swing.JFrame {
             }
         });
 
-        playlistSongsTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Τίτλος", "Καλλιτέχνης", "Συγκρότημα", "Διάρκεια"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
+        org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, songList, playlistSongsTable);
+        org.jdesktop.swingbinding.JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${title}"));
+        columnBinding.setColumnName("Τίτλος");
+        columnBinding.setColumnClass(String.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${albumId.artistId.artisticName}"));
+        columnBinding.setColumnName("Καλλιτέχνης");
+        columnBinding.setColumnClass(String.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${albumId.musicgroupName.musicgroupName}"));
+        columnBinding.setColumnName("Συγκρότημα");
+        columnBinding.setColumnClass(String.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${duration}"));
+        columnBinding.setColumnName("Διάρκεια");
+        columnBinding.setColumnClass(Integer.class);
+        bindingGroup.addBinding(jTableBinding);
+        jTableBinding.bind();
         jScrollPane2.setViewportView(playlistSongsTable);
 
         jLabel5.setText("Λίστα τραγουδιών");
 
         addSong.setText("Εισαγωγή");
+        addSong.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addSongActionPerformed(evt);
+            }
+        });
 
         removeSong.setText("Διαγραφή");
 
+        dateTxt.setEditable(false);
         dateTxt.setBackground(new java.awt.Color(255, 204, 0));
         dateTxt.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("dd/MM/yyyy"))));
 
         jLabel6.setText("Κωδικός λίστας");
 
+        plsId.setEditable(false);
         plsId.setBackground(new java.awt.Color(255, 204, 51));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -199,6 +206,8 @@ public class R17_Playlist_Management extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        bindingGroup.bind();
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -245,6 +254,12 @@ public class R17_Playlist_Management extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_savePlaylistActionPerformed
 
+    private void addSongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addSongActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(true);
+        new R18_SongsList(this).setVisible(true);
+    }//GEN-LAST:event_addSongActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -281,6 +296,7 @@ public class R17_Playlist_Management extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.persistence.EntityManager RadioStationPUEntityManager;
     private javax.swing.JButton addSong;
     private javax.swing.JFormattedTextField dateTxt;
     private javax.swing.JButton exitButton;
@@ -298,5 +314,8 @@ public class R17_Playlist_Management extends javax.swing.JFrame {
     private javax.swing.JTextField plsId;
     private javax.swing.JButton removeSong;
     private javax.swing.JButton savePlaylist;
+    private java.util.List<radiostation_POJO.Song> songList;
+    private javax.persistence.Query songQuery;
+    private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 }

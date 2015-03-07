@@ -10,6 +10,7 @@
     <class>radiostation_POJO.PlaylistSongs</class>
     <class>radiostation_POJO.Musicproductioncompany</class>
     <class>radiostation_POJO.Playlist</class>
+    <class>GUI.PlaylistSong</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:derby://localhost:1527/radiostation_db"/>
       <property name="javax.persistence.jdbc.user" value="radio"/>
