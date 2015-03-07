@@ -92,17 +92,17 @@ public class R17_Playlist_Management extends javax.swing.JFrame {
 
         playlistSongsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Τίτλος", "Καλλιτέχνης", "Διάρκεια"
+                "Τίτλος", "Καλλιτέχνης", "Συγκρότημα", "Διάρκεια"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Object.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -117,6 +117,7 @@ public class R17_Playlist_Management extends javax.swing.JFrame {
 
         removeSong.setText("Διαγραφή");
 
+        dateTxt.setBackground(new java.awt.Color(255, 204, 0));
         dateTxt.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("dd/MM/yyyy"))));
 
         jLabel6.setText("Κωδικός λίστας");

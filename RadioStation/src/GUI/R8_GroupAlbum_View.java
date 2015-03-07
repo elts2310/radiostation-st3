@@ -112,22 +112,22 @@ public class R8_GroupAlbum_View extends javax.swing.JFrame {
 
         org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, albumList, tableGroupAlbums);
         org.jdesktop.swingbinding.JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${title}"));
-        columnBinding.setColumnName("Title");
+        columnBinding.setColumnName("Τίτλος");
         columnBinding.setColumnClass(String.class);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${musicgroupName}"));
-        columnBinding.setColumnName("Musicgroup Name");
+        columnBinding.setColumnName("Συγκρότημα");
         columnBinding.setColumnClass(radiostation_POJO.Musicgroup.class);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${albumType}"));
-        columnBinding.setColumnName("Album Type");
+        columnBinding.setColumnName("Τύπος");
         columnBinding.setColumnClass(String.class);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${discNumber}"));
-        columnBinding.setColumnName("Disc Number");
+        columnBinding.setColumnName("Αριθμός Άλμπουμ");
         columnBinding.setColumnClass(Integer.class);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${releaseDate}"));
-        columnBinding.setColumnName("Release Date");
+        columnBinding.setColumnName("Ημερομηνία Κυκλοφορίας");
         columnBinding.setColumnClass(java.util.Date.class);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${mpcName}"));
-        columnBinding.setColumnName("Mpc Name");
+        columnBinding.setColumnName("Δισκογραφική");
         columnBinding.setColumnClass(radiostation_POJO.Musicproductioncompany.class);
         bindingGroup.addBinding(jTableBinding);
         jTableBinding.bind();

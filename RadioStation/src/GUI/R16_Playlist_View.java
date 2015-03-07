@@ -86,17 +86,16 @@ public class R16_Playlist_View extends javax.swing.JFrame {
 
         org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, playlistList, tablePlaylists);
         org.jdesktop.swingbinding.JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${plName}"));
-        columnBinding.setColumnName("Pl Name");
+        columnBinding.setColumnName("Τίτλος");
         columnBinding.setColumnClass(String.class);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${plDescription}"));
-        columnBinding.setColumnName("Pl Description");
+        columnBinding.setColumnName("Περιγραφή");
         columnBinding.setColumnClass(String.class);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${plCreationDate}"));
-        columnBinding.setColumnName("Pl Creation Date");
+        columnBinding.setColumnName("Ημερομηνία Δημιουργίας");
         columnBinding.setColumnClass(java.util.Date.class);
         bindingGroup.addBinding(jTableBinding);
         jTableBinding.bind();
-
         jScrollPane1.setViewportView(tablePlaylists);
 
         newPlaylist.setText("Δημιουργία");
