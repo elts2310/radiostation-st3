@@ -8,6 +8,7 @@ package GUI;
 /*import java.util.List;*/
 import radiostation_POJO.Album;
 import radiostation_POJO.Musicgroup;
+import radiostation_POJO.Musicproductioncompany;
 import radiostation.RadioStation;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
@@ -23,15 +24,21 @@ import javax.swing.JOptionPane;
  * @author Panos
  */
 public class R9_GroupAlbum_Management extends javax.swing.JFrame {
-    /*private List<Musicgroup> groups;*/
+        /*private List<Musicgroup> groups;*/
     /*private JComboBox MusicGroupList;*/
     Connection conn = null;
     ResultSet rs = null;
     PreparedStatement pst = null;
-    
+    private String m;
     
     
     private R8_GroupAlbum_View creator;
+    private EntityManager em;
+    private int cComp;
+    private Album Alb;
+    Musicgroup MG;
+    /*private String MG;*/
+    /*private Musicgroup MG;*/
     /*private RadioStation rs = new RadioStation();*/
     /**
      * Creates new form R9_GroupAlbum_Management
@@ -44,7 +51,15 @@ public class R9_GroupAlbum_Management extends javax.swing.JFrame {
     
     public R9_GroupAlbum_Management(R8_GroupAlbum_View inJFrame) {  //(((R9 test)))
         
-        initComponents();        
+        initComponents();
+        this.creator = inJFrame;
+        MusicGroupList.setSelectedItem(null);
+        
+        /*this.em = creator.ap.getLocalEntityManager();*/
+        
+        
+        
+        
         /*for (Musicgroup mg : groups) {
             String displayMsg = "Όνομα.: " + mg.getMusicgroupName();
             MusicGroupList.addItem(displayMsg);
@@ -81,10 +96,8 @@ public class R9_GroupAlbum_Management extends javax.swing.JFrame {
         deleteSong = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        txtDiscNr = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        txtReleaseDt = new javax.swing.JTextField();
         txtTitle = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -93,6 +106,8 @@ public class R9_GroupAlbum_Management extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         MpcList = new javax.swing.JComboBox();
         MusicGroupList = new javax.swing.JComboBox();
+        ReleaseDt = new org.jdesktop.swingx.JXDatePicker();
+        DiscNr = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -209,8 +224,6 @@ public class R9_GroupAlbum_Management extends javax.swing.JFrame {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        txtDiscNr.setPreferredSize(new java.awt.Dimension(100, 20));
-
         jLabel6.setText("Ημ/νία Κυκλοφορίας");
 
         jLabel1.setText("Τίτλος");
@@ -218,7 +231,11 @@ public class R9_GroupAlbum_Management extends javax.swing.JFrame {
         jLabel1.setMinimumSize(new java.awt.Dimension(50, 14));
         jLabel1.setPreferredSize(new java.awt.Dimension(50, 14));
 
-        txtReleaseDt.setPreferredSize(new java.awt.Dimension(100, 20));
+        txtTitle.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtTitleActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("Συγκρότημα");
         jLabel2.setMaximumSize(new java.awt.Dimension(70, 14));
@@ -230,6 +247,11 @@ public class R9_GroupAlbum_Management extends javax.swing.JFrame {
         Type.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "", "CD Single", "Extended Play", "Long Play" }));
         Type.setMinimumSize(new java.awt.Dimension(100, 20));
         Type.setPreferredSize(new java.awt.Dimension(100, 20));
+        Type.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TypeActionPerformed(evt);
+            }
+        });
 
         jLabel4.setText("Τύπος");
 
@@ -240,12 +262,34 @@ public class R9_GroupAlbum_Management extends javax.swing.JFrame {
         org.jdesktop.swingbinding.JComboBoxBinding jComboBoxBinding = org.jdesktop.swingbinding.SwingBindings.createJComboBoxBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, musicproductioncompanyList, MpcList);
         bindingGroup.addBinding(jComboBoxBinding);
 
+        MusicGroupList.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " " }));
+        MusicGroupList.setSelectedIndex(-1);
+
         jComboBoxBinding = org.jdesktop.swingbinding.SwingBindings.createJComboBoxBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, musicgroupList, MusicGroupList);
         bindingGroup.addBinding(jComboBoxBinding);
 
         MusicGroupList.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 MusicGroupListActionPerformed(evt);
+            }
+        });
+
+        ReleaseDt.setMaximumSize(new java.awt.Dimension(32767, 32767));
+        ReleaseDt.setMinimumSize(new java.awt.Dimension(100, 20));
+        ReleaseDt.setPreferredSize(new java.awt.Dimension(100, 20));
+        ReleaseDt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ReleaseDtActionPerformed(evt);
+            }
+        });
+
+        DiscNr.setMaximumRowCount(5);
+        DiscNr.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
+        DiscNr.setMinimumSize(new java.awt.Dimension(100, 20));
+        DiscNr.setPreferredSize(new java.awt.Dimension(100, 20));
+        DiscNr.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DiscNrActionPerformed(evt);
             }
         });
 
@@ -265,13 +309,22 @@ public class R9_GroupAlbum_Management extends javax.swing.JFrame {
                         .addComponent(MusicGroupList, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtReleaseDt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel4)
                     .addComponent(Type, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtDiscNr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(DiscNr, 0, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ReleaseDt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(419, 419, 419)
+                        .addComponent(jLabel4))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(419, 419, 419)
+                        .addComponent(jLabel5))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(419, 419, 419)
+                        .addComponent(jLabel6)))
+                .addGap(13, 13, 13))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -289,16 +342,16 @@ public class R9_GroupAlbum_Management extends javax.swing.JFrame {
                     .addComponent(jLabel5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtDiscNr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(MusicGroupList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(MusicGroupList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(DiscNr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(jLabel6))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtReleaseDt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(MpcList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(MpcList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ReleaseDt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 20, Short.MAX_VALUE))
         );
 
@@ -325,13 +378,15 @@ public class R9_GroupAlbum_Management extends javax.swing.JFrame {
                 .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(22, 22, 22)
                         .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
+                        .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(2, 2, 2)))
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(25, Short.MAX_VALUE))
         );
@@ -346,12 +401,85 @@ public class R9_GroupAlbum_Management extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelActionPerformed
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
-        // TODO add your handling code here:
-        Album alb = new Album();
-        alb.setTitle(this.txtTitle.getText());
-        /*alb.setAlbumPK(this.txtAlbumID.getText());*/
+        if(creator.createMode&&!creator.deleteMode&&!creator.editMode){
+            cComp = checkComponents();
+            if(cComp==0){
+                JOptionPane.showMessageDialog(rootPane, "Παρακαλώ εισάγεται Τίτλο Άλμπουμ", "Σφάλμα", 1);
+            }else if(cComp==1){
+                JOptionPane.showMessageDialog(rootPane, "Παρακαλώ επιλέξτε Τύπος Άλμπουμ", "Σφάλμα", 1);
+            }else if(cComp==2){
+                JOptionPane.showMessageDialog(rootPane, "Παρακαλώ επιλέξτε Συγκρότημα", "Σφάλμα", 1);
+            }else if(cComp==3){
+                JOptionPane.showMessageDialog(rootPane, "Παρακαλώ εισάγεται αριθμό δίσκου", "Σφάλμα", 1);
+            }else if(cComp==4){
+                JOptionPane.showMessageDialog(rootPane, "Παρακαλώ επιλέξτε Εταιρία Παραγωγής", "Σφάλμα", 1);
+            }else if(cComp==5){
+                JOptionPane.showMessageDialog(rootPane, "Παρακαλώ εισάγεται Ημερομηνία Κυκλοφορίας", "Σφάλμα", 1);
+            }else{
+                /*Album Alb = new Album();
+                Musicgroup MG;
+                
+                Alb.setTitle(this.txtTitle.getText());
+                Alb.setAlbumType((String)Type.getSelectedItem());*/
+                
+                /*m = (String)MusicGroupList.getSelectedItem();
+                MG = m.getMusicgroupName();
+                Alb.setMusicgroupName(MG);*/
+                /*MGname = creator.ge;*/
+                /*Alb.setMusicgroupName((Musicgroup)MusicGroupList.getSelectedItem());*/
+                /*Alb.setDiscNumber(this.DiscNr.getComponentCount());*/
+                /*m = (String)MpcList.getSelectedItem();*/
+                /*Alb.setMpcName((Musicproductioncompany)MpcList.getSelectedItem());*/
+                /*Alb.setReleaseDate(this.ReleaseDt.getDate());*/
+                /*creator.resetForm();*/
+                /*creator.setVisible(true);*/
+                /*creator.newAlbum = Alb;*/
+                String NewtxtTitle = txtTitle.getText();
+                String NewType = (String)Type.getSelectedItem();
+                MG = radiostation.RadioStation.getMGroupByName(MusicGroupList.getSelectedItem().toString());
+                
+                dispose();
+            }
+        }
+        else if(!creator.createMode&&!creator.deleteMode&&creator.editMode){
+            /*dispose();*/
+        
+        
+        
+        }
+        else if(!creator.createMode&&creator.deleteMode&&!creator.editMode){
+            /*dispose();*/
+        
+        
+        
+        }
+        
     }//GEN-LAST:event_btnSaveActionPerformed
-
+    
+    int checkComponents(){
+        if(this.txtTitle.getText().isEmpty()){
+            return (0);
+        }
+        if(this.Type.getSelectedIndex()==0){
+            return (1);
+        }
+        if(this.MusicGroupList.getSelectedIndex()==0){
+            return (2);
+        }
+        if(this.DiscNr.getSelectedIndex()==0){
+            return (3);
+        }
+        if(this.MpcList.getSelectedIndex()==0){
+            return (4);
+        }
+        if(this.ReleaseDt.getDate()==null){
+            return (5);
+        }
+        else{
+        return (6);
+        }
+    }
+    
     private void insertSongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertSongActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_insertSongActionPerformed
@@ -363,6 +491,22 @@ public class R9_GroupAlbum_Management extends javax.swing.JFrame {
     private void MusicGroupListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MusicGroupListActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_MusicGroupListActionPerformed
+
+    private void txtTitleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTitleActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTitleActionPerformed
+
+    private void DiscNrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DiscNrActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_DiscNrActionPerformed
+
+    private void TypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TypeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TypeActionPerformed
+
+    private void ReleaseDtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ReleaseDtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ReleaseDtActionPerformed
     
     /**
      * @param args the command line arguments
@@ -420,9 +564,11 @@ public class R9_GroupAlbum_Management extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox DiscNr;
     private javax.swing.JComboBox MpcList;
     private javax.swing.JComboBox MusicGroupList;
     private javax.persistence.EntityManager RadioStationPUEntityManager;
+    private org.jdesktop.swingx.JXDatePicker ReleaseDt;
     private javax.swing.JComboBox Type;
     private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnSave;
@@ -444,8 +590,6 @@ public class R9_GroupAlbum_Management extends javax.swing.JFrame {
     private javax.persistence.Query musicgroupQuery;
     private java.util.List<radiostation_POJO.Musicproductioncompany> musicproductioncompanyList;
     private javax.persistence.Query musicproductioncompanyQuery;
-    private javax.swing.JTextField txtDiscNr;
-    private javax.swing.JTextField txtReleaseDt;
     private javax.swing.JTextField txtTitle;
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables

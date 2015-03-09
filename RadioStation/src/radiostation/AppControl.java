@@ -18,5 +18,9 @@ public class AppControl {
     private EntityManager emThread;        
     private static Connection connection;
     private static final String dbURL = "jdbc:derby://localhost:1527/radiostation_db;user=radio;password=station";
+
+    public EntityManager getLocalEntityManager() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }
