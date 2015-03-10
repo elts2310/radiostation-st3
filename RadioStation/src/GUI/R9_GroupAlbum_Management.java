@@ -9,10 +9,11 @@ package GUI;
 import radiostation_POJO.Album;
 import radiostation_POJO.Musicgroup;
 import radiostation_POJO.Musicproductioncompany;
-import radiostation.RadioStation;
+import radiostation.AppControl;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.ArrayList;
+import java.util.Date;
 import java.sql.*;
 import javax.swing.*;
 import javax.persistence.EntityManager;
@@ -30,12 +31,13 @@ public class R9_GroupAlbum_Management extends javax.swing.JFrame {
     ResultSet rs = null;
     PreparedStatement pst = null;
     private String m;
+    Album Alb;
     
     
     private R8_GroupAlbum_View creator;
     private EntityManager em;
     private int cComp;
-    private Album Alb;
+    /*private Album Alb;*/
     Musicgroup MG;
     Musicproductioncompany MPC;
     /*private String MG;*/
@@ -55,7 +57,7 @@ public class R9_GroupAlbum_Management extends javax.swing.JFrame {
         initComponents();
         this.creator = inJFrame;
         MusicGroupList.setSelectedItem(null);
-        
+        MpcList.setSelectedItem(null);
         /*this.em = creator.ap.getLocalEntityManager();*/
         
         
@@ -302,7 +304,7 @@ public class R9_GroupAlbum_Management extends javax.swing.JFrame {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                             .addComponent(Type, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(DiscNr, 0, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(ReleaseDt, javax.swing.GroupLayout.DEFAULT_SIZE, 105, Short.MAX_VALUE)))
+                            .addComponent(ReleaseDt, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 105, Short.MAX_VALUE)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(419, 419, 419)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -424,9 +426,13 @@ public class R9_GroupAlbum_Management extends javax.swing.JFrame {
                 MG = radiostation.AppControl.getMGroupByName(MusicGroupList.getSelectedItem().toString());
                 int NewDiscNr = DiscNr.getSelectedIndex();
                 MPC = radiostation.AppControl.getMPCByName(MpcList.getSelectedItem().toString());
-                Date NewReleaseDt = (Date)ReleaseDt.getDate();
-                /*Alb = new Album(0, NewtxtTitle, NewReleaseDt, );*/
-                
+                Date NewReleaseDt = ReleaseDt.getDate();
+                Alb = new Album(0, NewtxtTitle, NewReleaseDt, NewType, NewDiscNr, null, MG, MPC);
+                if (radiostation.AppControl.SaveAlbum(Alb)){
+                    JOptionPane.showMessageDialog(null, "Album Saved", "ERROR", JOptionPane.ERROR_MESSAGE);
+                }else{
+                    JOptionPane.showMessageDialog(null, "Σφάλμα επικοινωνίας με τη ΒΔ!", "ERROR", JOptionPane.ERROR_MESSAGE);
+                }
                 dispose();
             }
         }

@@ -87,6 +87,17 @@ public class Album implements Serializable {
         this.discNumber = discNumber;
     }
 
+    public Album(Integer albumId, String title, Date releaseDate, String albumType, int discNumber, Artist artistId, Musicgroup musicgroupId, Musicproductioncompany mpcId) {
+        this.albumId = albumId;
+        this.title = title;
+        this.releaseDate = releaseDate;
+        this.albumType = albumType;
+        this.discNumber = discNumber;
+        this.artistId = artistId;
+        this.musicgroupId = musicgroupId;
+        this.mpcId = mpcId;        
+    }
+        
     public Integer getAlbumId() {
         return albumId;
     }

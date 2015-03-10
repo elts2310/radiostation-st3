@@ -13,6 +13,7 @@ import javax.persistence.Query;
 import javax.swing.JOptionPane;
 import radiostation_POJO.Musicgroup;
 import radiostation_POJO.Musicproductioncompany;
+import radiostation_POJO.Album;
 
 /**
  *
@@ -38,9 +39,9 @@ public class AppControl {
     
     public static Musicgroup getMGroupByName(String inGroupName){
         Musicgroup MG;
-        Query FindByName = emLocal.createNamedQuery("MusicGroup.findByNameMusicGroup", Musicgroup.class);
+        Query FindByName = emLocal.createNamedQuery("Musicgroup.findByMusicgroupName", Musicgroup.class);
         try{
-            FindByName.setParameter("NameMusicGroup", inGroupName);
+            FindByName.setParameter("musicgroupName", inGroupName);
             MG = (Musicgroup)FindByName.getSingleResult();
         }catch(Exception e){
             return(null);
@@ -60,6 +61,17 @@ public class AppControl {
         return MPC;
     }
     
+    public static boolean SaveAlbum(Album album) {
+        try{
+            emLocal.getTransaction().begin();
+            emLocal.persist(album);
+            emLocal.getTransaction().commit();
+        }catch(Exception e){
+            System.out.println(e);
+            return false;
+        }
+        return true;
+    }
     
     public EntityManager getLocalEntityManager() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
