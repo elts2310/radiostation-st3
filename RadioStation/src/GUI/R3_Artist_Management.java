@@ -9,7 +9,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import radiostation_POJO.Artist;
+import radiostation_POJO.Musicgenre;
+import javax.persistence.EntityManager;
+import java.util.ArrayList;
+import java.swing.JList;
 import javax.swing.JOptionPane;
+import radiostation.AppControl;
+import java.util.Date;
 import javax.sql.*;
 /**
  *
@@ -19,21 +25,30 @@ public class R3_Artist_Management extends javax.swing.JFrame {
     Connection conn = null;
     ResultSet rs = null;
     PreparedStatement pst = null;
-    
+    private String m;
+    Artist art;
     
     private R2_ArtistList_View creator;
   
+    private EntityManager em;
+    private int cComp;
+    Musicgenre MG;
+    
+    
+    
     /**
      * Creates new form R3_Artist_Management
      */
     public R3_Artist_Management() {
        initComponents();
-
+       
 }
     
     public R3_Artist_Management(R2_ArtistList_View inJFrame) {
         initComponents();
- 
+        this.creator=inJFrame;
+        genreComboBox.setSelectedItem(null);
+        sexComboBox.setSelectedItem(null);
     }
 
     /**
@@ -63,12 +78,12 @@ public class R3_Artist_Management extends javax.swing.JFrame {
         jTextArtistLastName = new javax.swing.JTextField();
         jTextArtistName = new javax.swing.JTextField();
         jTextArtisticName = new javax.swing.JTextField();
-        jTextFieldBirthDate = new javax.swing.JTextField();
         jTextBirthPlace = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         genreComboBox = new javax.swing.JComboBox();
         jLabel9 = new javax.swing.JLabel();
         jTextArtistId = new javax.swing.JTextField();
+        ReleaseDt = new org.jdesktop.swingx.JXDatePicker();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
 
@@ -129,12 +144,6 @@ public class R3_Artist_Management extends javax.swing.JFrame {
             }
         });
 
-        jTextFieldBirthDate.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldBirthDateActionPerformed(evt);
-            }
-        });
-
         jTextBirthPlace.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextBirthPlaceActionPerformed(evt);
@@ -168,16 +177,22 @@ public class R3_Artist_Management extends javax.swing.JFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addGap(10, 10, 10)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jTextArtistLastName, javax.swing.GroupLayout.DEFAULT_SIZE, 205, Short.MAX_VALUE)
-                                        .addGap(93, 93, 93)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel3)
-                                            .addComponent(jLabel4)))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                        .addGap(0, 0, Short.MAX_VALUE)
-                                        .addComponent(jLabel6)))
-                                .addGap(34, 34, 34)))
+                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                                .addComponent(jTextArtistLastName, javax.swing.GroupLayout.DEFAULT_SIZE, 205, Short.MAX_VALUE)
+                                                .addGap(93, 93, 93)
+                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(jLabel3)
+                                                    .addComponent(jLabel4)))
+                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                                .addGap(0, 0, Short.MAX_VALUE)
+                                                .addComponent(jLabel6)))
+                                        .addGap(34, 34, 34))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jTextArtisticName, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(86, 86, 86)
+                                        .addComponent(jLabel5)))))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(39, 39, 39)
@@ -186,22 +201,18 @@ public class R3_Artist_Management extends javax.swing.JFrame {
                             .addComponent(jTextBirthPlace, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jTextArtisticName, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addGap(85, 85, 85)
-                                    .addComponent(jTextArtistId, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(jLabel2)
-                                .addComponent(jLabel8)
-                                .addComponent(jTextArtistName, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel7)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(85, 85, 85)
+                                .addComponent(jTextArtistId, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel8)
+                            .addComponent(jTextArtistName, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel7))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jLabel5)
-                        .addGap(54, 54, 54)
-                        .addComponent(jTextFieldBirthDate, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(ReleaseDt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -234,13 +245,17 @@ public class R3_Artist_Management extends javax.swing.JFrame {
                         .addComponent(jTextBirthPlace, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel7)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(jTextFieldBirthDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(8, 8, 8)
-                .addComponent(jTextArtisticName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(75, 75, 75))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5)
+                            .addComponent(ReleaseDt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(102, 102, 102))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jTextArtisticName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -283,7 +298,103 @@ public class R3_Artist_Management extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelActionPerformed
 
     private void jButSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButSaveActionPerformed
-        R2_ArtistList_View createMode = new R2_ArtistList_View();
+     if( creator.createMode&&!creator.deleteMode&&!creator.editMode){
+         cComp=checkComponents();
+       if(cComp==0){
+           JOptionPane.showMessageDialog(rootPane, "Παρακαλώ εισάγεται Id καλλιτέχνη","Σφάλμα",1);
+       }  else if(cComp==1){
+        JOptionPane.showMessageDialog(rootPane, "Παρακαλώ εισάγεται επώνυμο καλλιτέχνη","Σφάλμα",1);
+       }  else if(cComp==2){
+           JOptionPane.showMessageDialog(rootPane, "Παρακαλώ εισάγεται όνομα καλλιτέχνη","Σφάλμα",1);
+       }  else if(cComp==3){ 
+           JOptionPane.showMessageDialog(rootPane, "Παρακαλώ εισάγεται καλλιτεχνικόόνομα καλλιτέχνη","Σφάλμα",1);
+       }  else if(cComp==4){
+           JOptionPane.showMessageDialog(rootPane, "Παρακαλώ επιλέξτε φύλο καλλιτέχνη","Σφάλμα",1);
+       }  else if(cComp==5){
+         JOptionPane.showMessageDialog(rootPane, "Παρακαλώ επιλέξτε είδος μουσικής","Σφάλμα",1);  
+       }else if(cComp==6){
+         JOptionPane.showMessageDialog(rootPane, "Παρακαλώ εισάγεται τόπο γέννησης","Σφάλμα",1);  
+       }else if(cComp==7){
+         JOptionPane.showMessageDialog(rootPane, "Παρακαλώ εισάγεται ημερομηνία γέννησης","Σφάλμα",1);  
+       } else {
+           
+           String NewjTextArtistId=jTextArtistId.getText();
+           String NewjTextArtistLastName=jTextArtistLastName.getText();
+           String NewjTextArtistName=jTextArtistName.getText();
+           String NewjTextArtisticName=jTextArtisticName.getText();
+           String NewsexComboBox=(String)sexComboBox.getSelectedItem();
+           MG=radiostation.AppControl.getByName(genreComboBox.getSelectedItem().toString());
+           String NewjTextBirthPlace=jTextBirthPlace.getText();
+           Date NewReleaseDt=ReleaseDt.getDate();
+           art = new Artist
+        (0, NewjTextArtistId, NewjTextArtistLastName, NewjTextArtistName, 
+                NewjTextArtisticName, NewsexComboBox, MG, NewjTextBirthPlace, NewReleaseDt);
+           
+       if(radiostation.AppControl.SaveArtist(art)){
+           
+           JOptionPane.showMessageDialog(null,"Artist Saved","ERROR",JOptionPane.ERROR_MESSAGE );
+       }
+       else{
+           JOptionPane.showMessageDialog(null, "Σφάλμα επικοινωνίας με τη ΒΔ!","ERROR",JOptionPane.ERROR_MESSAGE);
+       }
+dispose();       
+       
+       
+       }
+                
+           
+     } 
+     else if(!creator.createMode&&!creator.deleteMode&&creator.editMode){
+         
+        
+         
+         
+         
+         
+         
+     }
+    else if(!creator.createMode&&!creator.deleteMode&&creator.editMode){
+        
+        
+        
+        
+    }
+     
+    
+    
+    }
+    
+    int checkComponents(){
+        if(this.jTextArtistId.getText().isEmpty()){
+          return(0);  
+        }
+          if(this.jTextArtistLastName.getText().isEmpty()) {
+              return(1);
+          }    
+            if(this.jTextArtistName.getText().isEmpty()) {
+                return(2);
+            }
+              if(this.jTextArtisticName.getText().isEmpty()) {
+                  return(3);
+              }
+                if(this.sexComboBox.getSelectedIndex()==0) {
+                    return(4);
+                }
+                  if(this.genreComboBox.getSelectedIndex()==0) {
+                      return(5);
+                  }
+                    if(this.jTextBirthPlace.getText().isEmpty()) {
+                        return(6);
+                    }
+                      if(this.ReleaseDt.getDate()==null) {
+                          return(7);
+                      }
+                      
+                      else{
+                          return(7);
+                      }
+    }
+        /*R2_ArtistList_View createMode = new R2_ArtistList_View();
           R2_ArtistList_View editMode = new R2_ArtistList_View(); 
            R2_ArtistList_View deleteMode = new R2_ArtistList_View();
            
@@ -332,14 +443,10 @@ public class R3_Artist_Management extends javax.swing.JFrame {
            dispose();
 // TODO add your handling code here:
     }//GEN-LAST:event_jButSaveActionPerformed
-
+*/
     private void jTextArtistLastNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextArtistLastNameActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextArtistLastNameActionPerformed
-
-    private void jTextFieldBirthDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldBirthDateActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldBirthDateActionPerformed
 
     private void jTextArtisticNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextArtisticNameActionPerformed
         // TODO add your handling code here:
@@ -398,6 +505,7 @@ public class R3_Artist_Management extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.persistence.EntityManager RadioStationPUEntityManager;
+    private org.jdesktop.swingx.JXDatePicker ReleaseDt;
     private javax.swing.JButton btnCancel;
     private javax.swing.JComboBox genreComboBox;
     private javax.swing.JButton jButSave;
@@ -416,7 +524,6 @@ public class R3_Artist_Management extends javax.swing.JFrame {
     private javax.swing.JTextField jTextArtistName;
     private javax.swing.JTextField jTextArtisticName;
     private javax.swing.JTextField jTextBirthPlace;
-    private javax.swing.JTextField jTextFieldBirthDate;
     private java.util.List<radiostation_POJO.Musicgenre> musicgenreList;
     private javax.persistence.Query musicgenreQuery;
     private javax.swing.JComboBox sexComboBox;
