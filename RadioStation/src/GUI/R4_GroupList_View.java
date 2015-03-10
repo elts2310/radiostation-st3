@@ -65,8 +65,8 @@ public class R4_GroupList_View extends javax.swing.JFrame {
     private void initComponents() {
         bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
-        RadioStationPUEntityManager = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory("RadioStationPU").createEntityManager();
-        musicgroupQuery = java.beans.Beans.isDesignTime() ? null : RadioStationPUEntityManager.createQuery("SELECT m FROM Musicgroup m");
+        RadioStationPUEntityManager0 = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory("RadioStationPU").createEntityManager();
+        musicgroupQuery = java.beans.Beans.isDesignTime() ? null : RadioStationPUEntityManager0.createQuery("SELECT m FROM Musicgroup m");
         musicgroupList = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : musicgroupQuery.getResultList();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -84,10 +84,10 @@ public class R4_GroupList_View extends javax.swing.JFrame {
 
         org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, musicgroupList, tableGroups);
         org.jdesktop.swingbinding.JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${musicgroupName}"));
-        columnBinding.setColumnName("Musicgroup Name");
+        columnBinding.setColumnName("Όνομα Συγκροτήματος");
         columnBinding.setColumnClass(String.class);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${formationDate}"));
-        columnBinding.setColumnName("Formation Date");
+        columnBinding.setColumnName("Ημερομηνία Δημιουργίας");
         columnBinding.setColumnClass(java.util.Date.class);
         bindingGroup.addBinding(jTableBinding);
         jTableBinding.bind();
@@ -246,7 +246,7 @@ public class R4_GroupList_View extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.persistence.EntityManager RadioStationPUEntityManager;
+    private javax.persistence.EntityManager RadioStationPUEntityManager0;
     private javax.swing.JButton addGroup;
     private javax.swing.JButton deleteSelectedGroup;
     private javax.swing.JButton editSelectedGroup;

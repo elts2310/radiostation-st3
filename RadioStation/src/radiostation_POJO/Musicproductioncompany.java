@@ -6,11 +6,13 @@
 package radiostation_POJO;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -21,7 +23,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Panos
+ * @author eliastsourapas
  */
 @Entity
 @Table(name = "MUSICPRODUCTIONCOMPANY")
@@ -34,10 +36,11 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Musicproductioncompany.findByTelephone", query = "SELECT m FROM Musicproductioncompany m WHERE m.telephone = :telephone")})
 public class Musicproductioncompany implements Serializable {
     private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "MPC_ID")
-    private int mpcId;
-    @Id
+    private Integer mpcId;
     @Basic(optional = false)
     @Column(name = "MPC_NAME")
     private String mpcName;
@@ -45,26 +48,26 @@ public class Musicproductioncompany implements Serializable {
     private String address;
     @Column(name = "TELEPHONE")
     private String telephone;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "mpcName")
-    private Collection<Album> albumCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "mpcId")
+    private List<Album> albumList;
 
     public Musicproductioncompany() {
     }
 
-    public Musicproductioncompany(String mpcName) {
-        this.mpcName = mpcName;
-    }
-
-    public Musicproductioncompany(String mpcName, int mpcId) {
-        this.mpcName = mpcName;
+    public Musicproductioncompany(Integer mpcId) {
         this.mpcId = mpcId;
     }
 
-    public int getMpcId() {
+    public Musicproductioncompany(Integer mpcId, String mpcName) {
+        this.mpcId = mpcId;
+        this.mpcName = mpcName;
+    }
+
+    public Integer getMpcId() {
         return mpcId;
     }
 
-    public void setMpcId(int mpcId) {
+    public void setMpcId(Integer mpcId) {
         this.mpcId = mpcId;
     }
 
@@ -93,18 +96,18 @@ public class Musicproductioncompany implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Album> getAlbumCollection() {
-        return albumCollection;
+    public List<Album> getAlbumList() {
+        return albumList;
     }
 
-    public void setAlbumCollection(Collection<Album> albumCollection) {
-        this.albumCollection = albumCollection;
+    public void setAlbumList(List<Album> albumList) {
+        this.albumList = albumList;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (mpcName != null ? mpcName.hashCode() : 0);
+        hash += (mpcId != null ? mpcId.hashCode() : 0);
         return hash;
     }
 
@@ -115,7 +118,7 @@ public class Musicproductioncompany implements Serializable {
             return false;
         }
         Musicproductioncompany other = (Musicproductioncompany) object;
-        if ((this.mpcName == null && other.mpcName != null) || (this.mpcName != null && !this.mpcName.equals(other.mpcName))) {
+        if ((this.mpcId == null && other.mpcId != null) || (this.mpcId != null && !this.mpcId.equals(other.mpcId))) {
             return false;
         }
         return true;
@@ -123,7 +126,7 @@ public class Musicproductioncompany implements Serializable {
 
     @Override
     public String toString() {
-        return "radiostation_POJO.Musicproductioncompany[ mpcName=" + mpcName + " ]";
+        return "radiostation_POJO.Musicproductioncompany[ mpcId=" + mpcId + " ]";
     }
     
 }

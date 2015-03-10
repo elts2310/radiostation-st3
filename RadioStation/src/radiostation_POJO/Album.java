@@ -5,9 +5,11 @@
  */
 package radiostation_POJO;
 
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -23,12 +25,13 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Panos
+ * @author eliastsourapas
  */
 @Entity
 @Table(name = "ALBUM")
@@ -37,16 +40,12 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Album.findAll", query = "SELECT a FROM Album a"),
     @NamedQuery(name = "Album.findByAlbumId", query = "SELECT a FROM Album a WHERE a.albumId = :albumId"),
     @NamedQuery(name = "Album.findByTitle", query = "SELECT a FROM Album a WHERE a.title = :title"),
+    @NamedQuery(name = "Album.findByReleaseDate", query = "SELECT a FROM Album a WHERE a.releaseDate = :releaseDate"),
     @NamedQuery(name = "Album.findByAlbumType", query = "SELECT a FROM Album a WHERE a.albumType = :albumType"),
-    @NamedQuery(name = "Album.findByDiscNumber", query = "SELECT a FROM Album a WHERE a.discNumber = :discNumber"),
-    @NamedQuery(name = "Album.findByReleaseDate", query = "SELECT a FROM Album a WHERE a.releaseDate = :releaseDate")})
+    @NamedQuery(name = "Album.findByDiscNumber", query = "SELECT a FROM Album a WHERE a.discNumber = :discNumber")})
 public class Album implements Serializable {
-    @JoinColumn(name = "MUSICGROUP_ID", referencedColumnName = "MUSICGROUP_ID")
-    @ManyToOne
-    private Musicgroup musicgroupId;
-    @JoinColumn(name = "MPC_ID", referencedColumnName = "MPC_ID")
-    @ManyToOne(optional = false)
-    private Musicproductioncompany mpcId;
+    @Transient
+    private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -57,25 +56,26 @@ public class Album implements Serializable {
     @Column(name = "TITLE")
     private String title;
     @Basic(optional = false)
+    @Column(name = "RELEASE_DATE")
+    @Temporal(TemporalType.DATE)
+    private Date releaseDate;
+    @Basic(optional = false)
     @Column(name = "ALBUM_TYPE")
     private String albumType;
     @Basic(optional = false)
     @Column(name = "DISC_NUMBER")
     private int discNumber;
-    @Column(name = "RELEASE_DATE")
-    @Temporal(TemporalType.DATE)
-    private Date releaseDate;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "albumId")
-    private Collection<Song> songCollection;
+    private List<Song> songList;
     @JoinColumn(name = "ARTIST_ID", referencedColumnName = "ARTIST_ID")
     @ManyToOne
     private Artist artistId;
-    @JoinColumn(name = "MUSICGROUP_NAME", referencedColumnName = "MUSICGROUP_NAME")
+    @JoinColumn(name = "MUSICGROUP_ID", referencedColumnName = "MUSICGROUP_ID")
     @ManyToOne
-    private Musicgroup musicgroupName;
-    @JoinColumn(name = "MPC_NAME", referencedColumnName = "MPC_NAME")
+    private Musicgroup musicgroupId;
+    @JoinColumn(name = "MPC_ID", referencedColumnName = "MPC_ID")
     @ManyToOne(optional = false)
-    private Musicproductioncompany mpcName;
+    private Musicproductioncompany mpcId;
 
     public Album() {
     }
@@ -84,9 +84,10 @@ public class Album implements Serializable {
         this.albumId = albumId;
     }
 
-    public Album(Integer albumId, String title, String albumType, int discNumber) {
+    public Album(Integer albumId, String title, Date releaseDate, String albumType, int discNumber) {
         this.albumId = albumId;
         this.title = title;
+        this.releaseDate = releaseDate;
         this.albumType = albumType;
         this.discNumber = discNumber;
     }
@@ -96,7 +97,9 @@ public class Album implements Serializable {
     }
 
     public void setAlbumId(Integer albumId) {
+        Integer oldAlbumId = this.albumId;
         this.albumId = albumId;
+        changeSupport.firePropertyChange("albumId", oldAlbumId, albumId);
     }
 
     public String getTitle() {
@@ -104,23 +107,9 @@ public class Album implements Serializable {
     }
 
     public void setTitle(String title) {
+        String oldTitle = this.title;
         this.title = title;
-    }
-
-    public String getAlbumType() {
-        return albumType;
-    }
-
-    public void setAlbumType(String albumType) {
-        this.albumType = albumType;
-    }
-
-    public int getDiscNumber() {
-        return discNumber;
-    }
-
-    public void setDiscNumber(int discNumber) {
-        this.discNumber = discNumber;
+        changeSupport.firePropertyChange("title", oldTitle, title);
     }
 
     public Date getReleaseDate() {
@@ -128,16 +117,38 @@ public class Album implements Serializable {
     }
 
     public void setReleaseDate(Date releaseDate) {
+        Date oldReleaseDate = this.releaseDate;
         this.releaseDate = releaseDate;
+        changeSupport.firePropertyChange("releaseDate", oldReleaseDate, releaseDate);
+    }
+
+    public String getAlbumType() {
+        return albumType;
+    }
+
+    public void setAlbumType(String albumType) {
+        String oldAlbumType = this.albumType;
+        this.albumType = albumType;
+        changeSupport.firePropertyChange("albumType", oldAlbumType, albumType);
+    }
+
+    public int getDiscNumber() {
+        return discNumber;
+    }
+
+    public void setDiscNumber(int discNumber) {
+        int oldDiscNumber = this.discNumber;
+        this.discNumber = discNumber;
+        changeSupport.firePropertyChange("discNumber", oldDiscNumber, discNumber);
     }
 
     @XmlTransient
-    public Collection<Song> getSongCollection() {
-        return songCollection;
+    public List<Song> getSongList() {
+        return songList;
     }
 
-    public void setSongCollection(Collection<Song> songCollection) {
-        this.songCollection = songCollection;
+    public void setSongList(List<Song> songList) {
+        this.songList = songList;
     }
 
     public Artist getArtistId() {
@@ -145,23 +156,29 @@ public class Album implements Serializable {
     }
 
     public void setArtistId(Artist artistId) {
+        Artist oldArtistId = this.artistId;
         this.artistId = artistId;
+        changeSupport.firePropertyChange("artistId", oldArtistId, artistId);
     }
 
-    public Musicgroup getMusicgroupName() {
-        return musicgroupName;
+    public Musicgroup getMusicgroupId() {
+        return musicgroupId;
     }
 
-    public void setMusicgroupName(Musicgroup musicgroupName) {
-        this.musicgroupName = musicgroupName;
+    public void setMusicgroupId(Musicgroup musicgroupId) {
+        Musicgroup oldMusicgroupId = this.musicgroupId;
+        this.musicgroupId = musicgroupId;
+        changeSupport.firePropertyChange("musicgroupId", oldMusicgroupId, musicgroupId);
     }
 
-    public Musicproductioncompany getMpcName() {
-        return mpcName;
+    public Musicproductioncompany getMpcId() {
+        return mpcId;
     }
 
-    public void setMpcName(Musicproductioncompany mpcName) {
-        this.mpcName = mpcName;
+    public void setMpcId(Musicproductioncompany mpcId) {
+        Musicproductioncompany oldMpcId = this.mpcId;
+        this.mpcId = mpcId;
+        changeSupport.firePropertyChange("mpcId", oldMpcId, mpcId);
     }
 
     @Override
@@ -189,20 +206,12 @@ public class Album implements Serializable {
         return "radiostation_POJO.Album[ albumId=" + albumId + " ]";
     }
 
-    public Musicgroup getMusicgroupId() {
-        return musicgroupId;
+    public void addPropertyChangeListener(PropertyChangeListener listener) {
+        changeSupport.addPropertyChangeListener(listener);
     }
 
-    public void setMusicgroupId(Musicgroup musicgroupId) {
-        this.musicgroupId = musicgroupId;
-    }
-
-    public Musicproductioncompany getMpcId() {
-        return mpcId;
-    }
-
-    public void setMpcId(Musicproductioncompany mpcId) {
-        this.mpcId = mpcId;
+    public void removePropertyChangeListener(PropertyChangeListener listener) {
+        changeSupport.removePropertyChangeListener(listener);
     }
     
 }

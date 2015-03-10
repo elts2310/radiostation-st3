@@ -5,12 +5,16 @@
  */
 package radiostation_POJO;
 
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
@@ -19,12 +23,13 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Panos
+ * @author eliastsourapas
  */
 @Entity
 @Table(name = "MUSICGROUP")
@@ -35,40 +40,45 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Musicgroup.findByMusicgroupName", query = "SELECT m FROM Musicgroup m WHERE m.musicgroupName = :musicgroupName"),
     @NamedQuery(name = "Musicgroup.findByFormationDate", query = "SELECT m FROM Musicgroup m WHERE m.formationDate = :formationDate")})
 public class Musicgroup implements Serializable {
+    @Transient
+    private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
     private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "MUSICGROUP_ID")
-    private int musicgroupId;
-    @Id
+    private Integer musicgroupId;
     @Basic(optional = false)
     @Column(name = "MUSICGROUP_NAME")
     private String musicgroupName;
     @Column(name = "FORMATION_DATE")
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.DATE)
     private Date formationDate;
-    @ManyToMany(mappedBy = "musicgroupCollection")
-    private Collection<Artist> artistCollection;
-    @OneToMany(mappedBy = "musicgroupName")
-    private Collection<Album> albumCollection;
+    @ManyToMany(mappedBy = "musicgroupList")
+    private List<Artist> artistList;
+    @OneToMany(mappedBy = "musicgroupId")
+    private List<Album> albumList;
 
     public Musicgroup() {
     }
 
-    public Musicgroup(String musicgroupName) {
-        this.musicgroupName = musicgroupName;
-    }
-
-    public Musicgroup(String musicgroupName, int musicgroupId) {
-        this.musicgroupName = musicgroupName;
+    public Musicgroup(Integer musicgroupId) {
         this.musicgroupId = musicgroupId;
     }
 
-    public int getMusicgroupId() {
+    public Musicgroup(Integer musicgroupId, String musicgroupName) {
+        this.musicgroupId = musicgroupId;
+        this.musicgroupName = musicgroupName;
+    }
+
+    public Integer getMusicgroupId() {
         return musicgroupId;
     }
 
-    public void setMusicgroupId(int musicgroupId) {
+    public void setMusicgroupId(Integer musicgroupId) {
+        Integer oldMusicgroupId = this.musicgroupId;
         this.musicgroupId = musicgroupId;
+        changeSupport.firePropertyChange("musicgroupId", oldMusicgroupId, musicgroupId);
     }
 
     public String getMusicgroupName() {
@@ -76,7 +86,9 @@ public class Musicgroup implements Serializable {
     }
 
     public void setMusicgroupName(String musicgroupName) {
+        String oldMusicgroupName = this.musicgroupName;
         this.musicgroupName = musicgroupName;
+        changeSupport.firePropertyChange("musicgroupName", oldMusicgroupName, musicgroupName);
     }
 
     public Date getFormationDate() {
@@ -84,31 +96,33 @@ public class Musicgroup implements Serializable {
     }
 
     public void setFormationDate(Date formationDate) {
+        Date oldFormationDate = this.formationDate;
         this.formationDate = formationDate;
+        changeSupport.firePropertyChange("formationDate", oldFormationDate, formationDate);
     }
 
     @XmlTransient
-    public Collection<Artist> getArtistCollection() {
-        return artistCollection;
+    public List<Artist> getArtistList() {
+        return artistList;
     }
 
-    public void setArtistCollection(Collection<Artist> artistCollection) {
-        this.artistCollection = artistCollection;
+    public void setArtistList(List<Artist> artistList) {
+        this.artistList = artistList;
     }
 
     @XmlTransient
-    public Collection<Album> getAlbumCollection() {
-        return albumCollection;
+    public List<Album> getAlbumList() {
+        return albumList;
     }
 
-    public void setAlbumCollection(Collection<Album> albumCollection) {
-        this.albumCollection = albumCollection;
+    public void setAlbumList(List<Album> albumList) {
+        this.albumList = albumList;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (musicgroupName != null ? musicgroupName.hashCode() : 0);
+        hash += (musicgroupId != null ? musicgroupId.hashCode() : 0);
         return hash;
     }
 
@@ -119,7 +133,7 @@ public class Musicgroup implements Serializable {
             return false;
         }
         Musicgroup other = (Musicgroup) object;
-        if ((this.musicgroupName == null && other.musicgroupName != null) || (this.musicgroupName != null && !this.musicgroupName.equals(other.musicgroupName))) {
+        if ((this.musicgroupId == null && other.musicgroupId != null) || (this.musicgroupId != null && !this.musicgroupId.equals(other.musicgroupId))) {
             return false;
         }
         return true;
@@ -127,7 +141,15 @@ public class Musicgroup implements Serializable {
 
     @Override
     public String toString() {
-        return "radiostation_POJO.Musicgroup[ musicgroupName=" + musicgroupName + " ]";
+        return "radiostation_POJO.Musicgroup[ musicgroupId=" + musicgroupId + " ]";
+    }
+
+    public void addPropertyChangeListener(PropertyChangeListener listener) {
+        changeSupport.addPropertyChangeListener(listener);
+    }
+
+    public void removePropertyChangeListener(PropertyChangeListener listener) {
+        changeSupport.removePropertyChangeListener(listener);
     }
     
 }

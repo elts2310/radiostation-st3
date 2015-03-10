@@ -6,11 +6,13 @@
 package radiostation_POJO;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -21,7 +23,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Panos
+ * @author eliastsourapas
  */
 @Entity
 @Table(name = "MUSICGENRE")
@@ -32,33 +34,28 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Musicgenre.findByGenreName", query = "SELECT m FROM Musicgenre m WHERE m.genreName = :genreName")})
 public class Musicgenre implements Serializable {
     private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "GENRE_ID")
-    private int genreId;
-    @Id
-    @Basic(optional = false)
+    private Integer genreId;
     @Column(name = "GENRE_NAME")
     private String genreName;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "genreName")
-    private Collection<Artist> artistCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "genreId")
+    private List<Artist> artistList;
 
     public Musicgenre() {
     }
 
-    public Musicgenre(String genreName) {
-        this.genreName = genreName;
-    }
-
-    public Musicgenre(String genreName, int genreId) {
-        this.genreName = genreName;
+    public Musicgenre(Integer genreId) {
         this.genreId = genreId;
     }
 
-    public int getGenreId() {
+    public Integer getGenreId() {
         return genreId;
     }
 
-    public void setGenreId(int genreId) {
+    public void setGenreId(Integer genreId) {
         this.genreId = genreId;
     }
 
@@ -71,18 +68,18 @@ public class Musicgenre implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Artist> getArtistCollection() {
-        return artistCollection;
+    public List<Artist> getArtistList() {
+        return artistList;
     }
 
-    public void setArtistCollection(Collection<Artist> artistCollection) {
-        this.artistCollection = artistCollection;
+    public void setArtistList(List<Artist> artistList) {
+        this.artistList = artistList;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (genreName != null ? genreName.hashCode() : 0);
+        hash += (genreId != null ? genreId.hashCode() : 0);
         return hash;
     }
 
@@ -93,7 +90,7 @@ public class Musicgenre implements Serializable {
             return false;
         }
         Musicgenre other = (Musicgenre) object;
-        if ((this.genreName == null && other.genreName != null) || (this.genreName != null && !this.genreName.equals(other.genreName))) {
+        if ((this.genreId == null && other.genreId != null) || (this.genreId != null && !this.genreId.equals(other.genreId))) {
             return false;
         }
         return true;
@@ -101,7 +98,7 @@ public class Musicgenre implements Serializable {
 
     @Override
     public String toString() {
-        return "radiostation_POJO.Musicgenre[ genreName=" + genreName + " ]";
+        return "radiostation_POJO.Musicgenre[ genreId=" + genreId + " ]";
     }
     
 }

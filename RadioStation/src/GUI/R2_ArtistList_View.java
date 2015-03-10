@@ -65,48 +65,22 @@ public class R2_ArtistList_View extends javax.swing.JFrame {
     private void initComponents() {
         bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
-        RadioStationPUEntityManager = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory("RadioStationPU").createEntityManager();
-        artistQuery = java.beans.Beans.isDesignTime() ? null : RadioStationPUEntityManager.createQuery("SELECT a FROM Artist a");
+        RadioStationPUEntityManager0 = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory("RadioStationPU").createEntityManager();
+        artistQuery = java.beans.Beans.isDesignTime() ? null : RadioStationPUEntityManager0.createQuery("SELECT a FROM Artist a");
         artistList = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : artistQuery.getResultList();
         jLabel1 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tableArtists = new javax.swing.JTable();
         addArtist = new javax.swing.JButton();
         editSelectedArtist = new javax.swing.JButton();
         exitBtn = new javax.swing.JButton();
         deleteSelectedArtist = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        artistsTable = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Αρχείο Καλλιτεχνών");
-
-        org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, artistList, tableArtists);
-        org.jdesktop.swingbinding.JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${firstName}"));
-        columnBinding.setColumnName("First Name");
-        columnBinding.setColumnClass(String.class);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${lastName}"));
-        columnBinding.setColumnName("Last Name");
-        columnBinding.setColumnClass(String.class);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${artisticName}"));
-        columnBinding.setColumnName("Artistic Name");
-        columnBinding.setColumnClass(String.class);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${sex}"));
-        columnBinding.setColumnName("Sex");
-        columnBinding.setColumnClass(String.class);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${genreName}"));
-        columnBinding.setColumnName("Genre Name");
-        columnBinding.setColumnClass(radiostation_POJO.Musicgenre.class);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${birthDay}"));
-        columnBinding.setColumnName("Birth Day");
-        columnBinding.setColumnClass(java.util.Date.class);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${birthPlace}"));
-        columnBinding.setColumnName("Birth Place");
-        columnBinding.setColumnClass(String.class);
-        bindingGroup.addBinding(jTableBinding);
-        jTableBinding.bind();
-        jScrollPane1.setViewportView(tableArtists);
 
         addArtist.setText("Προσθήκη");
         addArtist.addActionListener(new java.awt.event.ActionListener() {
@@ -136,6 +110,32 @@ public class R2_ArtistList_View extends javax.swing.JFrame {
             }
         });
 
+        org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, artistList, artistsTable);
+        org.jdesktop.swingbinding.JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${firstName}"));
+        columnBinding.setColumnName("Όνομα");
+        columnBinding.setColumnClass(String.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${lastName}"));
+        columnBinding.setColumnName("Επώνυμο");
+        columnBinding.setColumnClass(String.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${artisticName}"));
+        columnBinding.setColumnName("Καλλιτεχνικό Όνομα");
+        columnBinding.setColumnClass(String.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${sex}"));
+        columnBinding.setColumnName("Φύλο");
+        columnBinding.setColumnClass(String.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${genreId.genreName}"));
+        columnBinding.setColumnName("Είδος Μουσικής");
+        columnBinding.setColumnClass(String.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${birthDay}"));
+        columnBinding.setColumnName("Ημ/νία Γέννησης");
+        columnBinding.setColumnClass(java.util.Date.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${birthPlace}"));
+        columnBinding.setColumnName("Τόπος Γέννησης");
+        columnBinding.setColumnClass(String.class);
+        bindingGroup.addBinding(jTableBinding);
+        jTableBinding.bind();
+        jScrollPane2.setViewportView(artistsTable);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -143,7 +143,6 @@ public class R2_ArtistList_View extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 772, Short.MAX_VALUE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(addArtist)
@@ -151,8 +150,9 @@ public class R2_ArtistList_View extends javax.swing.JFrame {
                         .addComponent(deleteSelectedArtist)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(editSelectedArtist)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(exitBtn)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 322, Short.MAX_VALUE)
+                        .addComponent(exitBtn))
+                    .addComponent(jScrollPane2))
                 .addContainerGap(33, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -160,15 +160,15 @@ public class R2_ArtistList_View extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 364, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(addArtist)
                     .addComponent(editSelectedArtist)
                     .addComponent(exitBtn)
                     .addComponent(deleteSelectedArtist))
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         bindingGroup.bind();
@@ -195,11 +195,11 @@ public class R2_ArtistList_View extends javax.swing.JFrame {
         this.createMode = false;
         this.editMode = true;
         this.deleteMode = false;
-        if(tableArtists.getSelectedRow()==-1)
+        if(artistsTable.getSelectedRow()==-1)
             JOptionPane.showMessageDialog(null, "Δεν έχει επιλεγεί καλλιτέχνης!");
         else{
             for(Artist art: artists){
-                if(art.getArtistId()==tableArtists.getValueAt(tableArtists.getSelectedRow(), 0)){
+                if(art.getArtistId()==artistsTable.getValueAt(artistsTable.getSelectedRow(), 0)){
                     newArtist = art;
                     new R3_Artist_Management(this).setVisible(true);
                 }
@@ -216,11 +216,11 @@ public class R2_ArtistList_View extends javax.swing.JFrame {
         this.createMode = false;
         this.editMode = false;
         this.deleteMode = true;
-        if(tableArtists.getSelectedRow()==-1)
+        if(artistsTable.getSelectedRow()==-1)
             JOptionPane.showMessageDialog(null, "Δεν έχει επιλεγεί καλλιτέχνης!");
         else{
             for(Artist art: artists){
-                if(art.getArtistId()==tableArtists.getValueAt(tableArtists.getSelectedRow(), 0)){
+                if(art.getArtistId()==artistsTable.getValueAt(artistsTable.getSelectedRow(), 0)){
                     newArtist = art;
                     new R3_Artist_Management(this).setVisible(true);
                 }
@@ -267,16 +267,16 @@ public class R2_ArtistList_View extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.persistence.EntityManager RadioStationPUEntityManager;
+    private javax.persistence.EntityManager RadioStationPUEntityManager0;
     private javax.swing.JButton addArtist;
     private java.util.List<radiostation_POJO.Artist> artistList;
     private javax.persistence.Query artistQuery;
+    private javax.swing.JTable artistsTable;
     private javax.swing.JButton deleteSelectedArtist;
     private javax.swing.JButton editSelectedArtist;
     private javax.swing.JButton exitBtn;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tableArtists;
+    private javax.swing.JScrollPane jScrollPane2;
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 }

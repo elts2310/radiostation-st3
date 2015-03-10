@@ -2,7 +2,7 @@
 
 <Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <NonVisualComponents>
-    <Component class="javax.persistence.EntityManager" name="RadioStationPUEntityManager">
+    <Component class="javax.persistence.EntityManager" name="RadioStationPUEntityManager0">
       <Properties>
         <Property name="persistenceUnit" type="java.lang.String" value="RadioStationPU"/>
       </Properties>
@@ -11,7 +11,7 @@
       <Properties>
         <Property name="query" type="java.lang.String" value="SELECT p FROM Playlist p"/>
         <Property name="entityManager" type="java.lang.Object" editor="org.netbeans.modules.form.j2ee.J2EEPropertyModifier$EMProperty$EntityManagerEditor">
-          <ComponentRef name="RadioStationPUEntityManager"/>
+          <ComponentRef name="RadioStationPUEntityManager0"/>
         </Property>
       </Properties>
     </Component>
@@ -146,7 +146,7 @@
           <BindingProperties>
             <BindingProperty name="elements" source="playlistList" target="tablePlaylists" targetPath="elements" updateStrategy="0" immediately="true">
               <Subbinding sourcePath="${plName}">
-                <BindingParameter name="NAME" value="&#x3a4;&#x3af;&#x3c4;&#x3bb;&#x3bf;&#x3c2;"/>
+                <BindingParameter name="NAME" value="&#x38c;&#x3bd;&#x3bf;&#x3bc;&#x3b1; &#x39b;&#x3af;&#x3c3;&#x3c4;&#x3b1;&#x3c2;"/>
                 <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="String.class"/>
               </Subbinding>
               <Subbinding sourcePath="${plDescription}">
@@ -154,7 +154,7 @@
                 <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="String.class"/>
               </Subbinding>
               <Subbinding sourcePath="${plCreationDate}">
-                <BindingParameter name="NAME" value="&#x397;&#x3bc;&#x3b5;&#x3c1;&#x3bf;&#x3bc;&#x3b7;&#x3bd;&#x3af;&#x3b1; &#x394;&#x3b7;&#x3bc;&#x3b9;&#x3bf;&#x3c5;&#x3c1;&#x3b3;&#x3af;&#x3b1;&#x3c2;"/>
+                <BindingParameter name="NAME" value="&#x397;&#x3bc;/&#x3bd;&#x3af;&#x3b1; &#x394;&#x3b7;&#x3bc;&#x3b9;&#x3bf;&#x3c5;&#x3c1;&#x3b3;&#x3af;&#x3b1;&#x3c2;"/>
                 <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="java.util.Date.class"/>
               </Subbinding>
             </BindingProperty>

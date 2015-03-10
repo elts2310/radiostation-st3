@@ -6,8 +6,8 @@
 package radiostation_POJO;
 
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -29,7 +29,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Panos
+ * @author eliastsourapas
  */
 @Entity
 @Table(name = "ARTIST")
@@ -44,9 +44,6 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Artist.findByBirthDay", query = "SELECT a FROM Artist a WHERE a.birthDay = :birthDay"),
     @NamedQuery(name = "Artist.findByBirthPlace", query = "SELECT a FROM Artist a WHERE a.birthPlace = :birthPlace")})
 public class Artist implements Serializable {
-    @JoinColumn(name = "GENRE_ID", referencedColumnName = "GENRE_ID")
-    @ManyToOne(optional = false)
-    private Musicgenre genreId;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -64,20 +61,20 @@ public class Artist implements Serializable {
     @Column(name = "SEX")
     private String sex;
     @Column(name = "BIRTH_DAY")
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.DATE)
     private Date birthDay;
     @Column(name = "BIRTH_PLACE")
     private String birthPlace;
     @JoinTable(name = "MUSICGROUP_ARTIST", joinColumns = {
         @JoinColumn(name = "ARTIST_ID", referencedColumnName = "ARTIST_ID")}, inverseJoinColumns = {
-        @JoinColumn(name = "MUSICGROUP_NAME", referencedColumnName = "MUSICGROUP_NAME")})
+        @JoinColumn(name = "MUSICGROUP_ID", referencedColumnName = "MUSICGROUP_ID")})
     @ManyToMany
-    private Collection<Musicgroup> musicgroupCollection;
-    @JoinColumn(name = "GENRE_NAME", referencedColumnName = "GENRE_NAME")
+    private List<Musicgroup> musicgroupList;
+    @JoinColumn(name = "GENRE_ID", referencedColumnName = "GENRE_ID")
     @ManyToOne(optional = false)
-    private Musicgenre genreName;
+    private Musicgenre genreId;
     @OneToMany(mappedBy = "artistId")
-    private Collection<Album> albumCollection;
+    private List<Album> albumList;
 
     public Artist() {
     }
@@ -149,29 +146,29 @@ public class Artist implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Musicgroup> getMusicgroupCollection() {
-        return musicgroupCollection;
+    public List<Musicgroup> getMusicgroupList() {
+        return musicgroupList;
     }
 
-    public void setMusicgroupCollection(Collection<Musicgroup> musicgroupCollection) {
-        this.musicgroupCollection = musicgroupCollection;
+    public void setMusicgroupList(List<Musicgroup> musicgroupList) {
+        this.musicgroupList = musicgroupList;
     }
 
-    public Musicgenre getGenreName() {
-        return genreName;
+    public Musicgenre getGenreId() {
+        return genreId;
     }
 
-    public void setGenreName(Musicgenre genreName) {
-        this.genreName = genreName;
+    public void setGenreId(Musicgenre genreId) {
+        this.genreId = genreId;
     }
 
     @XmlTransient
-    public Collection<Album> getAlbumCollection() {
-        return albumCollection;
+    public List<Album> getAlbumList() {
+        return albumList;
     }
 
-    public void setAlbumCollection(Collection<Album> albumCollection) {
-        this.albumCollection = albumCollection;
+    public void setAlbumList(List<Album> albumList) {
+        this.albumList = albumList;
     }
 
     @Override
@@ -197,14 +194,6 @@ public class Artist implements Serializable {
     @Override
     public String toString() {
         return "radiostation_POJO.Artist[ artistId=" + artistId + " ]";
-    }
-
-    public Musicgenre getGenreId() {
-        return genreId;
-    }
-
-    public void setGenreId(Musicgenre genreId) {
-        this.genreId = genreId;
     }
     
 }

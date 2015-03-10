@@ -66,8 +66,8 @@ public class R16_Playlist_View extends javax.swing.JFrame {
     private void initComponents() {
         bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
-        RadioStationPUEntityManager = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory("RadioStationPU").createEntityManager();
-        playlistQuery = java.beans.Beans.isDesignTime() ? null : RadioStationPUEntityManager.createQuery("SELECT p FROM Playlist p");
+        RadioStationPUEntityManager0 = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory("RadioStationPU").createEntityManager();
+        playlistQuery = java.beans.Beans.isDesignTime() ? null : RadioStationPUEntityManager0.createQuery("SELECT p FROM Playlist p");
         playlistList = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : playlistQuery.getResultList();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -86,13 +86,13 @@ public class R16_Playlist_View extends javax.swing.JFrame {
 
         org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, playlistList, tablePlaylists);
         org.jdesktop.swingbinding.JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${plName}"));
-        columnBinding.setColumnName("Τίτλος");
+        columnBinding.setColumnName("Όνομα Λίστας");
         columnBinding.setColumnClass(String.class);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${plDescription}"));
         columnBinding.setColumnName("Περιγραφή");
         columnBinding.setColumnClass(String.class);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${plCreationDate}"));
-        columnBinding.setColumnName("Ημερομηνία Δημιουργίας");
+        columnBinding.setColumnName("Ημ/νία Δημιουργίας");
         columnBinding.setColumnClass(java.util.Date.class);
         bindingGroup.addBinding(jTableBinding);
         jTableBinding.bind();
@@ -266,7 +266,7 @@ public class R16_Playlist_View extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.persistence.EntityManager RadioStationPUEntityManager;
+    private javax.persistence.EntityManager RadioStationPUEntityManager0;
     private javax.swing.JButton alterPlaylist;
     private javax.swing.JButton deletePlaylist;
     private javax.swing.JButton exitPlaylist;

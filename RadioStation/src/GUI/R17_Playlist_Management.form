@@ -228,6 +228,11 @@
                   <Editor/>
                   <Renderer/>
                 </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
               </TableColumnModel>
             </Property>
             <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
@@ -240,17 +245,21 @@
                 <BindingParameter name="NAME" value="&#x3a4;&#x3af;&#x3c4;&#x3bb;&#x3bf;&#x3c2;"/>
                 <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="String.class"/>
               </Subbinding>
+              <Subbinding sourcePath="${duration}">
+                <BindingParameter name="NAME" value="&#x394;&#x3b9;&#x3ac;&#x3c1;&#x3ba;&#x3b5;&#x3b9;&#x3b1;"/>
+                <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="Integer.class"/>
+              </Subbinding>
+              <Subbinding sourcePath="${albumId.musicgroupId.musicgroupName}">
+                <BindingParameter name="NAME" value="&#x3a3;&#x3c5;&#x3b3;&#x3ba;&#x3c1;&#x3cc;&#x3c4;&#x3b7;&#x3bc;&#x3b1;"/>
+                <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="String.class"/>
+              </Subbinding>
               <Subbinding sourcePath="${albumId.artistId.artisticName}">
                 <BindingParameter name="NAME" value="&#x39a;&#x3b1;&#x3bb;&#x3bb;&#x3b9;&#x3c4;&#x3ad;&#x3c7;&#x3bd;&#x3b7;&#x3c2;"/>
                 <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="String.class"/>
               </Subbinding>
-              <Subbinding sourcePath="${albumId.musicgroupName.musicgroupName}">
-                <BindingParameter name="NAME" value="&#x3a3;&#x3c5;&#x3b3;&#x3ba;&#x3c1;&#x3cc;&#x3c4;&#x3b7;&#x3bc;&#x3b1;"/>
+              <Subbinding sourcePath="${albumId.artistId.genreId.genreName}">
+                <BindingParameter name="NAME" value="&#x395;&#x3af;&#x3b4;&#x3bf;&#x3c2;"/>
                 <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="String.class"/>
-              </Subbinding>
-              <Subbinding sourcePath="${duration}">
-                <BindingParameter name="NAME" value="&#x394;&#x3b9;&#x3ac;&#x3c1;&#x3ba;&#x3b5;&#x3b9;&#x3b1;"/>
-                <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="Integer.class"/>
               </Subbinding>
             </BindingProperty>
           </BindingProperties>
