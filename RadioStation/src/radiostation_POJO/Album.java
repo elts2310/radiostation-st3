@@ -41,6 +41,12 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Album.findByDiscNumber", query = "SELECT a FROM Album a WHERE a.discNumber = :discNumber"),
     @NamedQuery(name = "Album.findByReleaseDate", query = "SELECT a FROM Album a WHERE a.releaseDate = :releaseDate")})
 public class Album implements Serializable {
+    @JoinColumn(name = "MUSICGROUP_ID", referencedColumnName = "MUSICGROUP_ID")
+    @ManyToOne
+    private Musicgroup musicgroupId;
+    @JoinColumn(name = "MPC_ID", referencedColumnName = "MPC_ID")
+    @ManyToOne(optional = false)
+    private Musicproductioncompany mpcId;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -181,6 +187,22 @@ public class Album implements Serializable {
     @Override
     public String toString() {
         return "radiostation_POJO.Album[ albumId=" + albumId + " ]";
+    }
+
+    public Musicgroup getMusicgroupId() {
+        return musicgroupId;
+    }
+
+    public void setMusicgroupId(Musicgroup musicgroupId) {
+        this.musicgroupId = musicgroupId;
+    }
+
+    public Musicproductioncompany getMpcId() {
+        return mpcId;
+    }
+
+    public void setMpcId(Musicproductioncompany mpcId) {
+        this.mpcId = mpcId;
     }
     
 }

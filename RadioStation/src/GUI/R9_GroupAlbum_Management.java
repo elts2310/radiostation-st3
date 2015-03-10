@@ -107,7 +107,7 @@ public class R9_GroupAlbum_Management extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         MpcList = new javax.swing.JComboBox();
         MusicGroupList = new javax.swing.JComboBox();
-        ReleaseDt = new org.jdesktop.swingx.JXDatePicker();
+        ReleaseDt = new org.netbeans.modules.form.InvalidComponent();
         DiscNr = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -209,7 +209,7 @@ public class R9_GroupAlbum_Management extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(13, Short.MAX_VALUE)
                 .addComponent(jLabel8)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -263,24 +263,12 @@ public class R9_GroupAlbum_Management extends javax.swing.JFrame {
         org.jdesktop.swingbinding.JComboBoxBinding jComboBoxBinding = org.jdesktop.swingbinding.SwingBindings.createJComboBoxBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, musicproductioncompanyList, MpcList);
         bindingGroup.addBinding(jComboBoxBinding);
 
-        MusicGroupList.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " " }));
-        MusicGroupList.setSelectedIndex(-1);
-
         jComboBoxBinding = org.jdesktop.swingbinding.SwingBindings.createJComboBoxBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, musicgroupList, MusicGroupList);
         bindingGroup.addBinding(jComboBoxBinding);
 
         MusicGroupList.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 MusicGroupListActionPerformed(evt);
-            }
-        });
-
-        ReleaseDt.setMaximumSize(new java.awt.Dimension(32767, 32767));
-        ReleaseDt.setMinimumSize(new java.awt.Dimension(100, 20));
-        ReleaseDt.setPreferredSize(new java.awt.Dimension(100, 20));
-        ReleaseDt.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ReleaseDtActionPerformed(evt);
             }
         });
 
@@ -315,16 +303,11 @@ public class R9_GroupAlbum_Management extends javax.swing.JFrame {
                     .addComponent(ReleaseDt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(419, 419, 419)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(419, 419, 419)
-                        .addComponent(jLabel4))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(419, 419, 419)
-                        .addComponent(jLabel5))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(419, 419, 419)
-                        .addComponent(jLabel6)))
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel6))
                 .addGap(13, 13, 13))
         );
         jPanel2Layout.setVerticalGroup(
@@ -379,15 +362,13 @@ public class R9_GroupAlbum_Management extends javax.swing.JFrame {
                 .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(22, 22, 22)
                         .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(2, 2, 2)))
+                        .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(25, Short.MAX_VALUE))
         );
@@ -575,7 +556,7 @@ public class R9_GroupAlbum_Management extends javax.swing.JFrame {
     private javax.swing.JComboBox MpcList;
     private javax.swing.JComboBox MusicGroupList;
     private javax.persistence.EntityManager RadioStationPUEntityManager;
-    private org.jdesktop.swingx.JXDatePicker ReleaseDt;
+    private org.netbeans.modules.form.InvalidComponent ReleaseDt;
     private javax.swing.JComboBox Type;
     private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnSave;

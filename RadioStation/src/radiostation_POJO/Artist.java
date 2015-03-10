@@ -44,6 +44,9 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Artist.findByBirthDay", query = "SELECT a FROM Artist a WHERE a.birthDay = :birthDay"),
     @NamedQuery(name = "Artist.findByBirthPlace", query = "SELECT a FROM Artist a WHERE a.birthPlace = :birthPlace")})
 public class Artist implements Serializable {
+    @JoinColumn(name = "GENRE_ID", referencedColumnName = "GENRE_ID")
+    @ManyToOne(optional = false)
+    private Musicgenre genreId;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -194,6 +197,14 @@ public class Artist implements Serializable {
     @Override
     public String toString() {
         return "radiostation_POJO.Artist[ artistId=" + artistId + " ]";
+    }
+
+    public Musicgenre getGenreId() {
+        return genreId;
+    }
+
+    public void setGenreId(Musicgenre genreId) {
+        this.genreId = genreId;
     }
     
 }
