@@ -290,11 +290,13 @@ public class R3_Artist_Management extends javax.swing.JFrame {
            if (createMode.getCreateMode()==true){
                Artist art= new Artist();
                //art.setArtistId(this.jTextArtistId.getText());
-               art.setFirstName(this.jTextArtistName.getText());
+              art.setFirstName(this.jTextArtistName.getText());
               art.setLastName(this.jTextArtistLastName.getText()); 
               art.setArtisticName(this.jTextArtisticName.getText()); 
               art.setBirthPlace(this.jTextBirthPlace.getText()); 
-               
+              art.setSex(sexComboBox.getSelectedItem().toString());
+              
+              
            }
            else if(editMode.getEditMode()==true){
                String sql="update from ARTIST where ArtistId=?";
@@ -302,9 +304,9 @@ public class R3_Artist_Management extends javax.swing.JFrame {
                    pst=conn.prepareStatement(sql);
                    pst.setString(1,jTextArtistId.getText());
                    pst.setString(2,jTextArtistName.getText());
-                   pst.setString(1,jTextArtistLastName.getText());
-                    pst.setString(1,jTextBirthPlace.getText());
-                    
+                   pst.setString(3,jTextArtistLastName.getText());
+                   pst.setString(4,jTextBirthPlace.getText());
+                   pst.setString(5,sexComboBox.getSelectedItem().toString());
                     
                }catch(Exception e){
                    JOptionPane.showMessageDialog(null, e);
@@ -359,23 +361,7 @@ public class R3_Artist_Management extends javax.swing.JFrame {
     private void jTextArtistNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextArtistNameActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextArtistNameActionPerformed
-    /*private void FilljCombobox2(){
-      try{
-            String sql="select * from MUSICGENRE";
-            pst=conn.prepearStatement(sql);
-            rs=pst.executeQuery();
-            
-            while (rs.next()){
-                String name=rs.getString("GENRE_NAME");
-                jComboBox2_name.addItem(name);
-            
-            }
-        }catch(Exception e){
-            JOptionPane.showMessageDialog(null,e);
-        }
-        
     
-    }*/
     /*
      * @param args the command line arguments
      */
