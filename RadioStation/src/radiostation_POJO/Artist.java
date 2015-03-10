@@ -6,8 +6,8 @@
 package radiostation_POJO;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
-import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -29,7 +29,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author eliastsourapas
+ * @author Panos
  */
 @Entity
 @Table(name = "ARTIST")
@@ -69,12 +69,12 @@ public class Artist implements Serializable {
         @JoinColumn(name = "ARTIST_ID", referencedColumnName = "ARTIST_ID")}, inverseJoinColumns = {
         @JoinColumn(name = "MUSICGROUP_ID", referencedColumnName = "MUSICGROUP_ID")})
     @ManyToMany
-    private List<Musicgroup> musicgroupList;
+    private Collection<Musicgroup> musicgroupCollection;
     @JoinColumn(name = "GENRE_ID", referencedColumnName = "GENRE_ID")
     @ManyToOne(optional = false)
     private Musicgenre genreId;
     @OneToMany(mappedBy = "artistId")
-    private List<Album> albumList;
+    private Collection<Album> albumCollection;
 
     public Artist() {
     }
@@ -146,12 +146,12 @@ public class Artist implements Serializable {
     }
 
     @XmlTransient
-    public List<Musicgroup> getMusicgroupList() {
-        return musicgroupList;
+    public Collection<Musicgroup> getMusicgroupCollection() {
+        return musicgroupCollection;
     }
 
-    public void setMusicgroupList(List<Musicgroup> musicgroupList) {
-        this.musicgroupList = musicgroupList;
+    public void setMusicgroupCollection(Collection<Musicgroup> musicgroupCollection) {
+        this.musicgroupCollection = musicgroupCollection;
     }
 
     public Musicgenre getGenreId() {
@@ -163,12 +163,12 @@ public class Artist implements Serializable {
     }
 
     @XmlTransient
-    public List<Album> getAlbumList() {
-        return albumList;
+    public Collection<Album> getAlbumCollection() {
+        return albumCollection;
     }
 
-    public void setAlbumList(List<Album> albumList) {
-        this.albumList = albumList;
+    public void setAlbumCollection(Collection<Album> albumCollection) {
+        this.albumCollection = albumCollection;
     }
 
     @Override

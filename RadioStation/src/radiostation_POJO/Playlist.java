@@ -5,11 +5,9 @@
  */
 package radiostation_POJO;
 
-import java.beans.PropertyChangeListener;
-import java.beans.PropertyChangeSupport;
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
-import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -24,13 +22,12 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author eliastsourapas
+ * @author Panos
  */
 @Entity
 @Table(name = "PLAYLIST")
@@ -42,8 +39,6 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Playlist.findByPlDescription", query = "SELECT p FROM Playlist p WHERE p.plDescription = :plDescription"),
     @NamedQuery(name = "Playlist.findByPlCreationDate", query = "SELECT p FROM Playlist p WHERE p.plCreationDate = :plCreationDate")})
 public class Playlist implements Serializable {
-    @Transient
-    private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -63,7 +58,7 @@ public class Playlist implements Serializable {
         @JoinColumn(name = "PLAYLIST_ID", referencedColumnName = "PLAYLIST_ID")}, inverseJoinColumns = {
         @JoinColumn(name = "SONG_ID", referencedColumnName = "SONG_ID")})
     @ManyToMany
-    private List<Song> songList;
+    private Collection<Song> songCollection;
 
     public Playlist() {
     }
@@ -83,9 +78,7 @@ public class Playlist implements Serializable {
     }
 
     public void setPlaylistId(Integer playlistId) {
-        Integer oldPlaylistId = this.playlistId;
         this.playlistId = playlistId;
-        changeSupport.firePropertyChange("playlistId", oldPlaylistId, playlistId);
     }
 
     public String getPlName() {
@@ -93,9 +86,7 @@ public class Playlist implements Serializable {
     }
 
     public void setPlName(String plName) {
-        String oldPlName = this.plName;
         this.plName = plName;
-        changeSupport.firePropertyChange("plName", oldPlName, plName);
     }
 
     public String getPlDescription() {
@@ -103,9 +94,7 @@ public class Playlist implements Serializable {
     }
 
     public void setPlDescription(String plDescription) {
-        String oldPlDescription = this.plDescription;
         this.plDescription = plDescription;
-        changeSupport.firePropertyChange("plDescription", oldPlDescription, plDescription);
     }
 
     public Date getPlCreationDate() {
@@ -113,18 +102,16 @@ public class Playlist implements Serializable {
     }
 
     public void setPlCreationDate(Date plCreationDate) {
-        Date oldPlCreationDate = this.plCreationDate;
         this.plCreationDate = plCreationDate;
-        changeSupport.firePropertyChange("plCreationDate", oldPlCreationDate, plCreationDate);
     }
 
     @XmlTransient
-    public List<Song> getSongList() {
-        return songList;
+    public Collection<Song> getSongCollection() {
+        return songCollection;
     }
 
-    public void setSongList(List<Song> songList) {
-        this.songList = songList;
+    public void setSongCollection(Collection<Song> songCollection) {
+        this.songCollection = songCollection;
     }
 
     @Override
@@ -150,14 +137,6 @@ public class Playlist implements Serializable {
     @Override
     public String toString() {
         return "radiostation_POJO.Playlist[ playlistId=" + playlistId + " ]";
-    }
-
-    public void addPropertyChangeListener(PropertyChangeListener listener) {
-        changeSupport.addPropertyChangeListener(listener);
-    }
-
-    public void removePropertyChangeListener(PropertyChangeListener listener) {
-        changeSupport.removePropertyChangeListener(listener);
     }
     
 }
