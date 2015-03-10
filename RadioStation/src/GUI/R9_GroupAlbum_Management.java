@@ -37,6 +37,7 @@ public class R9_GroupAlbum_Management extends javax.swing.JFrame {
     private int cComp;
     private Album Alb;
     Musicgroup MG;
+    Musicproductioncompany MPC;
     /*private String MG;*/
     /*private Musicgroup MG;*/
     /*private RadioStation rs = new RadioStation();*/
@@ -434,9 +435,15 @@ public class R9_GroupAlbum_Management extends javax.swing.JFrame {
                 /*creator.resetForm();*/
                 /*creator.setVisible(true);*/
                 /*creator.newAlbum = Alb;*/
+                
+                
                 String NewtxtTitle = txtTitle.getText();
                 String NewType = (String)Type.getSelectedItem();
-                MG = radiostation.RadioStation.getMGroupByName(MusicGroupList.getSelectedItem().toString());
+                MG = radiostation.AppControl.getMGroupByName(MusicGroupList.getSelectedItem().toString());
+                int NewDiscNr = DiscNr.getSelectedIndex();
+                MPC = radiostation.AppControl.getMPCByName(MpcList.getSelectedItem().toString());
+                Date NewReleaseDt = (Date)ReleaseDt.getDate();
+                /*Alb = new Album(0, NewtxtTitle, NewReleaseDt, );*/
                 
                 dispose();
             }

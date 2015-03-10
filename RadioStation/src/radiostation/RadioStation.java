@@ -21,31 +21,13 @@ public class RadioStation {
     /**
      * @param args the command line arguments
      */
-    private static EntityManagerFactory emf;
-    private static EntityManager em;
+    //private static EntityManagerFactory emf;
+    //private static EntityManager em;
     /*Connecting;*/
     
-    public static void Connecting(){
-        try{
-            emf = Persistence.createEntityManagerFactory("RadioStationPU");
-            em = emf.createEntityManager();
-        }catch(Exception e) {
-            System.out.println(e);
-            JOptionPane.showMessageDialog(null, "DB connection Fail", "ERROR", JOptionPane.ERROR_MESSAGE);
-        }
-    }
     
-    public static Musicgroup getMGroupByName(String inGroupName){
-        Musicgroup MG;
-        Query FindByName = em.createNamedQuery("MusicGroup.findByNameMusicGroup", Musicgroup.class);
-        try{
-            FindByName.setParameter("NameMusicGroup", inGroupName);
-            MG = (Musicgroup)FindByName.getSingleResult();
-        }catch(Exception e){
-            return(null);
-        }
-        return MG;
-    }
+    
+    
     
     
     public static void main(String[] args) {

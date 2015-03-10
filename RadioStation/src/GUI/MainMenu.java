@@ -10,7 +10,7 @@ package GUI;
  * @author Panos
  */
 
-import radiostation.RadioStation;
+import radiostation.*;
 
 public class MainMenu extends javax.swing.JFrame {
     private RadioStation rs = new RadioStation();
@@ -21,6 +21,7 @@ public class MainMenu extends javax.swing.JFrame {
     public MainMenu() {
         this.rs = new RadioStation();
         initComponents();
+        AppControl.Connecting();
     }
 
     /**

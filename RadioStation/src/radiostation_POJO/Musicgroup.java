@@ -5,8 +5,6 @@
  */
 package radiostation_POJO;
 
-import java.beans.PropertyChangeListener;
-import java.beans.PropertyChangeSupport;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
@@ -21,7 +19,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -38,12 +35,10 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Musicgroup.findByMusicgroupName", query = "SELECT m FROM Musicgroup m WHERE m.musicgroupName = :musicgroupName"),
     @NamedQuery(name = "Musicgroup.findByFormationDate", query = "SELECT m FROM Musicgroup m WHERE m.formationDate = :formationDate")})
 public class Musicgroup implements Serializable {
-    @Transient
-    private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
     private static final long serialVersionUID = 1L;
     @Basic(optional = false)
     @Column(name = "MUSICGROUP_ID")
-    private long musicgroupId;
+    private int musicgroupId;
     @Id
     @Basic(optional = false)
     @Column(name = "MUSICGROUP_NAME")
@@ -63,19 +58,17 @@ public class Musicgroup implements Serializable {
         this.musicgroupName = musicgroupName;
     }
 
-    public Musicgroup(String musicgroupName, long musicgroupId) {
+    public Musicgroup(String musicgroupName, int musicgroupId) {
         this.musicgroupName = musicgroupName;
         this.musicgroupId = musicgroupId;
     }
 
-    public long getMusicgroupId() {
+    public int getMusicgroupId() {
         return musicgroupId;
     }
 
-    public void setMusicgroupId(long musicgroupId) {
-        long oldMusicgroupId = this.musicgroupId;
+    public void setMusicgroupId(int musicgroupId) {
         this.musicgroupId = musicgroupId;
-        changeSupport.firePropertyChange("musicgroupId", oldMusicgroupId, musicgroupId);
     }
 
     public String getMusicgroupName() {
@@ -83,9 +76,7 @@ public class Musicgroup implements Serializable {
     }
 
     public void setMusicgroupName(String musicgroupName) {
-        String oldMusicgroupName = this.musicgroupName;
         this.musicgroupName = musicgroupName;
-        changeSupport.firePropertyChange("musicgroupName", oldMusicgroupName, musicgroupName);
     }
 
     public Date getFormationDate() {
@@ -93,9 +84,7 @@ public class Musicgroup implements Serializable {
     }
 
     public void setFormationDate(Date formationDate) {
-        Date oldFormationDate = this.formationDate;
         this.formationDate = formationDate;
-        changeSupport.firePropertyChange("formationDate", oldFormationDate, formationDate);
     }
 
     @XmlTransient
@@ -139,14 +128,6 @@ public class Musicgroup implements Serializable {
     @Override
     public String toString() {
         return "radiostation_POJO.Musicgroup[ musicgroupName=" + musicgroupName + " ]";
-    }
-
-    public void addPropertyChangeListener(PropertyChangeListener listener) {
-        changeSupport.addPropertyChangeListener(listener);
-    }
-
-    public void removePropertyChangeListener(PropertyChangeListener listener) {
-        changeSupport.removePropertyChangeListener(listener);
     }
     
 }

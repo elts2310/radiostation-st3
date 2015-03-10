@@ -49,7 +49,7 @@ public class Artist implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "ARTIST_ID")
-    private Long artistId;
+    private Integer artistId;
     @Column(name = "FIRST_NAME")
     private String firstName;
     @Column(name = "LAST_NAME")
@@ -79,21 +79,21 @@ public class Artist implements Serializable {
     public Artist() {
     }
 
-    public Artist(Long artistId) {
+    public Artist(Integer artistId) {
         this.artistId = artistId;
     }
 
-    public Artist(Long artistId, String artisticName, String sex) {
+    public Artist(Integer artistId, String artisticName, String sex) {
         this.artistId = artistId;
         this.artisticName = artisticName;
         this.sex = sex;
     }
 
-    public Long getArtistId() {
+    public Integer getArtistId() {
         return artistId;
     }
 
-    public void setArtistId(Long artistId) {
+    public void setArtistId(Integer artistId) {
         this.artistId = artistId;
     }
 
