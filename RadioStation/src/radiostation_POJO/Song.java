@@ -75,6 +75,14 @@ public class Song implements Serializable {
         this.duration = duration;
         this.trackNr = trackNr;
     }
+    
+    public Song(Integer songId, String title, int duration, int trackNr, Album albumId) {
+        this.songId = songId;
+        this.title = title;
+        this.duration = duration;
+        this.trackNr = trackNr;
+        this.albumId = albumId;
+    }
 
     public Integer getSongId() {
         return songId;

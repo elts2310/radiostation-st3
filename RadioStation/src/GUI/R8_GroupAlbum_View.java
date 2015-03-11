@@ -24,6 +24,7 @@ public class R8_GroupAlbum_View extends javax.swing.JFrame {
     private EntityManager em;
     public Album newAlbum; //Το άλμπουμ που τροποποιείται
     AppControl ap; //Αντικείμενο για τον χειρισμό της ΒΔ
+    public static int selRow;
 
     /**
      * Creates new form R8_GroupAlbum_View
@@ -192,9 +193,9 @@ public class R8_GroupAlbum_View extends javax.swing.JFrame {
         this.createMode = false;
         this.editMode = false;
         this.deleteMode = true;
-        if(tableGroupAlbums.getSelectedRow()==-1)
+        if(tableGroupAlbums.getSelectedRow()==-1){
             JOptionPane.showMessageDialog(null, "Δεν έχει επιλεγεί άλμπουμ!");
-        else{
+        }else{
             for(Album alb: groupalbums){
                 if(alb.getAlbumId()==tableGroupAlbums.getValueAt(tableGroupAlbums.getSelectedRow(), 0)){
                     newAlbum = alb;
@@ -209,15 +210,18 @@ public class R8_GroupAlbum_View extends javax.swing.JFrame {
         this.createMode = false;
         this.editMode = true;
         this.deleteMode = false;
-        if(tableGroupAlbums.getSelectedRow()==-1)
+        if(tableGroupAlbums.getSelectedRow()==-1){
             JOptionPane.showMessageDialog(null, "Δεν έχει επιλεγεί άλμπουμ!");
-        else{
-            for(Album alb: groupalbums){
+        }else{
+            selRow = tableGroupAlbums.getSelectedRow();
+            newAlbum = albumList.get(tableGroupAlbums.convertRowIndexToModel(selRow));
+            new R9_GroupAlbum_Management(newAlbum).setVisible(true);
+            /*for(Album alb: groupalbums){
                 if(alb.getAlbumId()==tableGroupAlbums.getValueAt(tableGroupAlbums.getSelectedRow(), 0)){
                     newAlbum = alb;
-                    new R9_GroupAlbum_Management(this).setVisible(true);
+                    new R13_ArtistAlbum_Management(newAlbum).setVisible(true);
                 }
-            }
+            }*/
         }
     }//GEN-LAST:event_editSelectedGroupAlbumActionPerformed
 

@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.swing.JOptionPane;
+import radiostation.AppControl;
 import radiostation_POJO.Album;
 
 /**
@@ -22,6 +23,8 @@ public class R12_ArtistAlbum_View extends javax.swing.JFrame {
     private List<Album> artistalbums = new ArrayList();
     private EntityManager em;
     public Album newAlbum; //Το άλμπουμ που τροποποιείται
+    AppControl ap;
+    public static int selRow;
 
     /**
      * Creates new form R8_GroupAlbum_View
@@ -65,7 +68,7 @@ public class R12_ArtistAlbum_View extends javax.swing.JFrame {
         bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
         RadioStationPUEntityManager0 = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory("RadioStationPU").createEntityManager();
-        albumQuery = java.beans.Beans.isDesignTime() ? null : RadioStationPUEntityManager0.createQuery("SELECT a FROM Album a WHERE a.mpcId.mpcName IS NOT NULL");
+        albumQuery = java.beans.Beans.isDesignTime() ? null : RadioStationPUEntityManager0.createQuery("SELECT a FROM Album a WHERE a.artistId.artisticName IS NOT NULL");
         albumList = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : albumQuery.getResultList();
         jLabel1 = new javax.swing.JLabel();
         addArtistAlbum = new javax.swing.JButton();
@@ -178,7 +181,7 @@ public class R12_ArtistAlbum_View extends javax.swing.JFrame {
         this.editMode = false;
         this.deleteMode = false;
         this.setVisible(true);
-        //new R13_ArtistAlbum_Management(this).setVisible(true);
+        new R13_ArtistAlbum_Management(this).setVisible(true);
     }//GEN-LAST:event_addArtistAlbumActionPerformed
 
     private void exitArtistAlbumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitArtistAlbumActionPerformed
@@ -194,12 +197,15 @@ public class R12_ArtistAlbum_View extends javax.swing.JFrame {
         if(tableArtistAlbums.getSelectedRow()==-1)
             JOptionPane.showMessageDialog(null, "Δεν έχει επιλεγεί άλμπουμ!");
         else{
-            for(Album alb: artistalbums){
+            selRow = tableArtistAlbums.getSelectedRow();
+            newAlbum = albumList.get(tableArtistAlbums.convertRowIndexToModel(selRow));
+            new R13_ArtistAlbum_Management(newAlbum).setVisible(true);
+            /*for(Album alb: artistalbums){
                 if(alb.getAlbumId()==tableArtistAlbums.getValueAt(tableArtistAlbums.getSelectedRow(), 0)){
                     newAlbum = alb;
-                    //new R13_ArtistAlbum_Management(this).setVisible(true);
+                    new R13_ArtistAlbum_Management(this).setVisible(true);
                 }
-            }
+            }*/
         }
     }//GEN-LAST:event_editSelectedArtistAlbumActionPerformed
 
@@ -211,6 +217,7 @@ public class R12_ArtistAlbum_View extends javax.swing.JFrame {
         if(tableArtistAlbums.getSelectedRow()==-1)
             JOptionPane.showMessageDialog(null, "Δεν έχει επιλεγεί άλμπουμ!");
         else{
+            
             for(Album alb: artistalbums){
                 if(alb.getAlbumId()==tableArtistAlbums.getValueAt(tableArtistAlbums.getSelectedRow(), 0)){
                     newAlbum = alb;

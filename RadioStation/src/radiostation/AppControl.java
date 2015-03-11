@@ -12,8 +12,10 @@ import javax.persistence.Persistence;
 import javax.persistence.Query;
 import javax.swing.JOptionPane;
 import radiostation_POJO.Musicgroup;
+import radiostation_POJO.Artist;
 import radiostation_POJO.Musicproductioncompany;
 import radiostation_POJO.Album;
+import radiostation_POJO.Song;
 
 /**
  *
@@ -49,6 +51,18 @@ public class AppControl {
         return MG;
     }
     
+    public static Artist getArtistByName(String inGroupName){
+        Artist Art;
+        Query FindByName = emLocal.createNamedQuery("Artist.findByArtisticName", Artist.class);
+        try{
+            FindByName.setParameter("artisticName", inGroupName);
+            Art = (Artist)FindByName.getSingleResult();
+        }catch(Exception e){
+            return(null);
+        }
+        return Art;
+    }
+    
     public static Musicproductioncompany getMPCByName(String inGroupName){
         Musicproductioncompany MPC;
         Query FindByName = emLocal.createNamedQuery("Musicproductioncompany.findByMpcName", Musicproductioncompany.class);
@@ -61,7 +75,7 @@ public class AppControl {
         return MPC;
     }
     
-    public static boolean SaveAlbum(Album album) {
+    public static boolean entryAlbum(Album album) {
         try{
             emLocal.getTransaction().begin();
             emLocal.persist(album);
@@ -71,6 +85,19 @@ public class AppControl {
             return false;
         }
         return true;
+    }
+    
+    public static boolean entrySong(Album album,Song song) {
+        try{
+            emLocal.getTransaction().begin();
+            song = emLocal.merge(song);
+            album.getSongCollection().add(song);
+            emLocal.getTransaction().commit();
+   }catch(Exception e){
+       System.out.println(e);
+       return false;
+   }
+    return true;
     }
     
     public EntityManager getLocalEntityManager() {

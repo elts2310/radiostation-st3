@@ -7,7 +7,7 @@ package GUI;
 
 /*import java.util.List;*/
 import radiostation_POJO.Album;
-import radiostation_POJO.Musicgroup;
+import radiostation_POJO.Artist;
 import radiostation_POJO.Musicproductioncompany;
 import radiostation_POJO.Song;
 import radiostation.AppControl;
@@ -27,7 +27,7 @@ import javax.swing.ListSelectionModel;
  *
  * @author Panos
  */
-public class R9_GroupAlbum_Management extends javax.swing.JFrame {
+public class R13_ArtistAlbum_Management extends javax.swing.JFrame {
         /*private List<Musicgroup> groups;*/
     /*private JComboBox MusicGroupList;*/
     Connection conn = null;
@@ -42,11 +42,11 @@ public class R9_GroupAlbum_Management extends javax.swing.JFrame {
     int TrackNum;
     
     
-    private R8_GroupAlbum_View creator;
+    private R12_ArtistAlbum_View creator;
     private EntityManager em;
     private int cComp;
     /*private Album Alb;*/
-    Musicgroup MG;
+    Artist Art;
     Musicproductioncompany MPC;
     Song song;
     /*private String MG;*/
@@ -55,18 +55,18 @@ public class R9_GroupAlbum_Management extends javax.swing.JFrame {
     /**
      * Creates new form R9_GroupAlbum_Management
      */
-    public R9_GroupAlbum_Management() {
+    public R13_ArtistAlbum_Management() {
         /*this.rs = new RadioStation();*/
         initComponents();
         /*RadioStation.createConnection();*/
     }
     
-    public R9_GroupAlbum_Management(R8_GroupAlbum_View inJFrame) {  //(((R9 test)))
+    public R13_ArtistAlbum_Management(R12_ArtistAlbum_View inJFrame) {  //(((R9 test)))
         
         initComponents();
         this.creator = inJFrame;
         /*if(creator.createMode&&!creator.deleteMode&&!creator.editMode){*/
-            MusicGroupList.setSelectedItem(null);
+            ArtistList.setSelectedItem(null);
             MpcList.setSelectedItem(null);
             songList.clear();
             TrackNum = 0;
@@ -78,13 +78,13 @@ public class R9_GroupAlbum_Management extends javax.swing.JFrame {
             /*dispose();*/
         /*}*/
     }
-    public R9_GroupAlbum_Management(Album newAlbum) {
+    public R13_ArtistAlbum_Management(Album newAlbum) {
         initComponents();
         trackTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         album = newAlbum;
         txtTitle.setText(album.getTitle());
         Type.setSelectedItem(album.getAlbumType());
-        MusicGroupList.setSelectedItem(album.getMusicgroupId().getMusicgroupName());
+        ArtistList.setSelectedItem(album.getArtistId().getArtisticName());
         DiscNr.setSelectedIndex(album.getDiscNumber());
         MpcList.setSelectedItem(album.getMpcId().getMpcName());
         ReleaseDt.setDate(album.getReleaseDate());
@@ -118,6 +118,8 @@ public class R9_GroupAlbum_Management extends javax.swing.JFrame {
         musicproductioncompanyList = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : musicproductioncompanyQuery.getResultList();
         songQuery = java.beans.Beans.isDesignTime() ? null : RadioStationPUEntityManager.createQuery("SELECT s FROM Song s");
         songList = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : songQuery.getResultList();
+        artistQuery = java.beans.Beans.isDesignTime() ? null : RadioStationPUEntityManager.createQuery("SELECT a.artisticName FROM Artist a");
+        artistList = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : artistQuery.getResultList();
         btnSave = new javax.swing.JButton();
         btnCancel = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
@@ -141,12 +143,11 @@ public class R9_GroupAlbum_Management extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         MpcList = new javax.swing.JComboBox();
-        MusicGroupList = new javax.swing.JComboBox();
+        ArtistList = new javax.swing.JComboBox();
         DiscNr = new javax.swing.JComboBox();
         ReleaseDt = new org.jdesktop.swingx.JXDatePicker();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(750, 550));
 
         btnSave.setText("Αποθήκευση");
         btnSave.setMaximumSize(new java.awt.Dimension(110, 23));
@@ -302,7 +303,7 @@ public class R9_GroupAlbum_Management extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setText("Συγκρότημα");
+        jLabel2.setText("Καλλιτέχνης");
         jLabel2.setMaximumSize(new java.awt.Dimension(70, 14));
         jLabel2.setMinimumSize(new java.awt.Dimension(70, 14));
         jLabel2.setPreferredSize(new java.awt.Dimension(70, 14));
@@ -327,12 +328,12 @@ public class R9_GroupAlbum_Management extends javax.swing.JFrame {
         org.jdesktop.swingbinding.JComboBoxBinding jComboBoxBinding = org.jdesktop.swingbinding.SwingBindings.createJComboBoxBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, musicproductioncompanyList, MpcList);
         bindingGroup.addBinding(jComboBoxBinding);
 
-        jComboBoxBinding = org.jdesktop.swingbinding.SwingBindings.createJComboBoxBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, musicgroupList, MusicGroupList);
+        jComboBoxBinding = org.jdesktop.swingbinding.SwingBindings.createJComboBoxBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, artistList, ArtistList);
         bindingGroup.addBinding(jComboBoxBinding);
 
-        MusicGroupList.addActionListener(new java.awt.event.ActionListener() {
+        ArtistList.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MusicGroupListActionPerformed(evt);
+                ArtistListActionPerformed(evt);
             }
         });
 
@@ -361,7 +362,7 @@ public class R9_GroupAlbum_Management extends javax.swing.JFrame {
                                 .addComponent(txtTitle, javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 391, Short.MAX_VALUE)
-                                .addComponent(MusicGroupList, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addComponent(ArtistList, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                             .addComponent(Type, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -391,7 +392,7 @@ public class R9_GroupAlbum_Management extends javax.swing.JFrame {
                     .addComponent(jLabel5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(MusicGroupList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ArtistList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(DiscNr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -457,7 +458,7 @@ public class R9_GroupAlbum_Management extends javax.swing.JFrame {
             }else if(cComp==1){
                 JOptionPane.showMessageDialog(rootPane, "Παρακαλώ επιλέξτε Τύπος Άλμπουμ", "Σφάλμα", 1);
             }else if(cComp==2){
-                JOptionPane.showMessageDialog(rootPane, "Παρακαλώ επιλέξτε Συγκρότημα", "Σφάλμα", 1);
+                JOptionPane.showMessageDialog(rootPane, "Παρακαλώ επιλέξτε Καλλιτέχνη", "Σφάλμα", 1);
             }else if(cComp==3){
                 JOptionPane.showMessageDialog(rootPane, "Παρακαλώ εισάγεται αριθμό δίσκου", "Σφάλμα", 1);
             }else if(cComp==4){
@@ -471,12 +472,12 @@ public class R9_GroupAlbum_Management extends javax.swing.JFrame {
                 if(reg == 0){
                     String NewtxtTitle = txtTitle.getText();
                     String NewType = (String)Type.getSelectedItem();
-                    MG = radiostation.AppControl.getMGroupByName(MusicGroupList.getSelectedItem().toString());
+                    Art = radiostation.AppControl.getArtistByName(ArtistList.getSelectedItem().toString());
                     int NewDiscNr = DiscNr.getSelectedIndex();
                     MPC = radiostation.AppControl.getMPCByName(MpcList.getSelectedItem().toString());
                     Date NewReleaseDt = ReleaseDt.getDate();
                 
-                    album = new Album(0, NewtxtTitle, NewReleaseDt, NewType, NewDiscNr, null, MG, MPC);
+                    album = new Album(0, NewtxtTitle, NewReleaseDt, NewType, NewDiscNr, Art, null, MPC);
                     if (radiostation.AppControl.entryAlbum(album)){
                         for(Song s: songList){
                             song = new Song (0, s.getTitle(), s.getDuration(), s.getTrackNr(), album);
@@ -522,7 +523,7 @@ public class R9_GroupAlbum_Management extends javax.swing.JFrame {
         if(this.Type.getSelectedIndex()==0){
             return (1);
         }
-        if(this.MusicGroupList.getSelectedIndex()==0){
+        if(this.ArtistList.getSelectedIndex()==0){
             return (2);
         }
         if(this.DiscNr.getSelectedIndex()==0){
@@ -588,9 +589,9 @@ public class R9_GroupAlbum_Management extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_deleteSongActionPerformed
 
-    private void MusicGroupListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MusicGroupListActionPerformed
+    private void ArtistListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ArtistListActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_MusicGroupListActionPerformed
+    }//GEN-LAST:event_ArtistListActionPerformed
 
     private void txtTitleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTitleActionPerformed
         // TODO add your handling code here:
@@ -650,32 +651,33 @@ public class R9_GroupAlbum_Management extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(R13_ArtistAlbum_Management.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(R9_GroupAlbum_Management.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(R13_ArtistAlbum_Management.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(R9_GroupAlbum_Management.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(R13_ArtistAlbum_Management.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(R9_GroupAlbum_Management.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(R13_ArtistAlbum_Management.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(R9_GroupAlbum_Management.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new R13_ArtistAlbum_Management().setVisible(true);
+                new R9_GroupAlbum_Management().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox ArtistList;
     private javax.swing.JComboBox DiscNr;
     private javax.swing.JComboBox MpcList;
-    private javax.swing.JComboBox MusicGroupList;
     private javax.persistence.EntityManager RadioStationPUEntityManager;
     private org.jdesktop.swingx.JXDatePicker ReleaseDt;
     private javax.swing.JComboBox Type;
+    private java.util.List<radiostation_POJO.Artist> artistList;
+    private javax.persistence.Query artistQuery;
     private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnSave;
     private javax.swing.JButton deleteSong;
