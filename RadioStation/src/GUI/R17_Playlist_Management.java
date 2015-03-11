@@ -19,6 +19,7 @@ public class R17_Playlist_Management extends javax.swing.JFrame {
     Connection conn = null;
     ResultSet rs = null;
     PreparedStatement pst = null;
+    int selectedRow;
     
     private R16_Playlist_View creator;
 
@@ -27,10 +28,13 @@ public class R17_Playlist_Management extends javax.swing.JFrame {
      */
     public R17_Playlist_Management() {
         initComponents();
+        songList.clear();
     }
 
     public R17_Playlist_Management(R16_Playlist_View inJFrame) {
         initComponents();
+        this.creator = inJFrame;
+        
     }
 
     /**
