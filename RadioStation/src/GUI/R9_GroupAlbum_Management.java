@@ -9,6 +9,7 @@ package GUI;
 import radiostation_POJO.Album;
 import radiostation_POJO.Musicgroup;
 import radiostation_POJO.Musicproductioncompany;
+import radiostation_POJO.Song;
 import radiostation.AppControl;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
@@ -32,6 +33,7 @@ public class R9_GroupAlbum_Management extends javax.swing.JFrame {
     PreparedStatement pst = null;
     private String m;
     Album Alb;
+    int TrackNum;
     
     
     private R8_GroupAlbum_View creator;
@@ -40,6 +42,7 @@ public class R9_GroupAlbum_Management extends javax.swing.JFrame {
     /*private Album Alb;*/
     Musicgroup MG;
     Musicproductioncompany MPC;
+    Song song;
     /*private String MG;*/
     /*private Musicgroup MG;*/
     /*private RadioStation rs = new RadioStation();*/
@@ -58,6 +61,7 @@ public class R9_GroupAlbum_Management extends javax.swing.JFrame {
         this.creator = inJFrame;
         MusicGroupList.setSelectedItem(null);
         MpcList.setSelectedItem(null);
+        TrackNum = 0;
         /*this.em = creator.ap.getLocalEntityManager();*/
         
         
@@ -89,15 +93,23 @@ public class R9_GroupAlbum_Management extends javax.swing.JFrame {
         musicgroupList = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : musicgroupQuery.getResultList();
         musicproductioncompanyQuery = java.beans.Beans.isDesignTime() ? null : RadioStationPUEntityManager.createQuery("SELECT m.mpcName FROM Musicproductioncompany m");
         musicproductioncompanyList = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : musicproductioncompanyQuery.getResultList();
+        songQuery = java.beans.Beans.isDesignTime() ? null : RadioStationPUEntityManager.createQuery("SELECT s FROM Song s");
+        songList = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : songQuery.getResultList();
+        songQuery1 = java.beans.Beans.isDesignTime() ? null : RadioStationPUEntityManager.createQuery("SELECT s FROM Song s");
+        songList1 = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : songQuery1.getResultList();
         btnSave = new javax.swing.JButton();
         btnCancel = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        trackList = new javax.swing.JTable();
         insertSong = new javax.swing.JButton();
         deleteSong = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
+        newSong = new javax.swing.JTextField();
+        newDuration = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -148,26 +160,26 @@ public class R9_GroupAlbum_Management extends javax.swing.JFrame {
 
         jScrollPane1.setPreferredSize(new java.awt.Dimension(736, 342));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        trackList.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
                 {null, null, null}
             },
             new String [] {
                 "Αριθμός σειράς", "Τίτλος", "Διάρκεια"
             }
-        ));
-        jTable1.setMaximumSize(new java.awt.Dimension(400, 64));
-        jTable1.setMinimumSize(new java.awt.Dimension(400, 64));
-        jTable1.setPreferredSize(new java.awt.Dimension(400, 64));
-        jScrollPane1.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(0).setPreferredWidth(50);
-            jTable1.getColumnModel().getColumn(1).setPreferredWidth(300);
-            jTable1.getColumnModel().getColumn(2).setPreferredWidth(50);
-        }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        trackList.setMaximumSize(new java.awt.Dimension(400, 64));
+        trackList.setMinimumSize(new java.awt.Dimension(400, 64));
+        trackList.setPreferredSize(new java.awt.Dimension(400, 64));
+        jScrollPane1.setViewportView(trackList);
 
         insertSong.setText("Εισαγωγή");
         insertSong.setMaximumSize(new java.awt.Dimension(110, 23));
@@ -191,17 +203,39 @@ public class R9_GroupAlbum_Management extends javax.swing.JFrame {
 
         jLabel8.setText("Λίστα τραγουδιών");
 
+        newSong.setBackground(new java.awt.Color(255, 255, 102));
+
+        newDuration.setBackground(new java.awt.Color(255, 255, 102));
+
+        jLabel9.setText("Εισάγεται τίτλο :");
+        jLabel9.setToolTipText("");
+
+        jLabel10.setText("Εισάγεται διάρκεια :");
+        jLabel10.setToolTipText("");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel8)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 531, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel8)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(14, 14, 14)
+                        .addComponent(jLabel9)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(newSong, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel10)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(newDuration, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(14, 14, 14))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 531, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(insertSong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -210,18 +244,20 @@ public class R9_GroupAlbum_Management extends javax.swing.JFrame {
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9)
+                    .addComponent(newSong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel10)
+                    .addComponent(newDuration, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(insertSong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
                 .addComponent(jLabel8)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addComponent(insertSong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(deleteSong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(deleteSong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -429,7 +465,7 @@ public class R9_GroupAlbum_Management extends javax.swing.JFrame {
                 Date NewReleaseDt = ReleaseDt.getDate();
                 Alb = new Album(0, NewtxtTitle, NewReleaseDt, NewType, NewDiscNr, null, MG, MPC);
                 if (radiostation.AppControl.SaveAlbum(Alb)){
-                    JOptionPane.showMessageDialog(null, "Album Saved", "ERROR", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Album Saved", "ERROR", JOptionPane.INFORMATION_MESSAGE);
                 }else{
                     JOptionPane.showMessageDialog(null, "Σφάλμα επικοινωνίας με τη ΒΔ!", "ERROR", JOptionPane.ERROR_MESSAGE);
                 }
@@ -450,6 +486,8 @@ public class R9_GroupAlbum_Management extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_btnSaveActionPerformed
+    
+    
     
     int checkComponents(){
         if(this.txtTitle.getText().isEmpty()){
@@ -476,7 +514,12 @@ public class R9_GroupAlbum_Management extends javax.swing.JFrame {
     }
     
     private void insertSongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertSongActionPerformed
-        // TODO add your handling code here:
+        int NewTrackNum = TrackNum++;
+        String newSongTitle = newSong.getText();
+        int newSongDuration = Integer.parseInt(newDuration.getText());
+        song = new Song(0, newSongTitle, newSongDuration, NewTrackNum);
+        
+        
     }//GEN-LAST:event_insertSongActionPerformed
 
     private void deleteSongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteSongActionPerformed
@@ -570,6 +613,7 @@ public class R9_GroupAlbum_Management extends javax.swing.JFrame {
     private javax.swing.JButton deleteSong;
     private javax.swing.JButton insertSong;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -577,14 +621,21 @@ public class R9_GroupAlbum_Management extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private java.util.List<radiostation_POJO.Musicgroup> musicgroupList;
     private javax.persistence.Query musicgroupQuery;
     private java.util.List<radiostation_POJO.Musicproductioncompany> musicproductioncompanyList;
     private javax.persistence.Query musicproductioncompanyQuery;
+    private javax.swing.JTextField newDuration;
+    private javax.swing.JTextField newSong;
+    private java.util.List<radiostation_POJO.Song> songList;
+    private java.util.List<radiostation_POJO.Song> songList1;
+    private javax.persistence.Query songQuery;
+    private javax.persistence.Query songQuery1;
+    private javax.swing.JTable trackList;
     private javax.swing.JTextField txtTitle;
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables

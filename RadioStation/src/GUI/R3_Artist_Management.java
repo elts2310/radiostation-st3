@@ -12,7 +12,7 @@ import radiostation_POJO.Artist;
 import radiostation_POJO.Musicgenre;
 import javax.persistence.EntityManager;
 import java.util.ArrayList;
-import java.swing.JList;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
 import radiostation.AppControl;
 import java.util.Date;
@@ -323,20 +323,20 @@ public class R3_Artist_Management extends javax.swing.JFrame {
            String NewjTextArtistName=jTextArtistName.getText();
            String NewjTextArtisticName=jTextArtisticName.getText();
            String NewsexComboBox=(String)sexComboBox.getSelectedItem();
-           MG=radiostation.AppControl.getByName(genreComboBox.getSelectedItem().toString());
+           /*MG=radiostation.AppControl.getByName(genreComboBox.getSelectedItem().toString());*/
            String NewjTextBirthPlace=jTextBirthPlace.getText();
            Date NewReleaseDt=ReleaseDt.getDate();
-           art = new Artist
+           /*art = new Artist
         (0, NewjTextArtistId, NewjTextArtistLastName, NewjTextArtistName, 
-                NewjTextArtisticName, NewsexComboBox, MG, NewjTextBirthPlace, NewReleaseDt);
+                NewjTextArtisticName, NewsexComboBox, MG, NewjTextBirthPlace, NewReleaseDt);*/
            
-       if(radiostation.AppControl.SaveArtist(art)){
+       /*if(radiostation.AppControl.SaveArtist(art)){
            
            JOptionPane.showMessageDialog(null,"Artist Saved","ERROR",JOptionPane.ERROR_MESSAGE );
        }
        else{
            JOptionPane.showMessageDialog(null, "Σφάλμα επικοινωνίας με τη ΒΔ!","ERROR",JOptionPane.ERROR_MESSAGE);
-       }
+       }*/
 dispose();       
        
        

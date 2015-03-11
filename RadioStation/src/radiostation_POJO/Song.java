@@ -5,6 +5,8 @@
  */
 package radiostation_POJO;
 
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.io.Serializable;
 import java.util.Collection;
 import javax.persistence.Basic;
@@ -19,6 +21,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -36,6 +39,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Song.findByDuration", query = "SELECT s FROM Song s WHERE s.duration = :duration"),
     @NamedQuery(name = "Song.findByTrackNr", query = "SELECT s FROM Song s WHERE s.trackNr = :trackNr")})
 public class Song implements Serializable {
+    @Transient
+    private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -76,7 +81,9 @@ public class Song implements Serializable {
     }
 
     public void setSongId(Integer songId) {
+        Integer oldSongId = this.songId;
         this.songId = songId;
+        changeSupport.firePropertyChange("songId", oldSongId, songId);
     }
 
     public String getTitle() {
@@ -84,7 +91,9 @@ public class Song implements Serializable {
     }
 
     public void setTitle(String title) {
+        String oldTitle = this.title;
         this.title = title;
+        changeSupport.firePropertyChange("title", oldTitle, title);
     }
 
     public int getDuration() {
@@ -92,7 +101,9 @@ public class Song implements Serializable {
     }
 
     public void setDuration(int duration) {
+        int oldDuration = this.duration;
         this.duration = duration;
+        changeSupport.firePropertyChange("duration", oldDuration, duration);
     }
 
     public int getTrackNr() {
@@ -100,7 +111,9 @@ public class Song implements Serializable {
     }
 
     public void setTrackNr(int trackNr) {
+        int oldTrackNr = this.trackNr;
         this.trackNr = trackNr;
+        changeSupport.firePropertyChange("trackNr", oldTrackNr, trackNr);
     }
 
     @XmlTransient
@@ -117,7 +130,9 @@ public class Song implements Serializable {
     }
 
     public void setAlbumId(Album albumId) {
+        Album oldAlbumId = this.albumId;
         this.albumId = albumId;
+        changeSupport.firePropertyChange("albumId", oldAlbumId, albumId);
     }
 
     @Override
@@ -143,6 +158,14 @@ public class Song implements Serializable {
     @Override
     public String toString() {
         return "radiostation_POJO.Song[ songId=" + songId + " ]";
+    }
+
+    public void addPropertyChangeListener(PropertyChangeListener listener) {
+        changeSupport.addPropertyChangeListener(listener);
+    }
+
+    public void removePropertyChangeListener(PropertyChangeListener listener) {
+        changeSupport.removePropertyChangeListener(listener);
     }
     
 }
