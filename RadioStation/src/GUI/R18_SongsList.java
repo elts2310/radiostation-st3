@@ -34,6 +34,7 @@ public class R18_SongsList extends javax.swing.JFrame {
 
     public R18_SongsList(R17_Playlist_Management inJFrame) {
         initComponents();
+        this.creator = inJFrame;
     }
     /**
      * This method is called from within the constructor to initialize the form.
