@@ -64,9 +64,9 @@ public class R17_Playlist_Management extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         addSong = new javax.swing.JButton();
         removeSong = new javax.swing.JButton();
-        dateTxt = new javax.swing.JFormattedTextField();
         jLabel6 = new javax.swing.JLabel();
         plsId = new javax.swing.JTextField();
+        jFormattedTextField1 = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -129,14 +129,13 @@ public class R17_Playlist_Management extends javax.swing.JFrame {
 
         removeSong.setText("Διαγραφή");
 
-        dateTxt.setEditable(false);
-        dateTxt.setBackground(new java.awt.Color(255, 204, 0));
-        dateTxt.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("dd/MM/yyyy"))));
-
         jLabel6.setText("Κωδικός λίστας");
 
         plsId.setEditable(false);
         plsId.setBackground(new java.awt.Color(255, 204, 51));
+
+        jFormattedTextField1.setEditable(false);
+        jFormattedTextField1.setBackground(new java.awt.Color(255, 204, 0));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -159,9 +158,9 @@ public class R17_Playlist_Management extends javax.swing.JFrame {
                             .addComponent(jScrollPane2)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(playlistTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 355, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(dateTxt)))
-                        .addGap(18, 34, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jFormattedTextField1)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(removeSong, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(addSong, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -196,7 +195,7 @@ public class R17_Playlist_Management extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(playlistTitle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(exitButton)
-                    .addComponent(dateTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel3)
                 .addGap(3, 3, 3)
@@ -231,10 +230,8 @@ public class R17_Playlist_Management extends javax.swing.JFrame {
         
         if (createMode.getCreateMode() == true) {
             Playlist pls = new Playlist();
-            //pls.setPlaylistId(this.plsId);
             pls.setPlName(this.playlistTitle.getText());
             pls.setPlDescription(this.playlistDescription.getText());
-            //pls.setPlCreationDate(this.dateTxt);
         }
         else if (editMode.getEditMode() == true) {
             String sql = "update from PLAYLIST where playlistId =?";
@@ -305,8 +302,8 @@ public class R17_Playlist_Management extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.persistence.EntityManager RadioStationPUEntityManager;
     private javax.swing.JButton addSong;
-    private javax.swing.JFormattedTextField dateTxt;
     private javax.swing.JButton exitButton;
+    private javax.swing.JFormattedTextField jFormattedTextField1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
